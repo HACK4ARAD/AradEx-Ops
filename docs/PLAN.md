@@ -291,3 +291,22 @@ Regula de aur pentru noapte: la 02:00 opriți feature-urile noi și faceți doar
 - Rating & recenzii Google (T17), recenzii la obiective, traducere automată RO→EN/HU a ghidului și voce naturală (OpenAI TTS).
 - Transport public în itinerar (orare CTP Arad, tramvaiul Arad–Ghioroc), parcări în timp real.
 - Parteneriate reale cu firme (program de puncte al orașului), rapoarte pentru Primărie (participare, impact), gamificare pentru vizitatori (badge-uri la obiective).
+
+---
+
+## Adăugiri pentru echipa de 4 (Paperclip, 6 nov)
+Împărțirea pe oameni e în `docs/TEAM.md`. Task-uri noi față de lista de mai sus:
+
+### T16a · Deploy final & seed de producție (P1)
+Partea tehnică din T16: migrări + seed pe DB-ul de producție, conturi demo verificate, poze, chei, `docs/DEPLOY.md` cu URL-urile reale.
+**Verificare:** fluxul din `docs/DEMO.md` merge pe URL-urile publice, de pe două telefoane.
+
+### T16b · Pitch, slide-uri, video de rezervă (P3)
+Max 8 slide-uri după `docs/DEMO.md` §Pitch; video de rezervă al demo-ului înregistrat duminică dimineață; cronometrare ≤ 6 min, repetat de 2 ori cu toată echipa.
+**Verificare:** slide-urile și video-ul sunt pe laptopul de prezentare și într-un link de rezervă.
+
+### T18 · (stretch) Rol Voluntar + mesaje (P4) — din `design/ia/` (prototip + admin)
+Rol `VOLUNTEER` creat doar de Primărie (fără SMS real), alocat pe acțiuni; în aplicație doar 3 tab-uri: Acțiuni, Scanează, Mesaje; scanarea se deschide cu 30 min înainte de start; Primăria vede cine a scanat pe cine și răspunde la mesaje. Migrarea V10. **Doar după ce bucla T11 e verde.**
+
+### T19 · (stretch) Transport public — tramvai (P3) — din `design/ia/AradExperience-prototype`
+Căutare destinație, linii de tramvai CTP Arad din OSM (ODbL), stații apropiate, orare de exemplu marcate „(exemplu)”, „Arată-mi pe hartă” în `MapView`. Fără date inventate prezentate ca reale. **Doar după ce T13 e verde.**
