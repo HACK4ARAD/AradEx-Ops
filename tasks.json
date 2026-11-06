@@ -73,7 +73,7 @@
   "labels": [
    "linia de demo"
   ],
-  "body": "**Scop:** URL public pentru API (Render) și APP (Netlify) de sâmbătă, ca deploy-ul final să fie doar un push.\n\n- Agentul pregătește: config de deploy în `AradEx-Infrastructure` (Render, Netlify, lista de env fără valori), `AradEx-Backend/Dockerfile`, `AradEx-Frontend/public/_redirects`, `docs/DEPLOY.md` (în `AradEx-Ops`)\n- Persoana 1 (om): conturile Neon/Render/Netlify și setarea secretelor (agentul se oprește și cere)\n\n**Verificare:** `https://<api>/api/v1/health` ok; APP publicată afișează „API online”.\nDetalii: `docs/PLAN.md` §T04, `docs/DEPLOY.md`."
+  "body": "**Scop:** URL public pentru API (Render) și APP (Netlify) de sâmbătă, ca deploy-ul final să fie doar un push.\n\n- Agentul pregătește: config de deploy în `AradEx-Infrastructure` (Render, Netlify, lista de env fără valori), `AradEx-Backend/Dockerfile`, `AradEx-Frontend/public/_redirects`, `docs/DEPLOY.md` (în `AradEx-Plan`)\n- Persoana 1 (om): conturile Neon/Render/Netlify și setarea secretelor (agentul se oprește și cere)\n\n**Verificare:** `https://<api>/api/v1/health` ok; APP publicată afișează „API online”.\nDetalii: `docs/PLAN.md` §T04, `docs/DEPLOY.md`."
  },
  {
   "key": "T05",

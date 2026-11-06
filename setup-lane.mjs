@@ -141,7 +141,8 @@ if (!project) {
 
 const scan = await call("POST", `/companies/${C}/skills/scan-projects`, { projectIds: [project.id], mode: "import" });
 const companySkills = list(await call("GET", `/companies/${C}/skills`), "skills");
-const skillKeys = REPO_SKILLS.map((slug) => companySkills.find((k) => k.slug === slug)?.key).filter(Boolean);
+const fromPlan = (k) => String(k.sourceLocator || "").startsWith(REPO + path.sep);
+const skillKeys = REPO_SKILLS.map((slug) => (companySkills.find((k) => k.slug === slug && fromPlan(k)) || companySkills.find((k) => k.slug === slug))?.key).filter(Boolean);
 if (skillKeys.length !== REPO_SKILLS.length) {
   console.error(`Expected the repo skills ${REPO_SKILLS.join(", ")} in .claude/skills, found ${skillKeys.length}. Is --plan the AradEx-Plan folder?`);
   process.exit(1);
