@@ -1,6 +1,6 @@
 # Echipa — 4 oameni, 4 culoare (lanes)
 
-Fiecare om are **o culoare** cu task-urile lui din `docs/PLAN.md` și **un agent Paperclip** pereche (compania HACK4ARAD, http://127.0.0.1:3100).
+Fiecare om are **o culoare** cu task-urile lui din `docs/PLAN.md` și **un agent Paperclip** pereche, care rulează **pe laptopul lui, cu abonamentul lui Claude** (configurare: `tools/paperclip/README.md`). Persoana 1 găzduiește în plus Lead Tehnic și QA & Demo. GitHub și `STATUS.md` sunt sursa comună de adevăr.
 Culoarele sunt tăiate pe module, ca să nu se calce pe fișiere: fiecare are pachetele lui din `api/` și view-urile lui din `app/`.
 Efort estimat ~15–16 h de om + Claude pentru fiecare, plus 1–2 h de stretch.
 
@@ -15,7 +15,7 @@ Efort estimat ~15–16 h de om + Claude pentru fiecare, plus 1–2 h de stretch.
 | Agent Paperclip | P1 · Platformă & Livrare | P2 · Experiența Vizitatorului | P3 · Hărți & AI | P4 · Firme & Comunitate |
 | Pași din DEMO.md | 9 (admin), deploy | 1, 3 | 2, 4 | 5, 6, 7, 8 |
 
-Comune: **Lead Tehnic** (agent) ține `STATUS.md`, ordinea dependențelor și numerele de migrare; **QA & Demo** (agent) face review la fiecare branch cu checklist-ul din `task-workflow` și rulează fluxul din `DEMO.md`.
+Comune (pe laptopul Persoanei 1): **Lead Tehnic** (agent) urmărește PR-urile tuturor, ține `STATUS.md`, ordinea dependențelor și numerele de migrare; **QA & Demo** (agent) face review la fiecare PR cu checklist-ul din `task-workflow`, face merge și rulează fluxul din `DEMO.md`. **T00 (repo pe GitHub + invitații) e primul: până atunci ceilalți nu pot începe.**
 Review uman în perechi: **P1 ↔ P2**, **P3 ↔ P4** (verificarea pe telefon real și pe web ≥ 1280 px).
 
 ## Fișiere comune (atenție la conflicte)
