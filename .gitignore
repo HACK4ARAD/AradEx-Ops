@@ -1,26 +1,8 @@
-# secrete
 .env
 .env.*
 !.env.example
-
-# java
-api/target/
-api/.mvn/wrapper/*.jar
-*.log
-
-# node
-app/node_modules/
-app/dist/
-app/dev-dist/
-app/.vite/
-
-# ide / os
+node_modules/
+.DS_Store
 .idea/
 .vscode/
-*.iml
-.DS_Store
-Thumbs.db
-
-# capacitor (opțional)
-app/android/
-app/ios/
+*.log

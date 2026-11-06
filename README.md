@@ -1,30 +1,20 @@
-# AradEx-Ops — Hack4Arad 2026
+# AradEx-Ops — agenții Paperclip pentru HACK4ARAD
 
-Repo-ul de coordonare al **AradExperience**: evenimente, obiective cu ghid virtual, oferte locale, acțiuni comunitare cu puncte, chat AI și planificator de itinerar pentru Arad.
-Codul stă în repo-uri surori din organizația [HACK4ARAD](https://github.com/HACK4ARAD):
+Aici stă doar partea de Paperclip. Planul, documentele, designul și skill-urile sunt în [AradEx-Plan](https://github.com/HACK4ARAD/AradEx-Plan), iar codul în `AradEx-Backend` și `AradEx-Frontend`. Toate 5 repo-urile stau în același folder (ex. `~/HACK4ARAD/`). Ghidul complet de configurare pentru Lukas (P2), Octav (P3) și Damian (P4): `../AradEx-Plan/docs/SETUP-ECHIPA.md`.
 
-| Repo | Ce conține |
-|---|---|
-| **AradEx-Ops** (acesta) | plan, contract API, docs, design, skill-uri Claude, agenți Paperclip |
-| [AradEx-Backend](https://github.com/HACK4ARAD/AradEx-Backend) | API Spring Boot 3 + PostgreSQL |
-| [AradEx-Frontend](https://github.com/HACK4ARAD/AradEx-Frontend) | Vue 3 PWA (web `/w` + mobil `/m`) |
-| [AradEx-Infrastructure](https://github.com/HACK4ARAD/AradEx-Infrastructure) | Postgres local, deploy |
+Ce e aici:
+- `setup-lane.mjs`: creează în Paperclip-ul tău local:
+  - compania HACK4ARAD;
+  - agentul culoarului tău, cu cele 5 skill-uri din `../AradEx-Plan/.claude/skills/`;
+  - proiectul, cu workspace-ul `../AradEx-Plan`;
+  - task-urile tale.
 
-## Pornire rapidă (din folderul comun, ex. `~/HACK4ARAD`)
-```
-(cd AradEx-Infrastructure && docker compose up -d)                                        # Postgres
-(cd AradEx-Backend && cp .env.example .env && set -a && . ./.env && set +a && mvn spring-boot:run)   # :8080
-(cd AradEx-Frontend && cp .env.example .env && npm install && npm run dev)                # :5173 (/m mobil, /w web)
-```
-Conturi demo: `visitor@demo.ro`, `local@demo.ro`, `firma@demo.ro`, `primaria@demo.ro`, `admin@demo.ro` / `demo1234`.
+  Se pornește din acest folder:
+  ```
+  node setup-lane.mjs --lane P2|P3|P4
+  ```
+  Îl poți rula de mai multe ori: nu dublează nimic și aduce la zi instrucțiunile agentului și workspace-ul.
+- `agents/`: instrucțiunile agenților. `common.md` se adaugă la fiecare agent; `P1.md`–`P4.md` sunt cele ale culoarelor; `LEAD.md` și `QA.md` sunt doar la Zoltan.
+- `tasks.json`: task-urile din `../AradEx-Plan/docs/PLAN.md`, împărțite pe culoare, cu ore, prioritate și dependențe.
 
-## Unde e ce
-- `docs/TEAM.md` — cine ce face (Zoltan, Lukas, Octav, Damian) și ce fișiere îi aparțin fiecăruia · `docs/SETUP-ECHIPA.md` — instalarea pe laptop
-- `docs/PLAN.md` — task-urile T00–T19 · `docs/API.md` — contractul de API · `docs/DATA-MODEL.md` — tabele și enum-uri
-- `docs/STATUS.md` — rezumat (Lead) + `docs/status/Px.md` — starea fiecărui culoar · `docs/DEMO.md` — demo + pitch · `docs/DEPLOY.md`
-- `CLAUDE.md` (+ `CLAUDE.md` din fiecare repo) — reguli pentru Claude Code · `.claude/skills/` — `task-workflow`, `be-module`, `fe-feature`, `seed-data`
-- `design/` — prototipuri, capturi, poze · `tools/paperclip/` — agenții Paperclip
-
-## Cum lucrăm
-Un task din PLAN = un branch `feat/Txx-...` în fiecare repo atins = câte un PR. Începe cu `/task-workflow`, termină cu checklist-ul și `docs/status/Px.md`.
-Fără `Co-Authored-By` în commit-uri. `main` rulează mereu; fluxul din `docs/DEMO.md` nu se strică.
+Doar Zoltan (P1) modifică acest repo, prin PR. Commit-urile sunt fără `Co-Authored-By:`. După ce o schimbare intră în `main`, fiecare face `./setup.sh` din `AradEx-Plan` (sau `git pull`) și rulează din nou scriptul.
