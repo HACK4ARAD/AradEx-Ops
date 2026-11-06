@@ -10,7 +10,7 @@
   "labels": [
    "linia de demo"
   ],
-  "body": "**Scop:** oricine rulează proiectul în 5 minute. Kit-ul e deja în repo (git local, 2 commit-uri pe `main`, fără remote).\n\n- [ ] Persoana 1 (om): repo GitHub, `git remote add origin`, push `main`, invită ceilalți 3 — **ceilalți nu pot începe până nu e gata** (agentul se oprește și cere asta board-ului)\n- [ ] `.github/workflows/ci.yml` (opțional, 15 min): `mvn -q test` în `api/`, `npm ci && npm run build && npm run test` în `app/`\n- [ ] README cu cele 3 comenzi (db, api, app) verificat\n\n**Verificare:** `git status` nu arată `.env`; README corect; ceilalți 3 pot clona.\nDetalii: `docs/PLAN.md` §T00."
+  "body": "**Scop:** oricine rulează proiectul în 5 minute. Kit-ul e deja în repo (git local, 2 commit-uri pe `main`, fără remote).\n\n- [ ] Zoltan (om): creează repo-ul **https://github.com/HACK4ARAD/AradExperience** în organizația HACK4ARAD, **gol** (fără README/licență, ca istoricul să rămână același cu zip-urile)\n- [ ] Zoltan: `git remote add origin https://github.com/HACK4ARAD/AradExperience.git && git push -u origin main` din `~/Desktop/HACK4ARAD/AradExperience`\n- [ ] Zoltan: adaugă Lukas, Octav, Damian în organizație cu drept de scriere pe repo — **ceilalți nu pot începe până nu e gata** (agentul se oprește și cere asta board-ului)\n- [ ] Recomandat: protecție pe `main` (merge doar prin PR), ca nimeni să nu împingă direct\n- [ ] `.github/workflows/ci.yml` (opțional, 15 min): `mvn -q test` în `api/`, `npm ci && npm run build && npm run test` în `app/`\n- [ ] README cu cele 3 comenzi (db, api, app) verificat\n\n**Verificare:** `git status` nu arată `.env`; README corect; ceilalți 3 văd repo-ul și fac `git fetch` din clona lor din zip.\nDetalii: `docs/PLAN.md` §T00."
  },
  {
   "key": "T01",

@@ -8,7 +8,7 @@
 | **P4** | **Damian** | Firme & comunitate: firme, oferte, puncte (bucla de demo) |
 
 Fiecare om are **un agent Paperclip** pereche, care rulează **pe laptopul lui, cu abonamentul lui Claude** (configurare: `tools/paperclip/README.md`). Paperclip-urile nu comunică între ele: **GitHub (PR-uri) și `docs/status/Px.md` sunt sursa comună de adevăr.** Pe laptopul lui Zoltan mai rulează **Lead Tehnic** (urmărește PR-urile tuturor, ține `docs/STATUS.md`) și **QA & Demo** (review + merge la fiecare PR, rulează fluxul din `DEMO.md`).
-**T00 (repo pe GitHub + invitații) e primul: până atunci ceilalți nu pot începe.**
+**T00 (repo-ul https://github.com/HACK4ARAD/AradExperience în organizația HACK4ARAD + invitații) e primul: până atunci ceilalți nu pot începe.**
 
 ## Task-uri și ore
 

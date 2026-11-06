@@ -22,7 +22,7 @@ Pregătirea ține cam 30–45 de minute. Fă-o înainte de hackathon.
 | Unealtă | Verificare | Notă |
 |---|---|---|
 | Git | `git --version` | |
-| GitHub CLI | `gh --version`, apoi `gh auth login` | contul tău de GitHub |
+| GitHub CLI | `gh --version`, apoi `gh auth login` | contul tău de GitHub (trimite-i lui Zoltan username-ul, ca să te adauge în organizația HACK4ARAD) |
 | Node.js 20+ | `node -v` | pentru `app/` și pentru Paperclip |
 | Java 21 + Maven | `java -version` (21), `mvn -v` | macOS: `brew install openjdk@21 maven` |
 | Docker Desktop (sau Postgres 16 local) | `docker compose version` | baza de date locală |
@@ -73,10 +73,10 @@ Scriptul poate fi rulat de oricâte ori: nu dublează nimic și aduce la zi inst
 **Nimic nu pornește singur.** Task-urile stau în *backlog* până le muți tu.
 
 ## 5. Când Zoltan pune repo-ul pe GitHub (T00)
-Zoltan urcă **exact acest repo**, cu același istoric, și te invită. Accepți invitația, apoi:
+Repo-ul echipei va fi **https://github.com/HACK4ARAD/AradExperience** (organizația [HACK4ARAD](https://github.com/HACK4ARAD)). Zoltan urcă acolo **exact acest repo**, cu același istoric, și te adaugă în organizație. Accepți invitația (e-mail sau https://github.com/orgs/HACK4ARAD/invitation), apoi:
 ```
 cd ~/HACK4ARAD/AradExperience
-git remote add origin <link-ul primit>
+git remote add origin https://github.com/HACK4ARAD/AradExperience.git
 git fetch origin
 git branch -u origin/main main
 git pull
