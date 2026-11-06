@@ -20,7 +20,7 @@ Review uman în perechi: **P1 ↔ P2**, **P3 ↔ P4** (verificarea pe telefon re
 
 ## Fișiere comune (atenție la conflicte)
 `docs/API.md`, `app/src/shared/types/api.ts`, `app/src/router/index.ts`, `app/src/shared/i18n/ro.json`, `SecurityConfig.java`, `docs/STATUS.md`.
-Regula: commit mic, separat, pe `main` cât mai repede (rebase des); la `ro.json` fiecare adaugă doar cheile lui sub prefixul modulului (`events.*`, `offers.*` …).
+Regula: PR mic, separat, în `main` cât mai repede (rebase des pe `origin/main`); la `ro.json` fiecare adaugă doar cheile lui sub prefixul modulului (`events.*`, `offers.*` …).
 
 ## Calendar
 | Când | P1 | P2 | P3 | P4 |
