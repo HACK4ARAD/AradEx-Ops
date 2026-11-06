@@ -35,7 +35,9 @@ Pe Windows merge, dar e mai simplu din WSL sau Git Bash. Comenzile de mai jos su
 2. ```
    cd ~/HACK4ARAD/AradExperience
    cp .env.example .env
+   git config core.hooksPath .githooks
    ```
+   Ultima comandă activează hook-ul care scoate liniile `Co-Authored-By:` din commit-uri (regula echipei: fără co-autori în commit-uri). Scriptul de la pasul 4 îl activează și el.
    Cheile (`OPENAI_API_KEY`, `JWT_SECRET`) le primești de la Zoltan **pe un canal privat**. Nu le pui niciodată în git, în chat-uri publice sau în task-uri.
 3. Verificare rapidă:
    ```

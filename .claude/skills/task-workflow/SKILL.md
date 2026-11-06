@@ -35,7 +35,7 @@ Scrie rezultatul verificării în PR (ce ai testat, ce nu, ce ai observat).
 Cere review cu: „Fă review la PR-ul pentru Txx: caută bug-uri care strică demo-ul, încălcări ale CLAUDE.md, diferențe față de API.md.” Reviewer-ul rulează aplicația, nu doar citește diff-ul. Se repară doar ce e major/critic; restul → `docs/status/Px.md` „Probleme cunoscute”. Review-ul îl face QA & Demo pe GitHub (`gh pr review`).
 
 ## 5. Închidere
-1. `git push -u origin feat/Txx-...` și `gh pr create` (titlu `Txx: ...`, în descriere ce ai testat). Merge-ul (squash) îl face QA & Demo după review, nu tu.
+1. `git push -u origin feat/Txx-...` și `gh pr create` (titlu `Txx: ...`, în descriere ce ai testat). Fără `Co-Authored-By:` în commit-uri și fără „Generated with Claude Code” în PR. Merge-ul (squash) îl face QA & Demo după review, nu tu.
 2. `docs/status/Px.md` (în același PR): task → `REVIEW`/`DONE`, decizii, probleme cunoscute, „De făcut mai târziu”.
 3. `docs/API.md` actualizat dacă s-a schimbat ceva. Dacă ai adăugat un ecran care nu era în design, pune o captură în `design/screens/`.
 4. Spune în chat, în 3 rânduri: ce merge, ce nu, ce urmează.

@@ -3,6 +3,7 @@
 // Usage: node tools/paperclip/setup-lane.mjs --lane P2   (P1 Zoltan, P2 Lukas, P3 Octav, P4 Damian; --person <name> to override)
 // Safe to run again: it finds what already exists by name and only creates what is missing.
 import { readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -60,6 +61,8 @@ if (!list(conns, "connections").some((c) => c.provider === "anthropic" && c.stat
     `Then run this script again.`);
   process.exit(2);
 }
+
+try { execFileSync("git", ["-C", REPO, "config", "core.hooksPath", ".githooks"]); console.log("Git hook enabled: no Co-Authored-By lines in commits"); } catch { console.warn("Could not enable .githooks (run: git config core.hooksPath .githooks)"); }
 
 const common = readFileSync(path.join(here, "agents", "common.md"), "utf8");
 const role = readFileSync(path.join(here, "agents", `${laneKey}.md`), "utf8");

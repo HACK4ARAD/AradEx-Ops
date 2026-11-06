@@ -40,6 +40,7 @@ cp .env.example .env                      # secretele stau în .env (nu e în gi
 - Modul nou în BE → skill `be-module`. Ecran/feature nou în FE → skill `fe-feature`. Date demo → skill `seed-data`.
 - Rulează testele înainte de a declara ceva gata. Nu dezactiva teste ca să treacă.
 - Commit-uri mici, mesaje scurte în engleză (`feat(events): list + filters`, `fix(auth): 401 on expired token`).
+- **Niciodată `Co-Authored-By:` sau alte linii de atribuire în commit-uri** (nici pentru Claude, nici pentru altcineva) și niciodată „🤖 Generated with Claude Code” în PR-uri. Autorul commit-ului e doar omul al cărui cont face commit-ul. Hook-ul din `.githooks/commit-msg` le șterge oricum (`git config core.hooksPath .githooks`, o dată pe clonă).
 - Când ceva din PLAN/API nu se poate face exact așa, alege varianta cea mai simplă care ține demo-ul, notează decizia în `docs/status/Px.md` și mergi mai departe. Nu reproiecta.
 
 ## Reguli
