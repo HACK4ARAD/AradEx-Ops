@@ -1,0 +1,39 @@
+{
+  "name": "aradexperience-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "lint": "vue-tsc --noEmit -p tsconfig.app.json"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.4",
+    "@vueuse/core": "^15.0.0",
+    "html5-qrcode": "^2.3.8",
+    "leaflet": "^1.9.4",
+    "pinia": "^4.1.0",
+    "qrcode": "^1.5.4",
+    "tailwindcss": "^4.3.4",
+    "vite-plugin-pwa": "^2.0.0",
+    "vue": "^3.5.44",
+    "vue-i18n": "^11.4.18",
+    "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^24.19.2",
+    "@types/qrcode": "^1.5.6",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "@vue/test-utils": "^2.5.1",
+    "@vue/tsconfig": "^0.9.1",
+    "jsdom": "^31.0.0",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.6",
+    "vitest": "^5.1.0",
+    "vue-tsc": "^3.3.14"
+  }
+}

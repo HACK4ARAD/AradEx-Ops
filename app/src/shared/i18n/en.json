@@ -1,0 +1,7 @@
+{
+  "app": { "name": "AradExperience", "tagline": "What's on in Arad?" },
+  "nav": { "events": "Events", "chat": "Chat", "map": "Map", "tickets": "Tickets", "saved": "Saved", "panel": "Dashboard", "offers": "Offers", "community": "Community", "places": "Places", "plan": "Plan your visit", "login": "Sign in", "logout": "Sign out", "profile": "Profile", "admin": "Admin", "business": "Business dashboard", "city": "City hall dashboard", "public": "Public site" },
+  "common": { "loading": "Loading…", "retry": "Retry", "empty": "Nothing here yet", "save": "Save", "cancel": "Cancel", "back": "Back", "continue": "Continue", "search": "Search events and activities", "apiOnline": "API online", "apiOffline": "API unavailable", "demoData": "Sample data", "comingSoon": "In progress — see docs/PLAN.md" },
+  "auth": { "title": "Sign in or create an account", "email": "E-mail address", "password": "Password", "name": "Your name", "login": "Sign in", "register": "Create account", "asVisitor": "Continue as visitor", "roleVisitor": "Visitor", "roleLocal": "Local", "roleBusiness": "Local business", "demoAccounts": "Demo accounts", "noAccount": "No account?", "haveAccount": "Already have an account?", "welcome": "Welcome, {name}!" },
+  "home": { "title": "What's on in Arad?", "today": "Today", "weekend": "This weekend", "week": "Next 7 days", "popular": "Popular", "planCta": "Visiting? Plan your day", "planCtaSub": "Tell us how much time you have → a plan with places, times and a route" }
+}

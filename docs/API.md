@@ -1,0 +1,156 @@
+# Contract de API — AradExperience
+
+Base URL: `/api/v1`. JSON peste tot, UTF-8, date ISO-8601 cu offset (`2026-11-07T11:00:00+02:00`), bani ca număr (RON).
+Autentificare: `Authorization: Bearer <jwt>`. Erori: RFC 7807 `ProblemDetail`:
+```json
+{ "type": "about:blank", "title": "Not Found", "status": 404, "detail": "Event 42 not found", "instance": "/api/v1/events/42",
+  "errors": [ { "field": "email", "message": "must be a well-formed email address" } ] }
+```
+Paginare: `?page=0&size=20` → `{ "content": [...], "page": 0, "size": 20, "totalElements": 57 }`.
+Roluri în coloana „Auth”: `pub` = public, `auth` = orice utilizator logat, altfel rolul cerut. `ADMIN` are acces oriunde.
+FE: tipurile TypeScript din `app/src/shared/types/api.ts` oglindesc DTO-urile de aici — când se schimbă unul, se schimbă și celălalt în același PR.
+
+## DTO-uri comune
+```ts
+type Role = 'VISITOR'|'LOCAL'|'BUSINESS'|'CITY_HALL'|'ADMIN'
+type UserDto = { id: number; email: string; displayName: string; role: Role; locale: 'ro'|'en'; pointsBalance: number; business?: BusinessSummary }
+type BusinessSummary = { id: number; name: string; category: string; verified: boolean; imageUrl?: string }
+type GeoPoint = { lat: number; lng: number }
+type PlaceSummary = { id: number; name: string; type: string; imageUrl?: string; lat: number; lng: number; visitMinutes: number; tags: string[]; distanceKm?: number }
+type PlaceDto = PlaceSummary & { slug: string; description: string; address: string; openingHours?: string; rating?: number; parkingHint?: string; imageCredit?: string; exteriorOnly: boolean; guidePoints: GuidePointDto[]; google?: GoogleInfoDto }
+type GuidePointDto = { id: number; position: number; title: string; text: string; imageUrl?: string; audioUrl?: string; lat?: number; lng?: number; durationSec?: number }
+type EventSummary = { id: number; title: string; category: string; startAt: string; endAt?: string; locationName: string; lat: number; lng: number; imageUrl?: string; ticketType: 'FREE'|'IN_APP'|'EXTERNAL'; priceFrom?: number; isHot: boolean; isDemo: boolean; participantsCount: number; organizerName: string; organizerType: string; distanceKm?: number; saved?: boolean; ratingAvg?: number; ratingCount: number }
+type EventDto = EventSummary & { description: string; address: string; placeId?: number; organizerBusinessId?: number; priceAdult?: number; priceChild?: number; externalUrl?: string; capacity?: number; spotsLeft?: number; savesCount: number; status: string }
+type ReviewDto = { id: number; eventId: number; userName: string; stars: number; text?: string; createdAt: string; mine?: boolean }
+type GoogleInfoDto = { rating?: number; userRatingCount?: number; reviews: { author: string; rating: number; text: string; relativeTime: string }[]; mapsUrl: string; attribution: 'Powered by Google' }
+type TicketDto = { code: string; eventId: number; eventTitle: string; startAt: string; locationName: string; qtyAdult: number; qtyChild: number; total: number; status: string; createdAt: string }
+type OfferSummary = { id: number; businessId: number; businessName: string; title: string; discountLabel: string; localProduct: boolean; validUntil: string; pointsPrice?: number; imageUrl?: string; distanceKm?: number; rating?: number }
+type OfferDto = OfferSummary & { description: string; validFrom: string; status: string; viewsCount: number; redemptionsCount: number; usedCount: number; myRedemption?: RedemptionDto }
+type RedemptionDto = { id: number; code: string; offerId: number; offerTitle: string; businessName: string; pointsSpent: number; status: 'ISSUED'|'USED'|'CANCELLED'; issuedAt: string; usedAt?: string }
+type ActionSummary = { id: number; title: string; category: string; startAt: string; endAt: string; locationName: string; lat: number; lng: number; pointsReward: number; capacity: number; registeredCount: number; imageUrl?: string; goingPreview: string[]; myRegistration?: RegistrationDto }
+type ActionDto = ActionSummary & { description: string; address: string; status: string; confirmedCount: number }
+type RegistrationDto = { id: number; actionId: number; actionTitle: string; code: string; status: 'REGISTERED'|'CONFIRMED'|'CANCELLED'|'NO_SHOW'; registeredAt: string; confirmedAt?: string; user?: { id: number; displayName: string } }
+type PointsDto = { balance: number; monthEarned: number; rank?: number; transactions: { id: number; amount: number; type: string; note?: string; createdAt: string }[] }
+type LeaderboardDto = { period: 'month'|'year'; entries: { rank: number; userId: number; displayName: string; points: number }[]; me?: { rank: number; points: number } }
+type ItineraryStop = { order: number; kind: 'PLACE'|'EVENT'|'OFFER'; refId: number; name: string; lat: number; lng: number; arriveAt: string; leaveAt: string; durationMin: number; travelMinutesFromPrev: number; travelMode: 'WALK'|'CAR'|'PUBLIC'; note?: string; parkingHint?: string; hasGuide: boolean; imageUrl?: string }
+type ItineraryDto = { id?: number; shareCode?: string; title: string; summary: string; date: string; transport: 'WALK'|'CAR'|'PUBLIC'; totalMinutes: number; stops: ItineraryStop[] }
+```
+
+## Auth & utilizator (T03)
+| Metodă | Rută | Auth | Cerere → Răspuns |
+|---|---|---|---|
+| POST | `/auth/register` | pub | `{ email, password(≥8), displayName, role: 'VISITOR'\|'LOCAL'\|'BUSINESS', business?: { name, category, address, lat?, lng? } }` → `{ token, user: UserDto }` (409 dacă emailul există) |
+| POST | `/auth/login` | pub | `{ email, password }` → `{ token, user }` (401 la date greșite) |
+| GET | `/me` | auth | → `UserDto` |
+| PATCH | `/me` | auth | `{ displayName?, locale? }` → `UserDto` |
+| GET | `/me/points` | auth | → `PointsDto` (T11) |
+
+JWT: HS256, claims `sub`=userId, `role`, `email`, `exp` = 24 h. Conturi demo: `visitor@demo.ro`, `local@demo.ro`, `firma@demo.ro`, `primaria@demo.ro`, `admin@demo.ro` / `demo1234`.
+
+## Locuri & ghid (T05)
+| Metodă | Rută | Auth | Cerere → Răspuns |
+|---|---|---|---|
+| GET | `/places?type&q&near=lat,lng&tags` | pub | → `PlaceSummary[]` (fără paginare, < 100) |
+| GET | `/places/{id}` | pub | → `PlaceDto` cu `guidePoints` ordonate |
+| POST/PUT/DELETE | `/admin/places`, `/admin/places/{id}` | ADMIN | `PlaceDto` fără id/guidePoints |
+| POST/PUT/DELETE | `/admin/places/{id}/guide-points`, `/{gpId}` | ADMIN | `GuidePointDto` |
+| POST | `/ai/tts` (opțional) | auth | `{ text, voice? }` → `audio/mpeg` (cache după hash) |
+| GET | `/places/{id}/google`, `/businesses/{id}/google` (opțional, T17) | pub | → `GoogleInfoDto` din Google Places API (New) Place Details, prin backend, cache 24 h; 404 dacă nu există `googlePlaceId`; afișat cu „Powered by Google” |
+
+## Evenimente (T06) & bilete (T07)
+| Metodă | Rută | Auth | Cerere → Răspuns |
+|---|---|---|---|
+| GET | `/events?from&to&category&near=lat,lng&radiusKm=5&organizerBusinessId&organizerType&hot=true&q&page&size` | pub | → `Page<EventSummary>`; `saved` completat dacă e logat |
+| GET | `/events/{id}` | pub | → `EventDto` |
+| POST | `/events` | CITY_HALL, ADMIN | `EventCreate` (titlu, descriere, categorie, placeId?/locație, startAt, endAt?, ticketType, prețuri, capacity?, imageUrl?) → `EventDto` |
+| PUT / DELETE | `/events/{id}` | creator sau ADMIN | |
+| POST / DELETE | `/events/{id}/save` | auth | → 204 (idempotent) |
+| GET | `/me/saved-events` | auth | → `EventSummary[]` |
+| POST | `/events/{id}/tickets` | auth | `{ qtyAdult, qtyChild, email }` → `TicketDto` (409 `capacity`; 400 dacă `ticketType=EXTERNAL`) |
+| GET | `/me/tickets?upcoming=true` | auth | → `TicketDto[]` |
+| GET | `/tickets/{code}` | proprietar/organizator/ADMIN | → `TicketDto` |
+| POST | `/tickets/{code}/use` | organizator/ADMIN | → `TicketDto` (409 dacă e deja USED) |
+| GET | `/events/{id}/ics` | pub | → fișier `text/calendar` (Adaugă în calendar). FE construiește și linkul Google Calendar fără login: `https://calendar.google.com/calendar/render?action=TEMPLATE&text=…&dates=YYYYMMDDTHHMMSSZ/…&location=…&details=…` |
+| GET | `/events/{id}/reviews` | pub | → `ReviewDto[]` + `{ avg, count }` în header-ul răspunsului sau ca `{ avg, count, items }` |
+| POST / PUT | `/events/{id}/reviews` | auth | `{ stars: 1..5, text? }` → `ReviewDto` (400 dacă evenimentul nu a trecut; una per utilizator, PUT o editează) |
+| DELETE | `/admin/reviews/{id}` | ADMIN | → 204 (ascunde) |
+
+Cod bilet: `AX-T{eventId}-{6 caractere A-Z0-9}`. QR-ul conține exact codul.
+
+## Hartă (T08) — fără endpoint-uri noi
+FE folosește `GET /events?near=`, `GET /places?near=`, `GET /offers?near=`, `GET /community/actions` și OSRM public pentru trasee.
+
+## Firme (T09)
+| Metodă | Rută | Auth | Cerere → Răspuns |
+|---|---|---|---|
+| GET | `/businesses/{id}` | pub | → `{ business: BusinessDto, offers: OfferSummary[], events: EventSummary[], announcements: AnnouncementDto[] }` (incrementează `viewsCount`) |
+| GET | `/business/me` | BUSINESS | → `{ business: BusinessDto, stats: { views, codesUsed, pointsPayments, upcomingEvents } }` |
+| PUT | `/business/me` | BUSINESS | `BusinessDto` (fără verified) |
+| GET / POST | `/business/events` | BUSINESS | `EventCreate` → `EventDto` (status `DRAFT` dacă firma nu e verificată) |
+| PUT / DELETE | `/business/events/{id}` | BUSINESS (proprietar) | |
+| GET / POST | `/business/announcements` | BUSINESS | `{ title, body, imageUrl? }` → `AnnouncementDto { id, title, body, imageUrl?, createdAt }` |
+| DELETE | `/business/announcements/{id}` | BUSINESS | |
+| GET | `/business/activity` | BUSINESS | → `{ items: { type: 'CODE_USED'\|'OFFER_SAVED'\|'OFFER_REDEEMED'\|'TICKET'\|'POINTS_PAYMENT', text, at }[] }` |
+
+`BusinessDto = BusinessSummary & { description, address, lat, lng, phone?, website?, viewsCount }`.
+
+## Oferte (T10, puncte în T11)
+| Metodă | Rută | Auth | Cerere → Răspuns |
+|---|---|---|---|
+| GET | `/offers?category&localProduct=true&near=lat,lng&q` | pub | → `OfferSummary[]` (doar `PUBLISHED`, valabile azi) |
+| GET | `/offers/{id}` | pub | → `OfferDto` (+ `myRedemption` dacă e logat) |
+| POST | `/offers/{id}/redeem` | auth | → `RedemptionDto` (409 dacă există una `ISSUED`; 409 `insufficient_points` dacă `pointsPrice` > sold) |
+| GET | `/me/redemptions` | auth | → `RedemptionDto[]` |
+| GET / POST | `/business/offers` | BUSINESS | `OfferCreate { title, description, discountLabel, localProduct, validFrom, validUntil, pointsPrice?, imageUrl? }` → `OfferDto` |
+| PUT / DELETE | `/business/offers/{id}` | BUSINESS | |
+| POST | `/business/redemptions/use` | BUSINESS | `{ code }` → `RedemptionDto` cu `USED` (404 cod necunoscut, 409 deja folosit / nu e al firmei) |
+| GET | `/business/redemptions?status` | BUSINESS | → `RedemptionDto[]` |
+
+Cod ofertă: `AX-O{offerId}-{6}`.
+
+## Comunitate & puncte (T11)
+| Metodă | Rută | Auth | Cerere → Răspuns |
+|---|---|---|---|
+| GET | `/community/actions?upcoming=true` | pub | → `ActionSummary[]` (+ `myRegistration` dacă e logat) |
+| GET | `/community/actions/{id}` | pub | → `ActionDto` |
+| POST | `/community/actions/{id}/register` | LOCAL (și VISITOR) | → `RegistrationDto` (409 plin / deja înscris) |
+| DELETE | `/community/actions/{id}/register` | auth | → 204 |
+| GET | `/me/community/registrations` | auth | → `RegistrationDto[]` |
+| GET | `/community/leaderboard?period=month\|year` | pub (+ `me` dacă e logat) | → `LeaderboardDto` |
+| GET / POST | `/city/actions` | CITY_HALL | `ActionCreate { title, description, category, startAt, endAt, locationName, address, lat, lng, pointsReward, capacity, imageUrl? }` → `ActionDto` |
+| PUT | `/city/actions/{id}` | CITY_HALL | |
+| GET | `/city/actions/{id}/registrations?status` | CITY_HALL | → `RegistrationDto[]` cu `user` |
+| POST | `/city/registrations/confirm` | CITY_HALL | `{ code }` → `ConfirmResultDto = RegistrationDto & { alreadyConfirmed: boolean; pointsAwarded: number }` (idempotent: a doua oară 200 cu `alreadyConfirmed: true`, `pointsAwarded: 0`; 404 cod necunoscut) |
+| POST | `/city/registrations/{id}/confirm` | CITY_HALL | → `ConfirmResultDto` |
+| POST | `/city/registrations/{id}/reject` | CITY_HALL | → `RegistrationDto` NO_SHOW |
+
+Cod înscriere: `AX-C{actionId}-{6}`. Punctele se scriu **doar** prin `PointsService` (`award`/`spend`).
+
+## AI (T12, T13)
+| Metodă | Rută | Auth | Cerere → Răspuns |
+|---|---|---|---|
+| POST | `/ai/chat` | pub (rate-limit 20/min/IP) | `{ messages: { role: 'user'\|'assistant', content }[], locale }` → `{ reply, suggestedEventIds: number[], quickReplies: string[], offline: boolean }` |
+| POST | `/ai/itinerary` | pub | `{ date, startTime?: '10:00', hours?: number, days?: number, transport, interests: string[], freeText?, start?: GeoPoint }` → `ItineraryDto` (nesalvat) |
+| POST | `/itineraries` | pub (userId dacă e logat) | `ItineraryDto` → `ItineraryDto` cu `id`, `shareCode` |
+| GET | `/itineraries/{idOrShareCode}` | pub | → `ItineraryDto` |
+| GET | `/me/itineraries` | auth | → `ItineraryDto[]` |
+
+Răspunsul modelului e forțat cu `response_format: json_schema` (schema în `ai/schemas/*.json`); BE validează id-urile și normalizează orele. Timeout 20 s, apoi fallback din `ai/fallback/*.json` cu `offline: true`.
+
+## Admin (T14)
+| Metodă | Rută | Auth | Cerere → Răspuns |
+|---|---|---|---|
+| GET | `/admin/stats` | ADMIN | → `{ usersByRole, events, ticketsSold, offersRedeemed, pointsAwarded, actions }` |
+| GET | `/admin/businesses?verified=false` | ADMIN | → `BusinessDto[]` |
+| POST | `/admin/businesses/{id}/verify` | ADMIN | → `BusinessDto` (publică și conținutul `DRAFT` al firmei) |
+| PATCH | `/admin/events/{id}/status` / `/admin/offers/{id}/status` / `/admin/actions/{id}/status` | ADMIN | `{ status }` |
+| GET | `/admin/users?role&q` | ADMIN | → `Page<UserDto>` |
+
+## Diverse
+| Metodă | Rută | Auth | Răspuns |
+|---|---|---|---|
+| GET | `/health` | pub | `{ status: 'ok', time, version }` |
+
+## Rute FE
+Mobil (`/m`): `/m` S1 · `/m/search` S2 · `/m/events/:id` S3 · `/m/events/:id/tickets` S4 · `/m/checkout` S5 · `/m/confirm/:code` S6 · `/m/map` S7 · `/m/chat` S8 · `/m/tickets` S9 · `/m/tickets/:code` S10 · `/m/profile` S11 · `/m/login` S12 · `/m/offers` · `/m/offers/:id` · `/m/community` · `/m/community/actions/:id` · `/m/community/leaderboard` · `/m/places/:id` E3 · `/m/plan` E1 · `/m/itinerary/:id` E2 · `/m/itinerary/:id/map` E4 · `/m/businesses/:id` · `/m/panel` E5 (firmă / primărie: validare + liste)
+Web (`/w`): `/w` W1 landing · `/w/events` W5 · `/w/events/:id` W6 · `/w/places` W7 · `/w/places/:id` W8 · `/w/map` W9 · `/w/plan` W10 · `/w/offers` W11 · `/w/community` W12 · `/w/chat` W13 · `/w/account` W14 (bilete, salvate, puncte, oferte, itinerarii, setări) · `/w/businesses/:id` W15 · `/w/login` W0 · `/w/business/*` W4, W16–W19 panou firmă · `/w/city/*` W20, W2, W21, W22 panou primărie · `/w/admin/*` W3, W23–W26

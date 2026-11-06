@@ -1,0 +1,7 @@
+{
+  "app": { "name": "AradExperience", "tagline": "Ce faci în Arad?" },
+  "nav": { "events": "Evenimente", "chat": "Chat", "map": "Hartă", "tickets": "Bilete", "saved": "Salvate", "panel": "Panou", "offers": "Oferte", "community": "Comunitate", "places": "Obiective", "plan": "Planifică-ți vizita", "login": "Conectare", "logout": "Deconectare", "profile": "Profil", "admin": "Administrare", "business": "Panou firmă", "city": "Panou Primărie", "public": "Site public" },
+  "common": { "loading": "Se încarcă…", "retry": "Reîncearcă", "empty": "Nimic aici încă", "save": "Salvează", "cancel": "Anulează", "back": "Înapoi", "continue": "Continuă", "search": "Caută evenimente și activități", "apiOnline": "API online", "apiOffline": "API indisponibil", "demoData": "Date de exemplu", "comingSoon": "În lucru — vezi docs/PLAN.md" },
+  "auth": { "title": "Conectează-te sau creează un cont", "email": "Adresa de e-mail", "password": "Parola", "name": "Numele tău", "login": "Conectare", "register": "Creează cont", "asVisitor": "Continuă ca vizitator", "roleVisitor": "Vizitator", "roleLocal": "Localnic", "roleBusiness": "Firmă locală", "demoAccounts": "Conturi demo", "noAccount": "Nu ai cont?", "haveAccount": "Ai deja cont?", "welcome": "Bun venit, {name}!" },
+  "home": { "title": "Ce faci în Arad?", "today": "Azi", "weekend": "Weekendul acesta", "week": "Următoarele 7 zile", "popular": "Populare", "planCta": "Ești în vizită? Planifică-ți ziua", "planCtaSub": "Spune cât timp ai → program cu obiective, ore și traseu" }
+}

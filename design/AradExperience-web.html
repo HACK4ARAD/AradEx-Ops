@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AradExperience – design web (toate paginile)</title>
+<link rel="stylesheet" href="assets/clean-ink.css">
+<style>
+.web{margin-bottom:0}
+.cap{max-width:1280px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div>
+      <div><span class="dot"></span><b>AradExperience</b> · design web</div>
+      <h1>Toate paginile web, cu funcționalitățile din plan</h1>
+      <p>Layout desktop 1280×800: pagini publice (bară sus), panouri cu sidebar pentru Firmă / Primărie / Admin. Aceleași componente ca pe mobil (<code>EventCard</code>, <code>OfferCard</code>, <code>MapView</code>…), altă așezare. W1–W4 sunt în <code>AradExperience-extensii.html</code>; aici W5–W26. Datele sunt de exemplu.</p>
+    </div>
+    <div class="nav">
+      <a href="#W5">W5 Evenimente</a><a href="#W6">W6 Eveniment</a><a href="#W7">W7 Obiective</a><a href="#W8">W8 Ghid</a><a href="#W9">W9 Hartă</a><a href="#W10">W10 Planificator</a><a href="#W11">W11 Oferte</a><a href="#W12">W12 Comunitate</a><a href="#W13">W13 Chat</a><a href="#W14">W14 Contul meu</a><a href="#W15">W15 Firmă publică</a><a href="#W16">W16 Firmă·Oferte</a><a href="#W17">W17 Firmă·Evenimente</a><a href="#W18">W18 Firmă·Anunțuri</a><a href="#W19">W19 Firmă·Coduri</a><a href="#W20">W20 Primărie·Panou</a><a href="#W21">W21 Primărie·Acțiuni</a><a href="#W22">W22 Primărie·Clasament</a><a href="#W23">W23 Admin·Firme</a><a href="#W24">W24 Admin·Conținut</a><a href="#W25">W25 Admin·Obiective</a><a href="#W26">W26 Admin·Utilizatori</a>
+    </div>
+  </div>
+
+<template id="mapTpl">
+  <svg viewBox="0 0 800 500" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"><rect width="800" height="500" fill="#E9E9E2"/><g stroke="#fff" stroke-width="7" fill="none"><path d="M-10 90 L810 60"/><path d="M-10 210 L810 180"/><path d="M-10 330 L810 300"/><path d="M-10 450 L810 420"/><path d="M110 -10 L130 510"/><path d="M260 -10 L280 510"/><path d="M420 -10 L440 510"/><path d="M580 -10 L600 510"/><path d="M720 -10 L740 510"/></g><g stroke="#fff" stroke-width="3" fill="none"><path d="M-10 150 L810 120"/><path d="M-10 270 L810 240"/><path d="M-10 390 L810 360"/><path d="M190 -10 L205 510"/><path d="M340 -10 L360 510"/><path d="M500 -10 L520 510"/><path d="M650 -10 L670 510"/></g><path d="M-10 430 C 150 380, 320 470, 480 420 S 720 380, 820 430" stroke="#BFD7E8" stroke-width="34" fill="none"/><rect x="560" y="150" width="130" height="90" rx="10" fill="#DCDCD2"/><text x="580" y="200" font-size="13" fill="#7a7a72" font-family="Inter">Cetatea</text><g font-family="Inter" font-weight="700" font-size="13" text-anchor="middle"><circle cx="620" cy="200" r="15" fill="#111"/><text x="620" y="205" fill="#fff">1</text><circle cx="470" cy="225" r="15" fill="#111"/><text x="470" y="230" fill="#fff">2</text><circle cx="430" cy="290" r="15" fill="#111"/><text x="430" y="295" fill="#fff">3</text><circle cx="300" cy="260" r="15" fill="#FFC43D"/><text x="300" y="265" fill="#111">🔥</text><circle cx="230" cy="340" r="15" fill="#FF5A36"/><text x="230" y="345" fill="#fff">%</text><circle cx="360" cy="140" r="15" fill="#1F3A1A"/><text x="360" y="145" fill="#fff">+</text><circle cx="650" cy="240" r="12" fill="#2F6BFF"/><text x="650" y="244" fill="#fff" font-size="11">P</text></g><path d="M620 200 L470 225 L430 290 L300 260 L230 340" stroke="#111" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" class="route"/><circle cx="520" cy="215" r="9" fill="#2F6BFF" stroke="#fff" stroke-width="3"/></svg>
+</template>
+
+  <div class="sechdr">Pagini publice (bară sus) — T05, T06, T07, T08, T10, T11, T12, T13</div>
+  <div class="grid">
+
+    <!-- W5 EVENIMENTE -->
+    <div class="frame-wrap" id="W5">
+      <div class="web" data-shot="W5-web-evenimente">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span class="on">Evenimente</span><span>Hartă</span><span>Oferte</span><span>Comunitate</span><span>Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="tbtn">Conectare</span><span class="tbtn pri"><span class="msym" style="font-size:18px">auto_awesome</span>Planifică-ți vizita</span></div></div>
+        <div class="wbody"><div class="main" style="padding:24px 36px">
+          <h2>Evenimente în Arad</h2><p class="sub">57 de evenimente în următoarele 30 de zile</p>
+          <div class="toolbar"><div class="search"><span class="msym">search</span>Caută după titlu, loc, organizator…</div><span class="chip on">Azi</span><span class="chip">Weekend</span><span class="chip">7 zile</span><span class="chip"><span class="msym">calendar_month</span>Alege data</span><span class="chip" style="margin-left:auto"><span class="msym">sort</span>După dată</span></div>
+          <div class="two" style="gap:24px">
+            <div class="filters">
+              <div class="grp"><b>Categorie</b><div class="chk"><i class="on"></i>Concerte</div><div class="chk"><i class="on"></i>Teatru și film</div><div class="chk"><i></i>Familie și copii</div><div class="chk"><i></i>Expoziții</div><div class="chk"><i></i>Sport</div><div class="chk"><i></i>În aer liber</div><div class="chk"><i></i>Târguri</div><div class="chk"><i></i>Gastronomie</div></div>
+              <div class="grp"><b>Preț</b><div class="chk"><i class="on"></i>Gratuite</div><div class="chk"><i class="on"></i>Cu bilete în aplicație</div><div class="chk"><i></i>Pe site-ul organizatorului</div></div>
+              <div class="grp"><b>Organizator</b><div class="chk"><i class="on"></i>Instituții</div><div class="chk"><i class="on"></i>Firme locale</div><div class="chk"><i></i>Primăria Arad</div></div>
+              <div class="grp"><b>Distanță</b><div class="chk"><i class="on"></i>În oraș</div><div class="chk"><i></i>Județ (Miniș, Macea, Moneasa)</div></div>
+            </div>
+            <div style="flex:1;min-width:0">
+              <div class="wgrid">
+                <div class="wev"><div class="img" style="background-image:url(assets/oferta-degustare-vin.jpg)"><span class="badge hot">🔥 120 participă</span></div><div class="bd"><div class="ti">Festivalul Vinului · Podgoria Miniș</div><div class="me">Sâm., 7 nov. · 17:00 · Miniș · de la 30 lei</div></div></div>
+                <div class="wev"><div class="img" style="background:linear-gradient(140deg,#6b5a46,#2b2622)"><span class="badge ok">Gratuit</span></div><div class="bd"><div class="ti">Tur ghidat de seară la Cetatea Aradului</div><div class="me">Sâm., 7 nov. · 19:30 · 38 merg</div></div></div>
+                <div class="wev"><div class="img" style="background:linear-gradient(140deg,#a33,#511)"></div><div class="bd"><div class="ti">Teatru de păpuși: Croitorașul cel viteaz</div><div class="me">Sâm., 7 nov. · 11:00 · Teatrul Clasic · de la 25 lei</div></div></div>
+                <div class="wev"><div class="img" style="background:linear-gradient(140deg,#9a8f7a,#5c5446)"><span class="badge ok">Gratuit</span></div><div class="bd"><div class="ti">Repetiție deschisă: Filarmonica Arad</div><div class="me">Mie., 11 nov. · 18:00 · Palatul Cultural</div></div></div>
+                <div class="wev"><div class="img" style="background-image:url(assets/oferta-miere.jpg)"><span class="badge off">Făcut în Arad</span></div><div class="bd"><div class="ti">Târgul producătorilor din județul Arad</div><div class="me">Sâm., 14 nov. · 09:00–14:00 · Piața Avram Iancu</div></div></div>
+                <div class="wev"><div class="img" style="background-image:url(assets/loc-cappuccino.jpg)"></div><div class="bd"><div class="ti">Seară de jazz la Pasaj</div><div class="me">Vin., 13 nov. · 19:30 · Cafeneaua din Pasaj · intrare liberă</div></div></div>
+                <div class="wev"><div class="img" style="background:linear-gradient(140deg,#4a5a3a,#1f2a18)"></div><div class="bd"><div class="ti">Cros de toamnă în Pădurea Ceala</div><div class="me">Dum., 15 nov. · 10:00 · gratuit · 210 înscriși</div></div></div>
+                <div class="wev"><div class="img" style="background:linear-gradient(140deg,#7d7a74,#3a3835)"></div><div class="bd"><div class="ti">Expoziție: Aradul în 1900</div><div class="me">Zilnic până pe 30 nov. · 10:00–18:00 · 10 lei</div></div></div>
+                <div class="wev"><div class="img" style="background:linear-gradient(140deg,#2b3a6b,#111a33)"><span class="badge off">Extern</span></div><div class="bd"><div class="ti">UTA Arad – meci de campionat</div><div class="me">Sâm., 21 nov. · 20:00 · Arena „Francisc Neuman”</div></div></div>
+              </div>
+              <div class="pager"><span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>4</span><span>›</span></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+      <div class="cap"><b>W5 · Evenimente</b> — <code>/w/events</code>. Filtre în stânga (categorie, preț, organizator, distanță) → <code>GET /events?category&from&to&organizerType…</code>, grid 3 coloane, paginare. Click pe card → W6.</div>
+    </div>
+
+    <!-- W6 DETALIU EVENIMENT -->
+    <div class="frame-wrap" id="W6">
+      <div class="web" data-shot="W6-web-detaliu-eveniment">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span class="on">Evenimente</span><span>Hartă</span><span>Oferte</span><span>Comunitate</span><span>Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="av">A</span><span style="font-size:14px;font-weight:600">Ana P.</span></div></div>
+        <div class="wbody"><div class="main" style="padding:24px 36px">
+          <div style="font-size:13px;color:var(--muted);margin-bottom:10px">Evenimente › Familie și copii</div>
+          <div class="two" style="gap:28px">
+            <div style="flex:1.6;min-width:0">
+              <div class="hero-w"><div><span class="badge hot" style="margin-bottom:8px">🔥 Popular · 86 participă</span><h2>Teatru de păpuși: Croitorașul cel viteaz</h2><div style="opacity:.85;margin-top:4px">Teatrul Clasic „Ioan Slavici” · Sâm., 7 nov. · 11:00 · 50 min</div></div><span style="position:absolute;right:14px;bottom:10px;font-size:11px;opacity:.7">Foto: Unsplash</span></div>
+              <div style="display:flex;gap:10px;margin:16px 0"><span class="tbtn"><span class="msym" style="font-size:18px">bookmark</span>Salvează</span><span class="tbtn"><span class="msym" style="font-size:18px">ios_share</span>Trimite</span><span class="tbtn"><span class="msym" style="font-size:18px">calendar_add_on</span>Adaugă în calendar</span><span class="tbtn"><span class="msym" style="font-size:18px">directions</span>Indicații</span></div>
+              <h3 style="margin:0 0 8px">Despre eveniment</h3>
+              <p style="font-size:15px;line-height:1.6;color:#333;margin:0 0 16px">Un croitoraș isteț păcălește uriași și cucerește un regat. Spectacol amuzant pentru copii de la 3 ani, cu păpuși de mari dimensiuni și muzică live. Durata: 50 de minute, fără pauză. Accesul copiilor sub 3 ani este gratuit, fără loc.</p>
+              <h3 style="margin:0 0 8px">Ce spun cei care au fost</h3>
+              <div class="card" style="display:flex;gap:14px;align-items:center"><div style="font-size:34px;font-weight:700">4,5</div><div><div style="color:#E0A100">★★★★★</div><div class="note">2 păreri · ediții anterioare</div></div><div style="margin-left:auto" class="note">„Copiii au râs tot spectacolul. Locurile din față sunt perfecte.” — Roxana B.</div></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+              <div class="panel" style="border:1.5px solid var(--ink)">
+                <h3>Bilete în aplicație</h3>
+                <div class="kv"><div><span class="msym">schedule</span><div><b>Sâm., 7 nov. · 11:00</b><div class="note">și 16:00 (ultimele 3 bilete) · Dum., 8 nov. 11:00 epuizat</div></div></div><div><span class="msym">location_on</span><div>Teatrul Clasic „Ioan Slavici”<div class="note">Bd. Revoluției 103 · 0,4 km de tine</div></div></div><div><span class="msym">accessible</span><div>Acces fără trepte</div></div></div>
+                <div style="margin:14px 0 8px;display:flex;justify-content:space-between;align-items:center"><span>Adult · 40 lei</span><span class="chips"><span class="chip" style="height:32px;width:32px;padding:0;justify-content:center">−</span><b>1</b><span class="chip" style="height:32px;width:32px;padding:0;justify-content:center">+</span></span></div>
+                <div style="margin:0 0 14px;display:flex;justify-content:space-between;align-items:center"><span>Copil (3–12 ani) · 25 lei</span><span class="chips"><span class="chip" style="height:32px;width:32px;padding:0;justify-content:center">−</span><b>1</b><span class="chip" style="height:32px;width:32px;padding:0;justify-content:center">+</span></span></div>
+                <div style="display:flex;justify-content:space-between;font-weight:700;font-size:18px;margin-bottom:12px"><span>Total</span><span>65 lei</span></div>
+                <div class="btn"><span class="msym">lock</span>Continuă spre plată</div>
+                <p class="note" style="margin:8px 0 0">Plată demonstrativă. Biletul apare în „Contul meu › Bilete” cu cod QR.</p>
+              </div>
+              <div class="mapbox" style="height:200px"><div class="mapfill" style="position:absolute;inset:0"></div><div style="position:absolute;right:10px;bottom:10px" class="tbtn">Deschide harta</div></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+      <div class="cap"><b>W6 · Detaliu eveniment</b> — <code>/w/events/:id</code>. Cutia de bilete înlocuiește S4+S5 pe web (cantități + total + plată simulată); salvare, calendar, indicații; hartă mică; recenzii.</div>
+    </div>
+
+    <!-- W7 OBIECTIVE -->
+    <div class="frame-wrap" id="W7">
+      <div class="web" data-shot="W7-web-obiective">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Evenimente</span><span>Hartă</span><span>Oferte</span><span>Comunitate</span><span class="on">Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="tbtn">Conectare</span><span class="tbtn pri"><span class="msym" style="font-size:18px">auto_awesome</span>Planifică-ți vizita</span></div></div>
+        <div class="wbody"><div class="main" style="padding:24px 36px">
+          <h2>Obiective cu ghid virtual</h2><p class="sub">12 locuri din Arad și din județ, cu ghid scris și audio, în RO / EN / HU</p>
+          <div class="toolbar"><span class="chip on">Toate</span><span class="chip">Istorie</span><span class="chip">Muzee</span><span class="chip">Natură</span><span class="chip">Crame & vin</span><span class="chip">Familie</span><span class="chip" style="margin-left:auto"><span class="msym">near_me</span>Lângă mine</span></div>
+          <div class="two" style="gap:24px">
+            <div style="flex:1.5;min-width:0" class="wgrid">
+              <div class="wev"><div class="img" style="background:linear-gradient(140deg,#6b5a46,#2b2622)"><span class="badge guide"><span class="msym" style="font-size:14px">headphones</span>6 puncte · 35 min</span></div><div class="bd"><div class="ti">Cetatea Aradului</div><div class="me">Fortificație Vauban · 90 min · 1,2 km</div></div></div>
+              <div class="wev"><div class="img" style="background:linear-gradient(140deg,#9a8f7a,#5c5446)"><span class="badge guide"><span class="msym" style="font-size:14px">headphones</span>4 puncte · 20 min</span></div><div class="bd"><div class="ti">Palatul Cultural</div><div class="me">Filarmonica + Muzeul · 60 min · 0,3 km</div></div></div>
+              <div class="wev"><div class="img" style="background:linear-gradient(140deg,#7d7a74,#3a3835)"><span class="badge guide"><span class="msym" style="font-size:14px">headphones</span>3 puncte</span></div><div class="bd"><div class="ti">Turnul de Apă</div><div class="me">Spațiu cultural · 30 min · 0,9 km</div></div></div>
+              <div class="wev"><div class="img" style="background:linear-gradient(140deg,#b06a3a,#5a3418)"><span class="badge guide"><span class="msym" style="font-size:14px">headphones</span>3 puncte</span></div><div class="bd"><div class="ti">Teatrul Clasic „Ioan Slavici”</div><div class="me">Neoclasic, 1874 · 20 min · 0,4 km</div></div></div>
+              <div class="wev"><div class="img" style="background:linear-gradient(140deg,#4a5a3a,#1f2a18)"></div><div class="bd"><div class="ti">Faleza Mureșului</div><div class="me">Promenadă · 45 min · 0,6 km</div></div></div>
+              <div class="wev"><div class="img" style="background-image:url(assets/oferta-degustare-vin.jpg)"><span class="badge guide"><span class="msym" style="font-size:14px">headphones</span>4 puncte</span></div><div class="bd"><div class="ti">Podgoria Miniș</div><div class="me">Crame, Cadarcă · 120 min · 24 km</div></div></div>
+            </div>
+            <div class="mapbox" style="flex:1;min-height:520px"><div class="mapfill" style="position:absolute;inset:0"></div></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="cap"><b>W7 · Obiective</b> — <code>/w/places</code>. <code>GET /places?type&near</code>; badge cu numărul de puncte de ghid; harta cu toate pin-urile în dreapta.</div>
+    </div>
+
+    <!-- W8 GHID VIRTUAL -->
+    <div class="frame-wrap" id="W8">
+      <div class="web" data-shot="W8-web-ghid-virtual">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Evenimente</span><span>Hartă</span><span>Oferte</span><span>Comunitate</span><span class="on">Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="tbtn">Conectare</span></div></div>
+        <div class="wbody"><div class="main" style="padding:24px 36px">
+          <div style="font-size:13px;color:var(--muted);margin-bottom:10px">Obiective › Istorie</div>
+          <div class="two" style="gap:28px">
+            <div style="flex:1.2;min-width:0">
+              <div class="hero-w" style="background:linear-gradient(160deg,#5a4634 0%,#2b2622 60%,#161412 100%);height:260px"><div><h2>Cetatea Aradului</h2><div style="opacity:.85;margin-top:4px">Fortificație Vauban, sec. XVIII · deschisă azi 09:00–18:00 · Parcare: str. Cetății</div></div><span style="position:absolute;right:14px;bottom:10px;font-size:11px;opacity:.7">Foto: Wikimedia Commons · CC BY-SA</span></div>
+              <div class="audio" style="margin:14px 0"><span class="play"><span class="msym fill">play_arrow</span></span><div class="meta"><b>1 · Poarta principală</b><div class="bar"><i></i></div><small>0:42 / 2:10 · voce română · RO | EN | HU</small></div><span class="spd">1×</span></div>
+              <div class="gp-w on"><span class="num">1</span><div style="flex:1"><b>Poarta principală</b><p style="margin:4px 0 0;font-size:14px;color:#333;line-height:1.55">Intrarea de sud, cu blazonul imperial deasupra bolții. De aici pornea drumul spre oraș, peste podul de lemn care traversa șanțul de apărare. Observați grosimea zidurilor: peste trei metri la bază…</p></div><span class="note">2 min</span></div>
+              <div class="gp-w"><span class="num">2</span><div style="flex:1"><b>Bastionul de nord</b><p style="margin:4px 0 0;font-size:14px;color:var(--muted)">Unul dintre cele șase bastioane în stea.</p></div><span class="note"><span class="msym" style="font-size:18px">play_circle</span> 3 min</span></div>
+              <div class="gp-w"><span class="num">3</span><div style="flex:1"><b>Cazărmile</b><p style="margin:4px 0 0;font-size:14px;color:var(--muted)">Clădirile lungi din cărămidă din interior.</p></div><span class="note"><span class="msym" style="font-size:18px">play_circle</span> 2 min</span></div>
+              <div class="gp-w"><span class="num">4</span><div style="flex:1"><b>Capela</b></div><span class="note"><span class="msym" style="font-size:18px">play_circle</span> 2 min</span></div>
+              <div class="gp-w"><span class="num">5</span><div style="flex:1"><b>Zidurile Vauban</b></div><span class="note"><span class="msym" style="font-size:18px">play_circle</span> 4 min</span></div>
+              <div class="gp-w" style="border:none"><span class="num">6</span><div style="flex:1"><b>Panorama spre Mureș</b></div><span class="note"><span class="msym" style="font-size:18px">play_circle</span> 1 min</span></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+              <div class="mapbox" style="height:300px"><div class="mapfill" style="position:absolute;inset:0"></div><div style="position:absolute;left:10px;top:10px" class="badge ok">Punctele de ghid pe hartă</div></div>
+              <div class="panel"><h3>Informații</h3><div class="kv"><div><span class="msym">schedule</span><div>Luni–Duminică 09:00–18:00</div></div><div><span class="msym">timer</span><div>Vizită: ~90 min</div></div><div><span class="msym">local_parking</span><div>Parcarea Cetății, str. Cetății · 2 min</div></div><div><span class="msym">directions_walk</span><div>18 min pe jos de la Palatul Cultural</div></div></div><div style="display:flex;gap:8px;margin-top:14px"><span class="tbtn pri"><span class="msym" style="font-size:18px">auto_awesome</span>Pune în program</span><span class="tbtn"><span class="msym" style="font-size:18px">directions</span>Indicații</span></div></div>
+              <div class="panel"><h3>Evenimente aici</h3><div class="lead"><span class="msym" style="font-size:18px;color:var(--muted)">event</span>Tur ghidat de seară<b style="font-weight:500;font-size:13px">Sâm., 19:30</b></div><div class="lead" style="border:none"><span class="msym" style="font-size:18px;color:var(--muted)">event</span>Plantăm copaci pe Faleză<b style="font-weight:500;font-size:13px">Sâm., 10:00</b></div></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+      <div class="cap"><b>W8 · Ghid virtual (web)</b> — <code>/w/places/:id</code>. Aceeași bară audio ca E3 (<code>useTts</code>), punctele de ghid pe hartă, informații practice, „Pune în program” → W10.</div>
+    </div>
+
+    <!-- W9 HARTA -->
+    <div class="frame-wrap" id="W9">
+      <div class="web" data-shot="W9-web-harta">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Evenimente</span><span class="on">Hartă</span><span>Oferte</span><span>Comunitate</span><span>Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="tbtn">Conectare</span></div></div>
+        <div class="wbody">
+          <div style="width:380px;flex:none;background:#fff;border-right:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:10px;overflow:hidden">
+            <div class="search" style="height:42px"><span class="msym">search</span>Caută pe hartă</div>
+            <div class="chips"><span class="chip on" style="height:32px;font-size:12px">Azi</span><span class="chip" style="height:32px;font-size:12px">Weekend</span><span class="chip" style="height:32px;font-size:12px">7 zile</span></div>
+            <div class="chips"><span class="chip on" style="height:32px;font-size:12px">Evenimente</span><span class="chip on" style="height:32px;font-size:12px">Oferte</span><span class="chip" style="height:32px;font-size:12px">Obiective</span><span class="chip" style="height:32px;font-size:12px">Acțiuni</span></div>
+            <div class="note" style="margin-top:4px">9 rezultate în zona hărții · sortate după distanță</div>
+            <div class="ev" style="border-top:1px solid var(--line)"><span class="thumb" style="width:56px;height:56px;background:linear-gradient(140deg,#9a8f7a,#5c5446)"></span><div style="flex:1"><div class="ti">Repetiție deschisă: Filarmonica</div><div class="me">Azi · 18:00 · 0,3 km</div><span class="badge ok">Gratuit</span></div></div>
+            <div class="ev"><span class="thumb" style="width:56px;height:56px;background-image:url(assets/oferta-cafea.jpg)"></span><div style="flex:1"><div class="ti">Cafeneaua din Pasaj</div><div class="me">0,3 km</div><span class="badge off">-20% la orice cafea</span></div></div>
+            <div class="ev" style="background:var(--bg);margin:0 -18px;padding:10px 18px;border-left:3px solid var(--ink)"><span class="thumb" style="width:56px;height:56px;background:linear-gradient(140deg,#6b5a46,#2b2622)"></span><div style="flex:1"><div class="ti">Tur ghidat de seară la Cetate</div><div class="me">Azi · 19:30 · 1,2 km · 38 merg</div><div style="display:flex;gap:6px;margin-top:6px"><span class="tbtn pri" style="height:30px;font-size:12px">Arată traseul</span><span class="tbtn" style="height:30px;font-size:12px">Deschide</span></div></div></div>
+            <div class="ev"><span class="thumb" style="width:56px;height:56px;background-image:url(assets/actiune-plantare-copaci.jpg)"></span><div style="flex:1"><div class="ti">Plantăm copaci pe Faleză</div><div class="me">Sâm., 10:00 · 0,6 km</div><span class="badge pts">+50 puncte</span></div></div>
+          </div>
+          <div style="flex:1;position:relative" class="mapbox mapfill"><div style="position:absolute;right:14px;top:14px;display:flex;flex-direction:column;gap:6px"><span class="tbtn" style="width:38px;justify-content:center">+</span><span class="tbtn" style="width:38px;justify-content:center">−</span><span class="tbtn" style="width:38px;justify-content:center"><span class="msym" style="font-size:18px">my_location</span></span></div><div style="position:absolute;left:14px;bottom:14px" class="card" style="padding:8px 12px"><span class="badge ok"><span class="msym" style="font-size:14px">directions_walk</span>Traseu: 16 min · 1,2 km</span></div></div>
+        </div>
+      </div>
+      <div class="cap"><b>W9 · Hartă</b> — <code>/w/map</code>. Lista în stânga sincronizată cu harta (hover/click evidențiază pin-ul), filtre, traseu OSRM pe jos/mașină de la locația mea.</div>
+    </div>
+
+    <!-- W10 PLANIFICATOR -->
+    <div class="frame-wrap" id="W10">
+      <div class="web" data-shot="W10-web-planificator">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Evenimente</span><span>Hartă</span><span>Oferte</span><span>Comunitate</span><span>Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="tbtn">Conectare</span></div></div>
+        <div class="wbody">
+          <div style="width:400px;flex:none;background:#fff;border-right:1px solid var(--line);padding:22px;overflow:hidden">
+            <h2 style="font-size:22px;margin:0 0 4px">Planifică-ți vizita</h2><p class="sub" style="font-size:13px">Program generat cu AI din obiective și evenimente reale.</p>
+            <div class="label" style="margin-top:4px">Cât timp ai?</div><div class="chips"><span class="chip">3 ore</span><span class="chip on">Jumătate de zi</span><span class="chip">O zi</span><span class="chip">2 zile</span></div>
+            <div class="label">Când?</div><div class="chips"><span class="chip on">Sâm., 7 nov.</span><span class="chip">Dum., 8 nov.</span><span class="chip">de la 10:00</span></div>
+            <div class="label">Cum te deplasezi?</div><div class="row"><div class="opt on"><span class="msym">directions_walk</span>Pe jos</div><div class="opt"><span class="msym">directions_car</span>Mașină</div><div class="opt"><span class="msym">directions_bus</span>Transport</div></div>
+            <div class="label">Ce te interesează?</div><div class="chips"><span class="chip on">Istorie</span><span class="chip">Crame & vin</span><span class="chip on">Muzee</span><span class="chip">Natură</span><span class="chip">Familie</span><span class="chip on">Gastronomie</span></div>
+            <div class="label">Altceva?</div><div class="textarea" style="min-height:60px">Vreau neapărat Cetatea și o cafea bună.</div>
+            <div class="btn" style="margin-top:14px"><span class="msym" style="color:var(--yellow)">auto_awesome</span>Generează programul</div>
+          </div>
+          <div class="main" style="padding:22px 28px;display:flex;gap:20px">
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><h2 style="font-size:22px;margin:0">Programul tău</h2><span class="badge guide">generat în 6 s</span></div>
+              <p class="sub" style="font-size:13px">Sâm., 7 nov. · 10:00–15:15 · pe jos · 5 opriri · 3,1 km</p>
+              <div class="timeline">
+                <div class="stop"><div class="t">10:00<br>11:30</div><div class="n"><span class="c">1</span><span class="l"></span></div><div class="b"><div class="card"><span class="thumb" style="background:linear-gradient(140deg,#6b5a46,#2b2622)"></span><div style="flex:1"><div class="ti">Cetatea Aradului</div><div class="me">90 min · <span class="badge guide">Ghid audio</span></div></div><span class="msym" style="color:var(--muted)">drag_indicator</span></div><div class="walk"><span class="msym">directions_walk</span>18 min · 1,3 km</div></div></div>
+                <div class="stop"><div class="t">11:50<br>12:20</div><div class="n"><span class="c">2</span><span class="l"></span></div><div class="b"><div class="card"><span class="thumb" style="background-image:url(assets/oferta-cafea.jpg)"></span><div style="flex:1"><div class="ti">Cafeneaua din Pasaj</div><div class="me">pauză · <span class="badge off">-20%</span></div></div><span class="msym" style="color:var(--muted)">drag_indicator</span></div><div class="walk"><span class="msym">directions_walk</span>6 min · 450 m</div></div></div>
+                <div class="stop"><div class="t">12:30<br>13:30</div><div class="n"><span class="c">3</span><span class="l"></span></div><div class="b"><div class="card"><span class="thumb" style="background:linear-gradient(140deg,#9a8f7a,#5c5446)"></span><div style="flex:1"><div class="ti">Palatul Cultural</div><div class="me">60 min · <span class="badge guide">Ghid audio</span></div></div><span class="msym" style="color:var(--muted)">drag_indicator</span></div><div class="walk"><span class="msym">directions_walk</span>4 min</div></div></div>
+                <div class="stop"><div class="t">13:35<br>14:30</div><div class="n"><span class="c">4</span><span class="l"></span></div><div class="b"><div class="card"><span class="thumb" style="background-image:url(assets/loc-ciorba-de-peste.jpg)"></span><div style="flex:1"><div class="ti">Prânz · Bistro La Mureș</div><div class="me">55 min</div></div><span class="msym" style="color:var(--muted)">drag_indicator</span></div><div class="walk"><span class="msym">directions_walk</span>12 min</div></div></div>
+                <div class="stop"><div class="t">14:45<br>15:15</div><div class="n"><span class="c">5</span></div><div class="b"><div class="card"><span class="thumb" style="background:linear-gradient(140deg,#7d7a74,#3a3835)"></span><div style="flex:1"><div class="ti">Turnul de Apă</div><div class="me">30 min</div></div><span class="msym" style="color:var(--muted)">drag_indicator</span></div></div></div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:8px"><span class="tbtn pri"><span class="msym" style="font-size:18px">bookmark</span>Salvează</span><span class="tbtn"><span class="msym" style="font-size:18px">ios_share</span>Trimite pe telefon</span><span class="tbtn"><span class="msym" style="font-size:18px">refresh</span>Regenerează</span><span class="tbtn"><span class="msym" style="font-size:18px">print</span>PDF</span></div>
+            </div>
+            <div class="mapbox" style="flex:1;min-height:600px"><div class="mapfill" style="position:absolute;inset:0"></div><div style="position:absolute;left:12px;top:12px" class="chips"><span class="chip on" style="height:32px;font-size:12px"><span class="msym" style="font-size:16px">directions_walk</span>Pe jos</span><span class="chip" style="height:32px;font-size:12px;background:#fff"><span class="msym" style="font-size:16px">directions_car</span>Mașină</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W10 · Planificator</b> — <code>/w/plan</code>. Wizard în stânga (E1), rezultat cu opriri reordonabile (drag) + hartă cu traseul (E2 + E4) în dreapta; „Trimite pe telefon” = link cu <code>shareCode</code>.</div>
+    </div>
+
+    <!-- W11 OFERTE -->
+    <div class="frame-wrap" id="W11">
+      <div class="web" data-shot="W11-web-oferte">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Evenimente</span><span>Hartă</span><span class="on">Oferte</span><span>Comunitate</span><span>Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="av">A</span><span style="font-size:14px;font-weight:600">Ana P. · <span class="badge pts">270 p</span></span></div></div>
+        <div class="wbody"><div class="main" style="padding:24px 36px">
+          <h2>Oferte de la firmele din Arad</h2><p class="sub">Revendici în aplicație, arăți codul la casă. Unele se plătesc cu punctele din acțiunile comunitare.</p>
+          <div class="cta" style="padding:16px 18px;margin-bottom:16px;background:var(--yellow);color:var(--ink)"><span class="msym" style="color:var(--ink)">local_cafe</span><div style="flex:1"><b>Doar în AradExperience: până la -20% la cafenelele din centru</b><small style="color:#5a4a00">7 cafenele participante · valabil până pe 30 nov.</small></div><span class="tbtn">Vezi cafenelele</span></div>
+          <div class="toolbar"><span class="chip on">Toate</span><span class="chip">☕ Cafenele</span><span class="chip">🍽️ Restaurante</span><span class="chip">🧺 Făcut în Arad</span><span class="chip">🎉 Evenimente</span><span class="chip">🪙 Cu puncte</span><span class="chip" style="margin-left:auto"><span class="msym">near_me</span>Lângă mine</span></div>
+          <div class="wgrid" style="grid-template-columns:repeat(4,1fr)">
+            <div class="wev"><div class="img" style="background-image:url(assets/oferta-cafea.jpg)"><span class="badge off">-20%</span></div><div class="bd"><div class="ti">20% reducere la orice cafea</div><div class="me">Cafeneaua din Pasaj · 4,5 ★ · 0,3 km</div><div style="margin-top:8px;display:flex;gap:6px"><span class="tbtn pri" style="height:30px;font-size:12px">Revendică</span><span class="badge pts">sau 30 p</span></div></div></div>
+            <div class="wev"><div class="img" style="background-image:url(assets/oferta-covrigi.jpg)"><span class="badge off">2+1</span></div><div class="bd"><div class="ti">2+1 la covrigii calzi</div><div class="me">Brutăria Veche · 4,6 ★ · 0,1 km</div><div style="margin-top:8px"><span class="tbtn pri" style="height:30px;font-size:12px">Revendică</span></div></div></div>
+            <div class="wev"><div class="img" style="background-image:url(assets/oferta-degustare-vin.jpg)"><span class="badge off">Eveniment</span></div><div class="bd"><div class="ti">Degustare de vinuri din Podgoria Miniș</div><div class="me">Crama Dealul Miniș · 4,9 ★ · Sâm., 17:00</div><div style="margin-top:8px"><span class="tbtn pri" style="height:30px;font-size:12px">Rezervă</span></div></div></div>
+            <div class="wev"><div class="img" style="background-image:url(assets/oferta-miere.jpg)"><span class="badge off">Făcut în Arad</span></div><div class="bd"><div class="ti">Miere de salcâm de la producători</div><div class="me">Producători din județul Arad · 0,4 km</div><div style="margin-top:8px"><span class="tbtn pri" style="height:30px;font-size:12px">Revendică</span></div></div></div>
+            <div class="wev"><div class="img" style="background-image:url(assets/oferta-prajitura.jpg)"><span class="badge off">-10%</span></div><div class="bd"><div class="ti">Prăjitura zilei -10%</div><div class="me">Cafeneaua din Pasaj · 0,3 km</div><div style="margin-top:8px"><span class="tbtn pri" style="height:30px;font-size:12px">Revendică</span></div></div></div>
+            <div class="wev"><div class="img" style="background-image:url(assets/loc-ciorba-de-peste.jpg)"><span class="badge off">Meniu</span></div><div class="bd"><div class="ti">Ciorbă de pește + desert · 35 lei</div><div class="me">Bistro La Mureș · 4,7 ★ · 0,8 km</div><div style="margin-top:8px"><span class="tbtn pri" style="height:30px;font-size:12px">Revendică</span></div></div></div>
+            <div class="wev"><div class="img" style="background-image:url(assets/loc-gradina-restaurant.jpg)"><span class="badge off">-15%</span></div><div class="bd"><div class="ti">-15% la grătar, duminica</div><div class="me">Grădina Bastion · Cetate · 1,3 km</div><div style="margin-top:8px"><span class="tbtn pri" style="height:30px;font-size:12px">Revendică</span></div></div></div>
+            <div class="wev"><div class="img" style="background-image:url(assets/loc-cappuccino.jpg)"><span class="badge pts">40 p</span></div><div class="bd"><div class="ti">Cappuccino gratuit cu puncte</div><div class="me">Cafeneaua din Pasaj · 0,3 km</div><div style="margin-top:8px"><span class="tbtn pri" style="height:30px;font-size:12px">Plătește 40 p</span></div></div></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="cap"><b>W11 · Oferte</b> — <code>/w/offers</code>. Grid 4 coloane, categorii, „Cu puncte”; Revendică → modal cu QR + cod (<code>POST /offers/{id}/redeem</code>).</div>
+    </div>
+
+    <!-- W12 COMUNITATE -->
+    <div class="frame-wrap" id="W12">
+      <div class="web" data-shot="W12-web-comunitate">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Evenimente</span><span>Hartă</span><span>Oferte</span><span class="on">Comunitate</span><span>Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="av">A</span><span style="font-size:14px;font-weight:600">Ana P.</span></div></div>
+        <div class="wbody"><div class="main" style="padding:24px 36px">
+          <h2>Comunitate</h2><p class="sub">Acțiuni organizate de Primăria Arad. Participi, primăria confirmă prezența, primești puncte pe care le folosești la firmele locale.</p>
+          <div class="two" style="gap:24px">
+            <div style="flex:1.5;min-width:0">
+              <div class="toolbar"><span class="chip on">Urmează</span><span class="chip">Toate</span><span class="chip">🌳 Mediu</span><span class="chip">🩸 Sănătate</span><span class="chip">🤝 Social</span></div>
+              <div class="card" style="display:flex;gap:16px;margin-bottom:12px"><span class="thumb" style="width:110px;height:84px;border-radius:12px;background-image:url(assets/actiune-plantare-copaci.jpg)"></span><div style="flex:1"><div style="display:flex;gap:8px;align-items:center"><b style="font-size:16px">Plantăm copaci pe Faleza Mureșului</b><span class="badge pts">+50 puncte</span></div><div class="note" style="margin:4px 0">Sâm., 7 nov. · 10:00–13:00 · Faleza Mureșului, punctul de întâlnire de la foișor</div><div class="mini-stat"><span>18/40 locuri</span><span>·</span><span>Radu, Elena, Mihai și încă 15 merg</span></div></div><div style="display:flex;flex-direction:column;gap:6px;justify-content:center"><span class="tbtn pri">Mă înscriu</span><span class="tbtn">Detalii</span></div></div>
+              <div class="card" style="display:flex;gap:16px;margin-bottom:12px"><span class="thumb" style="width:110px;height:84px;border-radius:12px;background-image:url(assets/actiune-curatenie.jpg)"></span><div style="flex:1"><div style="display:flex;gap:8px;align-items:center"><b style="font-size:16px">Curățenie în Pădurea Ceala</b><span class="badge pts">+40 puncte</span></div><div class="note" style="margin:4px 0">Dum., 8 nov. · 09:00–12:00 · Pădurea Ceala, parcarea de la intrare</div><div class="mini-stat"><span>33/60 locuri</span><span>·</span><span>Bogdan, Diana și încă 31 merg</span></div></div><div style="display:flex;flex-direction:column;gap:6px;justify-content:center"><span class="tbtn ok"><span class="msym" style="font-size:16px">check</span>Înscris</span><span class="tbtn">QR-ul meu</span></div></div>
+              <div class="card" style="display:flex;gap:16px"><span class="thumb" style="width:110px;height:84px;border-radius:12px;background-image:url(assets/actiune-donare-sange.jpg)"></span><div style="flex:1"><div style="display:flex;gap:8px;align-items:center"><b style="font-size:16px">Donăm sânge pentru spitalele din Arad</b><span class="badge pts">+80 puncte</span></div><div class="note" style="margin:4px 0">Mar., 10 nov. · 08:00–13:00 · Centrul de Transfuzie Sanguină Arad</div><div class="mini-stat"><span>12/30 locuri</span></div></div><div style="display:flex;flex-direction:column;gap:6px;justify-content:center"><span class="tbtn pri">Mă înscriu</span><span class="tbtn">Detalii</span></div></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+              <div class="panel" style="background:var(--green);color:#fff"><div style="font-size:13px;opacity:.8">Punctele tale</div><div style="font-size:40px;font-weight:700;letter-spacing:-.02em">270</div><div style="display:flex;justify-content:space-between;font-size:13px"><span>🔥 Activ 2 luni la rând</span><b>Locul 16</b></div></div>
+              <div class="panel"><h3>Clasament · noiembrie</h3><div class="lead"><span class="r">1</span>Mihai R.<b>980</b></div><div class="lead"><span class="r">2</span>Ioana S.<b>910</b></div><div class="lead"><span class="r">3</span>Andrei P.<b>860</b></div><div class="lead"><span class="r">4</span>Elena V.<b>790</b></div><div class="lead" style="border:none;background:var(--bg);margin:0 -8px;padding:8px"><span class="r">16</span>Ana P. (tu)<b>270</b></div><div class="note" style="margin-top:8px">Primii 50 sunt invitați la Gala Voluntarilor, 19 decembrie. Premii: abonament Teatrul Clasic, Filarmonica, cină pentru două persoane.</div></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+      <div class="cap"><b>W12 · Comunitate</b> — <code>/w/community</code>. Lista acțiunilor cu înscriere (<code>POST /community/actions/{id}/register</code>), „QR-ul meu” (modal), punctele mele și clasamentul (<code>GET /community/leaderboard</code>).</div>
+    </div>
+
+    <!-- W13 CHAT -->
+    <div class="frame-wrap" id="W13">
+      <div class="web" data-shot="W13-web-chat">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Evenimente</span><span>Hartă</span><span>Oferte</span><span>Comunitate</span><span>Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="tbtn">Conectare</span></div></div>
+        <div class="wbody"><div class="main" style="padding:24px 36px;display:flex;gap:24px">
+          <div style="flex:1.3;min-width:0;display:flex;flex-direction:column;background:#fff;border-radius:16px;padding:20px;height:690px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><div><b style="font-size:16px">Asistentul AradExperience</b><div class="note">Găsește evenimente și răspunde la întrebări despre ele. Nu face plăți.</div></div><span class="tbtn"><span class="msym" style="font-size:18px">edit_square</span>Chat nou</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:10px;overflow:hidden;background:var(--bg);border-radius:12px;padding:14px">
+              <div class="msg bot">Bună! Spune-mi ce ai chef să faci, când și cu cine.</div>
+              <div class="msg me">Ce pot face cu copiii în weekend?</div>
+              <div class="msg bot">Pentru ce zi cauți?</div>
+              <div class="chips"><span class="chip on" style="height:32px;font-size:12px">Sâmbătă, 7 nov.</span><span class="chip" style="height:32px;font-size:12px;background:#fff">Duminică, 8 nov.</span><span class="chip" style="height:32px;font-size:12px;background:#fff">Tot weekendul</span></div>
+              <div class="msg bot">Sâmbătă aveți trei variante bune pentru copii. Teatrul de păpuși de la 11:00 e cel mai potrivit pentru cei mici (de la 3 ani); dacă vreți aer liber, plantarea de pe Faleză e gratuită și primiți și puncte. Seara, turul ghidat la Cetate e gratuit, dar e mai lung.</div>
+              <div style="display:flex;gap:10px"><div class="wev" style="width:200px"><div class="img" style="height:70px;background:linear-gradient(140deg,#a33,#511)"></div><div class="bd" style="padding:8px 10px"><div class="ti" style="font-size:13px">Teatru de păpuși: Croitorașul cel viteaz</div><div class="me">Sâm., 11:00 · de la 25 lei</div></div></div><div class="wev" style="width:200px"><div class="img" style="height:70px;background-image:url(assets/actiune-plantare-copaci.jpg)"></div><div class="bd" style="padding:8px 10px"><div class="ti" style="font-size:13px">Plantăm copaci pe Faleză</div><div class="me">Sâm., 10:00 · +50 puncte</div></div></div><div class="wev" style="width:200px"><div class="img" style="height:70px;background:linear-gradient(140deg,#6b5a46,#2b2622)"></div><div class="bd" style="padding:8px 10px"><div class="ti" style="font-size:13px">Tur ghidat de seară la Cetate</div><div class="me">Sâm., 19:30 · gratuit</div></div></div></div>
+            </div>
+            <div class="search" style="height:48px;margin-top:12px"><span class="msym">chat_bubble</span>Mesaj…<span class="tbtn pri" style="margin-left:auto;height:34px"><span class="msym" style="font-size:18px">arrow_upward</span></span></div>
+          </div>
+          <div style="flex:.7;display:flex;flex-direction:column;gap:14px">
+            <div class="panel"><h3>Întrebări frecvente</h3><div class="chips" style="flex-direction:column;align-items:flex-start"><span class="chip">Ce concerte sunt săptămâna asta?</span><span class="chip">Cum ajung la Cetate?</span><span class="chip">Unde mănânc ciorbă de pește?</span><span class="chip">Ce e gratuit duminică?</span></div></div>
+            <div class="panel" style="border:1px dashed var(--line)"><h3>Cum funcționează</h3><p class="note" style="margin:0">Răspunsurile folosesc doar evenimentele și locurile din aplicație (următoarele 14 zile). Dacă serviciul AI nu răspunde, primești un răspuns pregătit în avans, marcat „offline”.</p></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="cap"><b>W13 · Chat</b> — <code>/w/chat</code>. <code>POST /ai/chat</code> → răspuns + <code>quickReplies</code> (chips) + <code>suggestedEventIds</code> (carduri). Întrebări frecvente în dreapta.</div>
+    </div>
+
+    <!-- W14 CONTUL MEU -->
+    <div class="frame-wrap" id="W14">
+      <div class="web" data-shot="W14-web-contul-meu">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Evenimente</span><span>Hartă</span><span>Oferte</span><span>Comunitate</span><span>Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="av">A</span><span style="font-size:14px;font-weight:600">Ana P.</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic">A</span><div><b>Ana P.</b><small>ana.popescu@exemplu.ro · Localnic</small></div></div><div class="it on"><span class="msym">confirmation_number</span>Biletele mele</div><div class="it"><span class="msym">bookmark</span>Salvate</div><div class="it"><span class="msym">volunteer_activism</span>Puncte & înscrieri</div><div class="it"><span class="msym">redeem</span>Ofertele mele</div><div class="it"><span class="msym">route</span>Itinerariile mele</div><div class="it"><span class="msym">settings</span>Setări</div><div style="margin-top:auto" class="tbtn"><span class="msym" style="font-size:18px">logout</span>Deconectare</div></div>
+          <div class="main">
+            <h2>Biletele mele</h2><p class="sub">Biletele cumpărate în aplicație. Pe cele de pe site-ul organizatorului le găsești în e-mail.</p>
+            <div class="tabs"><span class="on">Viitoare (2)</span><span>Trecute (3)</span></div>
+            <div class="two">
+              <div style="flex:1.4;display:flex;flex-direction:column;gap:12px">
+                <div class="card" style="display:flex;gap:16px;align-items:center;border:1.5px solid var(--ink)"><div style="width:96px;height:96px;background:#fff;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center"><span class="msym" style="font-size:72px">qr_code_2</span></div><div style="flex:1"><b style="font-size:16px">Teatru de păpuși: Croitorașul cel viteaz</b><div class="note" style="margin:4px 0">Sâm., 7 nov. · 11:00 · Teatrul Clasic „Ioan Slavici”</div><div style="font-family:ui-monospace,monospace;font-size:13px">AX-T3-7K3Q9Z · 1 adult + 1 copil · 65 lei</div><div style="display:flex;gap:6px;margin-top:8px"><span class="tbtn" style="height:30px;font-size:12px">Arată pe tot ecranul</span><span class="tbtn" style="height:30px;font-size:12px">Trimite pe telefon</span><span class="tbtn" style="height:30px;font-size:12px">Calendar</span></div></div><span class="badge ok">Confirmat</span></div>
+                <div class="card" style="display:flex;gap:16px;align-items:center"><div style="width:96px;height:96px;background:#fff;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;justify-content:center"><span class="msym" style="font-size:72px">qr_code_2</span></div><div style="flex:1"><b style="font-size:16px">Concert simfonic · Filarmonica Arad</b><div class="note" style="margin:4px 0">Joi, 19 nov. · 19:00 · Palatul Cultural</div><div style="font-family:ui-monospace,monospace;font-size:13px">AX-T8-M2N8RT · 2 adulți · 80 lei</div></div><span class="badge ok">Confirmat</span></div>
+              </div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+                <div class="panel" style="background:var(--green);color:#fff"><div style="font-size:13px;opacity:.8">Punctele tale</div><div style="font-size:34px;font-weight:700">270</div><div class="note" style="color:rgba(255,255,255,.8)">+50 la plantare (sâm.) · −30 cafea (azi)</div></div>
+                <div class="panel"><h3>Ofertele mele</h3><div class="lead"><span class="msym" style="font-size:18px;color:var(--muted)">redeem</span>Cafea -20% · AX-O1-A4K7<b style="font-size:12px;font-weight:600;color:#1F6B3A">activ</b></div><div class="lead" style="border:none"><span class="msym" style="font-size:18px;color:var(--muted)">redeem</span>Covrigi 2+1 · AX-O2-Q5W7<b style="font-size:12px;font-weight:500;color:var(--muted)">folosit</b></div></div>
+                <div class="panel"><h3>Setări</h3><div class="kv"><div><span class="msym">language</span><div>Limba: Română</div></div><div><span class="msym">notifications</span><div>Mementouri cu o zi înainte: pornit</div></div><div><span class="msym">smartphone</span><div>Instalează aplicația pe telefon (PWA)</div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W14 · Contul meu</b> — <code>/w/account</code> (bilete S9/S10, salvate, puncte, oferte revendicate, itinerarii salvate, setări). Pe mobil sunt ecrane separate; pe web, un singur hub cu sidebar.</div>
+    </div>
+
+    <!-- W15 FIRMA PUBLICA -->
+    <div class="frame-wrap" id="W15">
+      <div class="web" data-shot="W15-web-firma-publica">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Evenimente</span><span>Hartă</span><span class="on">Oferte</span><span>Comunitate</span><span>Obiective</span></nav><div class="right"><span class="tbtn">RO</span><span class="tbtn">Conectare</span></div></div>
+        <div class="wbody"><div class="main" style="padding:24px 36px">
+          <div class="card" style="display:flex;gap:18px;align-items:center;margin-bottom:18px"><span class="thumb" style="width:92px;height:92px;border-radius:16px;background-image:url(assets/loc-cappuccino.jpg)"></span><div style="flex:1"><div style="display:flex;gap:8px;align-items:center"><h2 style="margin:0">Cafeneaua din Pasaj</h2><span class="msym" style="color:#1F6B3A">verified</span></div><div class="note">Cafenea · Str. Vasile Alecsandri 1, Arad · 4,5 ★ (128 păreri) · deschis azi până la 22:00</div><div style="margin-top:6px"><span class="tag">specialty coffee</span><span class="tag">prăjituri de casă</span><span class="tag">jazz vineri</span><span class="tag">acceptă puncte</span></div></div><div style="display:flex;gap:8px"><span class="tbtn"><span class="msym" style="font-size:18px">directions</span>Indicații</span><span class="tbtn"><span class="msym" style="font-size:18px">call</span>0257 …</span><span class="tbtn pri"><span class="msym" style="font-size:18px">bookmark</span>Urmărește</span></div></div>
+          <div class="two" style="gap:24px">
+            <div style="flex:1.6;min-width:0">
+              <h3 style="margin:0 0 10px">Oferte active</h3>
+              <div class="wgrid" style="margin-bottom:18px"><div class="wev"><div class="img" style="height:90px;background-image:url(assets/oferta-cafea.jpg)"><span class="badge off">-20%</span></div><div class="bd"><div class="ti">20% la orice cafea</div><div class="me">până pe 30 nov. · sau 30 puncte</div></div></div><div class="wev"><div class="img" style="height:90px;background-image:url(assets/oferta-prajitura.jpg)"><span class="badge off">-10%</span></div><div class="bd"><div class="ti">Prăjitura zilei</div><div class="me">până pe 15 nov.</div></div></div><div class="wev"><div class="img" style="height:90px;background-image:url(assets/loc-cappuccino.jpg)"><span class="badge pts">40 p</span></div><div class="bd"><div class="ti">Cappuccino cu puncte</div><div class="me">oricând</div></div></div></div>
+              <h3 style="margin:0 0 10px">Evenimente</h3>
+              <div class="ev"><span class="thumb" style="width:64px;height:64px;background-image:url(assets/loc-cappuccino.jpg)"></span><div style="flex:1"><div class="ti">Seară de jazz la Pasaj</div><div class="me">Vin., 13 nov. · 19:30 · intrare liberă · 🔥 62 participă</div></div><span class="tbtn">Particip</span></div>
+              <div class="ev"><span class="thumb" style="width:64px;height:64px;background-image:url(assets/oferta-cafea.jpg)"></span><div style="flex:1"><div class="ti">Degustare de cafea de specialitate</div><div class="me">Sâm., 21 nov. · 11:00 · 25 lei</div></div><span class="tbtn pri">Bilete</span></div>
+              <h3 style="margin:16px 0 10px">Anunțuri</h3>
+              <div class="card" style="margin-bottom:8px"><b>Program prelungit de Black Friday</b><div class="note">Vineri și sâmbătă până la 23:00. · acum 2 zile</div></div>
+              <div class="card"><b>Căutăm barista part-time</b><div class="note">Trimite CV-ul la cafenea. · acum 5 zile</div></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:14px"><div class="mapbox" style="height:240px"><div class="mapfill" style="position:absolute;inset:0"></div></div><div class="panel"><h3>Despre</h3><p style="font-size:14px;line-height:1.55;margin:0;color:#333">Cafenea de specialitate în pasajul de lângă Teatrul Clasic. Prăjim local, avem lapte vegetal și o terasă mică în curte. Vinerea, de la 19:30, jazz live.</p></div><div class="panel"><h3>Program</h3><div class="kv"><div><span class="msym">schedule</span><div>L–V 07:30–22:00 · S 09:00–23:00 · D 09:00–20:00</div></div></div></div></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="cap"><b>W15 · Pagina publică a firmei</b> — <code>/w/businesses/:id</code> → <code>GET /businesses/{id}</code> (profil + oferte + evenimente + anunțuri). Aceleași date pe mobil la <code>/m/businesses/:id</code>.</div>
+    </div>
+  </div>
+
+  <div class="sechdr">Panou Firmă (sidebar) — T09, T10</div>
+  <div class="grid">
+
+    <!-- W16 FIRMA OFERTE -->
+    <div class="frame-wrap" id="W16">
+      <div class="web" data-shot="W16-web-firma-oferte">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span><span>Pagina mea publică</span></nav><div class="right"><span class="av">C</span><span style="font-size:14px;font-weight:600">Cafeneaua din Pasaj</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">storefront</span></span><div><b>Cafeneaua din Pasaj</b><small>Cont verificat</small></div></div><div class="it"><span class="msym">dashboard</span>Panou</div><div class="it on"><span class="msym">sell</span>Oferte</div><div class="it"><span class="msym">event</span>Evenimente</div><div class="it"><span class="msym">campaign</span>Anunțuri</div><div class="it"><span class="msym">qr_code_scanner</span>Validează coduri</div><div class="it"><span class="msym">settings</span>Profilul firmei</div></div>
+          <div class="main" style="display:flex;gap:20px">
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;justify-content:space-between"><div><h2>Oferte</h2><p class="sub">3 active · 1 programată · 2 expirate</p></div><span class="tbtn pri"><span class="msym" style="font-size:18px">add</span>Ofertă nouă</span></div>
+              <div class="toolbar"><span class="chip on">Active</span><span class="chip">Programate</span><span class="chip">Expirate</span><div class="search" style="margin-left:auto;max-width:260px"><span class="msym">search</span>Caută</div></div>
+              <table class="offers"><colgroup><col style="width:36%"><col style="width:16%"><col style="width:11%"><col style="width:11%"><col style="width:12%"><col style="width:14%"></colgroup>
+                <tr><th>Ofertă</th><th>Valabilă</th><th>Afișări</th><th>Folosite</th><th>Stare</th><th></th></tr>
+                <tr style="background:var(--bg)"><td><div class="row" style="gap:10px"><span class="thumb" style="width:40px;height:40px;background-image:url(assets/oferta-cafea.jpg)"></span><div><b>20% reducere la orice cafea</b><br><small style="color:var(--muted)">sau 30 de puncte</small></div></div></td><td>7–30 nov.</td><td>1.240</td><td>87</td><td><span class="badge ok">Activă</span></td><td><span class="tbtn">Editează</span></td></tr>
+                <tr><td><div class="row" style="gap:10px"><span class="thumb" style="width:40px;height:40px;background-image:url(assets/oferta-prajitura.jpg)"></span><div><b>Prăjitura zilei -10%</b></div></div></td><td>1–15 nov.</td><td>410</td><td>22</td><td><span class="badge ok">Activă</span></td><td><span class="tbtn">Editează</span></td></tr>
+                <tr><td><div class="row" style="gap:10px"><span class="thumb" style="width:40px;height:40px;background-image:url(assets/loc-cappuccino.jpg)"></span><div><b>Cappuccino cu puncte</b><br><small style="color:var(--muted)">40 de puncte</small></div></div></td><td>permanent</td><td>960</td><td>12</td><td><span class="badge ok">Activă</span></td><td><span class="tbtn">Editează</span></td></tr>
+                <tr><td><div class="row" style="gap:10px"><span class="thumb" style="width:40px;height:40px;background:#DCDCD2"></span><div><b>Meniu de Crăciun -15%</b></div></div></td><td>1–24 dec.</td><td>—</td><td>—</td><td><span class="badge wait">Programată</span></td><td><span class="tbtn">Editează</span></td></tr>
+              </table>
+            </div>
+            <div class="drawer"><h3>Ofertă nouă <span class="msym">close</span></h3>
+              <div class="field"><label>Titlu</label><div class="in filled">20% reducere la orice cafea</div></div>
+              <div class="frow"><div class="field"><label>Eticheta reducerii</label><div class="in filled">-20%</div></div><div class="field"><label>Preț în puncte (opțional)</label><div class="in filled">30</div></div></div>
+              <div class="field"><label>Descriere</label><div class="ta">Arată codul la casă. Valabil de luni până sâmbătă, o dată pe zi, pentru o comandă.</div></div>
+              <div class="frow"><div class="field"><label>Valabilă de la</label><div class="in filled">7 nov. 2026</div></div><div class="field"><label>până la</label><div class="in filled">30 nov. 2026</div></div></div>
+              <div class="field"><label>Imagine</label><div class="in" style="height:auto;padding:12px;justify-content:center;border-style:dashed"><span class="msym">upload</span>&nbsp;Trage o poză sau alege din galerie</div></div>
+              <div class="chk"><i class="on"></i>Produs „Făcut în Arad”</div>
+              <div class="foot"><span class="tbtn">Salvează ciornă</span><span class="tbtn pri">Publică</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W16 · Firmă · Oferte</b> — <code>/w/business/offers</code>. Tabel cu statistici per ofertă + formular în drawer (<code>POST/PUT /business/offers</code>). Firma neverificată vede „Ciornă până la verificare”.</div>
+    </div>
+
+    <!-- W17 FIRMA EVENIMENTE -->
+    <div class="frame-wrap" id="W17">
+      <div class="web" data-shot="W17-web-firma-evenimente">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span><span>Pagina mea publică</span></nav><div class="right"><span class="av">C</span><span style="font-size:14px;font-weight:600">Cafeneaua din Pasaj</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">storefront</span></span><div><b>Cafeneaua din Pasaj</b><small>Cont verificat</small></div></div><div class="it"><span class="msym">dashboard</span>Panou</div><div class="it"><span class="msym">sell</span>Oferte</div><div class="it on"><span class="msym">event</span>Evenimente</div><div class="it"><span class="msym">campaign</span>Anunțuri</div><div class="it"><span class="msym">qr_code_scanner</span>Validează coduri</div><div class="it"><span class="msym">settings</span>Profilul firmei</div></div>
+          <div class="main" style="display:flex;gap:20px">
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;justify-content:space-between"><div><h2>Evenimente</h2><p class="sub">Evenimentele tale apar în lista publică alături de cele ale instituțiilor.</p></div><span class="tbtn pri"><span class="msym" style="font-size:18px">add</span>Eveniment nou</span></div>
+              <table><tr><th>Eveniment</th><th>Când</th><th>Bilete</th><th>Participă</th><th>Stare</th><th></th></tr>
+                <tr><td><b>Seară de jazz la Pasaj</b><br><small style="color:var(--muted)">Concert · intrare liberă</small></td><td>Vin., 13 nov. · 19:30</td><td>Gratuit</td><td>62 · <span class="badge hot">🔥</span></td><td><span class="badge ok">Publicat</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn"><span class="msym" style="font-size:16px">qr_code_scanner</span></span></td></tr>
+                <tr><td><b>Degustare de cafea de specialitate</b><br><small style="color:var(--muted)">Gastronomie · bilete în aplicație</small></td><td>Sâm., 21 nov. · 11:00</td><td>25 lei · 12/20</td><td>12</td><td><span class="badge ok">Publicat</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn"><span class="msym" style="font-size:16px">qr_code_scanner</span></span></td></tr>
+                <tr><td><b>Atelier latte art</b><br><small style="color:var(--muted)">Familie · bilete în aplicație</small></td><td>Dum., 29 nov. · 16:00</td><td>40 lei · 0/10</td><td>0</td><td><span class="badge draft">Ciornă</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn pri">Publică</span></td></tr>
+              </table>
+              <div class="panel" style="margin-top:16px"><h3>Scanare bilete la intrare</h3><p class="note" style="margin:0 0 10px">La evenimentele cu bilete, validezi biletele cu scanner-ul (<code>POST /tickets/{code}/use</code>). Fiecare cod merge o singură dată.</p><span class="tbtn"><span class="msym" style="font-size:18px">qr_code_scanner</span>Deschide scanner-ul</span></div>
+            </div>
+            <div class="drawer"><h3>Eveniment nou <span class="msym">close</span></h3>
+              <div class="field"><label>Titlu</label><div class="in filled">Atelier latte art</div></div>
+              <div class="frow"><div class="field"><label>Categorie</label><div class="in filled">Familie și copii ▾</div></div><div class="field"><label>Bilete</label><div class="in filled">În aplicație ▾</div></div></div>
+              <div class="frow"><div class="field"><label>Data și ora</label><div class="in filled">Dum., 29 nov. · 16:00</div></div><div class="field"><label>Durată</label><div class="in filled">90 min</div></div></div>
+              <div class="frow"><div class="field"><label>Preț adult</label><div class="in filled">40 lei</div></div><div class="field"><label>Preț copil</label><div class="in filled">25 lei</div></div><div class="field"><label>Locuri</label><div class="in filled">10</div></div></div>
+              <div class="field"><label>Locul</label><div class="in filled"><span class="msym" style="font-size:18px">storefront</span>&nbsp;La noi, Str. Vasile Alecsandri 1</div></div>
+              <div class="field"><label>Descriere</label><div class="ta">Înveți să torni laptele ca un barista. Toate materialele incluse. Pentru copii de la 8 ani însoțiți.</div></div>
+              <div class="foot"><span class="tbtn">Salvează ciornă</span><span class="tbtn pri">Publică</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W17 · Firmă · Evenimente</b> — <code>/w/business/events</code>. CRUD evenimente (<code>/business/events</code>), capacitate și bilete vândute, scanner pentru intrare.</div>
+    </div>
+
+    <!-- W18 FIRMA ANUNTURI -->
+    <div class="frame-wrap" id="W18">
+      <div class="web" data-shot="W18-web-firma-anunturi">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span><span>Pagina mea publică</span></nav><div class="right"><span class="av">C</span><span style="font-size:14px;font-weight:600">Cafeneaua din Pasaj</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">storefront</span></span><div><b>Cafeneaua din Pasaj</b><small>Cont verificat</small></div></div><div class="it"><span class="msym">dashboard</span>Panou</div><div class="it"><span class="msym">sell</span>Oferte</div><div class="it"><span class="msym">event</span>Evenimente</div><div class="it on"><span class="msym">campaign</span>Anunțuri</div><div class="it"><span class="msym">qr_code_scanner</span>Validează coduri</div><div class="it"><span class="msym">settings</span>Profilul firmei</div></div>
+          <div class="main" style="display:flex;gap:20px">
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;justify-content:space-between"><div><h2>Anunțuri</h2><p class="sub">Scurte, fără dată de eveniment: program, noutăți, angajări. Apar pe pagina firmei și în feed-ul „Lângă mine”.</p></div><span class="tbtn pri"><span class="msym" style="font-size:18px">add</span>Anunț nou</span></div>
+              <div class="card" style="margin-bottom:10px;display:flex;gap:14px"><div style="flex:1"><b>Program prelungit de Black Friday</b><div class="note" style="margin:4px 0">Vineri și sâmbătă până la 23:00.</div><div class="mini-stat"><span>acum 2 zile</span><span>·</span><span>310 vizualizări</span></div></div><span class="tbtn">Editează</span><span class="tbtn"><span class="msym" style="font-size:18px">delete</span></span></div>
+              <div class="card" style="margin-bottom:10px;display:flex;gap:14px"><div style="flex:1"><b>Căutăm barista part-time</b><div class="note" style="margin:4px 0">Trimite CV-ul la cafenea sau pe e-mail. Program flexibil, weekend-uri.</div><div class="mini-stat"><span>acum 5 zile</span><span>·</span><span>540 vizualizări</span></div></div><span class="tbtn">Editează</span><span class="tbtn"><span class="msym" style="font-size:18px">delete</span></span></div>
+              <div class="card" style="display:flex;gap:14px;opacity:.7"><div style="flex:1"><b>Închis luni, 2 nov. (inventar)</b><div class="mini-stat"><span>expirat</span></div></div><span class="tbtn">Republică</span></div>
+            </div>
+            <div class="drawer"><h3>Anunț nou <span class="msym">close</span></h3>
+              <div class="field"><label>Titlu</label><div class="in filled">Prăjim un lot nou de Etiopia</div></div>
+              <div class="field"><label>Text</label><div class="ta">De joi avem un lot nou de Etiopia Yirgacheffe, note de iasomie și citrice. Vino să-l încerci la filtru.</div></div>
+              <div class="field"><label>Imagine (opțional)</label><div class="in" style="height:auto;padding:12px;justify-content:center;border-style:dashed"><span class="msym">upload</span>&nbsp;Adaugă o poză</div></div>
+              <div class="foot"><span class="tbtn">Anulează</span><span class="tbtn pri">Publică</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W18 · Firmă · Anunțuri</b> — <code>/w/business/announcements</code>. <code>POST/DELETE /business/announcements</code>; afișate pe W15 și pe mobil pe pagina firmei.</div>
+    </div>
+
+    <!-- W19 FIRMA CODURI -->
+    <div class="frame-wrap" id="W19">
+      <div class="web" data-shot="W19-web-firma-coduri">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span><span>Pagina mea publică</span></nav><div class="right"><span class="av">C</span><span style="font-size:14px;font-weight:600">Cafeneaua din Pasaj</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">storefront</span></span><div><b>Cafeneaua din Pasaj</b><small>Cont verificat</small></div></div><div class="it"><span class="msym">dashboard</span>Panou</div><div class="it"><span class="msym">sell</span>Oferte</div><div class="it"><span class="msym">event</span>Evenimente</div><div class="it"><span class="msym">campaign</span>Anunțuri</div><div class="it on"><span class="msym">qr_code_scanner</span>Validează coduri</div><div class="it"><span class="msym">settings</span>Profilul firmei</div></div>
+          <div class="main">
+            <h2>Validează coduri</h2><p class="sub">Codul de pe telefonul clientului (QR sau text). Devine „folosit” o singură dată; la ofertele cu puncte, punctele au fost deja debitate la revendicare.</p>
+            <div class="two">
+              <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+                <div class="panel"><h3>Scanează</h3><div class="scan" style="height:260px;margin:0 0 10px"><div class="box" style="width:170px;height:170px"><i></i></div><div class="line"></div><p>Camera laptopului sau telefonul (PWA) de la casă</p></div><div class="search" style="height:44px"><span class="msym">keyboard</span>sau introdu codul: AX-O1-…<span class="tbtn pri" style="margin-left:auto;height:32px">Validează</span></div></div>
+                <div class="card" style="display:flex;gap:12px;align-items:center;border:1.5px solid #1F6B3A"><span class="msym" style="color:#1F6B3A;font-size:30px">check_circle</span><div style="flex:1"><b>Cod valid · 20% reducere la orice cafea</b><div class="note">AX-O1-A4K7M2 · Ana P. · revendicat azi 10:12 · marcat folosit acum</div></div></div>
+              </div>
+              <div style="flex:1.2"><div class="panel" style="padding:0"><h3 style="padding:16px 16px 0">Coduri folosite azi (9)</h3>
+                <table><tr><th>Ora</th><th>Cod</th><th>Ofertă</th><th>Client</th><th>Puncte</th></tr>
+                  <tr><td>11:42</td><td style="font-family:ui-monospace,monospace;font-size:13px">AX-O1-A4K7M2</td><td>Cafea -20%</td><td>Ana P.</td><td>—</td></tr>
+                  <tr><td>11:05</td><td style="font-family:ui-monospace,monospace;font-size:13px">AX-O3-Q5W7ZX</td><td>Cappuccino cu puncte</td><td>Mihai R.</td><td><span class="badge pts">40 p</span></td></tr>
+                  <tr><td>10:30</td><td style="font-family:ui-monospace,monospace;font-size:13px">AX-O1-D7H4XP</td><td>Cafea -20%</td><td>Ioana S.</td><td>—</td></tr>
+                  <tr><td>09:58</td><td style="font-family:ui-monospace,monospace;font-size:13px">AX-O2-M2N8RT</td><td>Prăjitura zilei -10%</td><td>Elena T.</td><td>—</td></tr>
+                  <tr><td>09:12</td><td style="font-family:ui-monospace,monospace;font-size:13px">AX-O1-B9Q2LW</td><td>Cafea -20%</td><td>Radu M.</td><td>—</td></tr>
+                </table></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W19 · Firmă · Validează coduri</b> — <code>/w/business/codes</code>. <code>POST /business/redemptions/use</code>; istoric din <code>GET /business/redemptions?status=USED</code>. Aceeași componentă <code>QrScanner</code> ca E7.</div>
+    </div>
+  </div>
+
+  <div class="sechdr">Panou Primărie (sidebar) — T11</div>
+  <div class="grid">
+
+    <!-- W20 PRIMARIE PANOU -->
+    <div class="frame-wrap" id="W20">
+      <div class="web" data-shot="W20-web-primarie-panou">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span></nav><div class="right"><span class="av">P</span><span style="font-size:14px;font-weight:600">Primăria Arad</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">account_balance</span></span><div><b>Primăria Arad</b><small>Organizator și validator</small></div></div><div class="it on"><span class="msym">dashboard</span>Panou</div><div class="it"><span class="msym">volunteer_activism</span>Acțiuni comunitare</div><div class="it"><span class="msym">qr_code_scanner</span>Validare participanți</div><div class="it"><span class="msym">leaderboard</span>Clasament</div><div class="it"><span class="msym">event</span>Evenimente publice</div><div style="margin-top:auto" class="tbtn pri"><span class="msym" style="font-size:18px">add</span>Acțiune nouă</div></div>
+          <div class="main">
+            <h2>Panou</h2><p class="sub">Noiembrie 2026</p>
+            <div class="wstats"><div class="wstat"><b>3</b><small>Acțiuni active</small></div><div class="wstat"><b>63</b><small>Înscriși</small><div class="d">+21 săptămâna asta</div></div><div class="wstat"><b>412</b><small>Voluntari activi în 2026</small></div><div class="wstat"><b>9.870</b><small>Puncte acordate</small></div><div class="wstat"><b>187</b><small>Puncte folosite la firme</small><div class="d">14 firme partenere</div></div></div>
+            <div class="two">
+              <div style="flex:1.4"><div class="panel" style="padding:0"><h3 style="padding:16px 16px 0">Acțiunile următoare</h3>
+                <table><tr><th>Acțiune</th><th>Când</th><th>Înscriși</th><th>Confirmați</th><th></th></tr>
+                  <tr><td><b>Plantăm copaci pe Faleza Mureșului</b><br><small style="color:var(--muted)">+50 puncte · Direcția Spații Verzi</small></td><td>Sâm., 7 nov. · 10:00</td><td>18 / 40</td><td>4</td><td><span class="tbtn pri">Validează</span></td></tr>
+                  <tr><td><b>Curățenie în Pădurea Ceala</b><br><small style="color:var(--muted)">+40 puncte</small></td><td>Dum., 8 nov. · 09:00</td><td>33 / 60</td><td>—</td><td><span class="tbtn">Detalii</span></td></tr>
+                  <tr><td><b>Donăm sânge pentru spitalele din Arad</b><br><small style="color:var(--muted)">+80 puncte · Centrul de Transfuzie</small></td><td>Mar., 10 nov. · 08:00</td><td>12 / 30</td><td>—</td><td><span class="tbtn">Detalii</span></td></tr>
+                </table></div></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+                <div class="panel"><h3>Confirmări recente</h3><div class="lead"><span class="av" style="width:28px;height:28px;font-size:11px">RM</span>Radu M. · Plantare<b style="font-size:12px;font-weight:600;color:#1F3A1A">+50 · acum</b></div><div class="lead"><span class="av" style="width:28px;height:28px;font-size:11px">ET</span>Elena T. · Plantare<b style="font-size:12px;font-weight:600;color:#1F3A1A">+50 · 10:40</b></div><div class="lead" style="border:none"><span class="av" style="width:28px;height:28px;font-size:11px">MR</span>Mihai R. · Plantare<b style="font-size:12px;font-weight:600;color:#1F3A1A">+50 · 10:38</b></div></div>
+                <div class="panel"><h3>Unde se folosesc punctele</h3><div class="lead">Cafeneaua din Pasaj<b>72</b></div><div class="lead">Brutăria Veche<b>51</b></div><div class="lead" style="border:none">Bistro La Mureș<b>34</b></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W20 · Primărie · Panou</b> — <code>/w/city</code>. Statistici agregate (din <code>/city/actions</code> + <code>/community/leaderboard</code> + tranzacții de puncte), acțiunile următoare, confirmări recente.</div>
+    </div>
+
+    <!-- W21 PRIMARIE ACTIUNI -->
+    <div class="frame-wrap" id="W21">
+      <div class="web" data-shot="W21-web-primarie-actiuni">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span></nav><div class="right"><span class="av">P</span><span style="font-size:14px;font-weight:600">Primăria Arad</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">account_balance</span></span><div><b>Primăria Arad</b><small>Organizator și validator</small></div></div><div class="it"><span class="msym">dashboard</span>Panou</div><div class="it on"><span class="msym">volunteer_activism</span>Acțiuni comunitare</div><div class="it"><span class="msym">qr_code_scanner</span>Validare participanți</div><div class="it"><span class="msym">leaderboard</span>Clasament</div><div class="it"><span class="msym">event</span>Evenimente publice</div></div>
+          <div class="main" style="display:flex;gap:20px">
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;justify-content:space-between"><div><h2>Acțiuni comunitare</h2><p class="sub">Localnicii se înscriu, primesc un cod QR, voi confirmați prezența pe teren.</p></div><span class="tbtn pri"><span class="msym" style="font-size:18px">add</span>Acțiune nouă</span></div>
+              <div class="toolbar"><span class="chip on">Urmează</span><span class="chip">Încheiate</span><span class="chip">Anulate</span></div>
+              <table><tr><th>Acțiune</th><th>Când</th><th>Puncte</th><th>Locuri</th><th>Stare</th><th></th></tr>
+                <tr><td><b>Plantăm copaci pe Faleza Mureșului</b><br><small style="color:var(--muted)">Mediu · Faleza Mureșului, foișor</small></td><td>Sâm., 7 nov. · 10:00–13:00</td><td>+50</td><td>18 / 40</td><td><span class="badge ok">Publicată</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn">Înscriși</span></td></tr>
+                <tr><td><b>Curățenie în Pădurea Ceala</b><br><small style="color:var(--muted)">Mediu · parcarea de la intrare</small></td><td>Dum., 8 nov. · 09:00–12:00</td><td>+40</td><td>33 / 60</td><td><span class="badge ok">Publicată</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn">Înscriși</span></td></tr>
+                <tr><td><b>Donăm sânge pentru spitalele din Arad</b><br><small style="color:var(--muted)">Sănătate · Centrul de Transfuzie</small></td><td>Mar., 10 nov. · 08:00–13:00</td><td>+80</td><td>12 / 30</td><td><span class="badge ok">Publicată</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn">Înscriși</span></td></tr>
+                <tr><td><b>Vopsim gardul Grădiniței nr. 12</b><br><small style="color:var(--muted)">Social</small></td><td>Sâm., 21 nov. · 09:00</td><td>+60</td><td>0 / 20</td><td><span class="badge draft">Ciornă</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn pri">Publică</span></td></tr>
+              </table>
+            </div>
+            <div class="drawer"><h3>Acțiune nouă <span class="msym">close</span></h3>
+              <div class="field"><label>Titlu</label><div class="in filled">Vopsim gardul Grădiniței nr. 12</div></div>
+              <div class="frow"><div class="field"><label>Categorie</label><div class="in filled">Social ▾</div></div><div class="field"><label>Puncte / participant</label><div class="chips"><span class="chip">30</span><span class="chip">50</span><span class="chip on">60</span><span class="chip">80</span></div></div></div>
+              <div class="frow"><div class="field"><label>Ziua</label><div class="in filled">Sâm., 21 nov.</div></div><div class="field"><label>Interval</label><div class="in filled">09:00 – 12:00</div></div></div>
+              <div class="field"><label>Locul</label><div class="in filled"><span class="msym" style="font-size:18px">location_on</span>&nbsp;Grădinița nr. 12, str. … · alege pe hartă</div></div>
+              <div class="frow"><div class="field"><label>Număr de locuri</label><div class="chips"><span class="chip on">20</span><span class="chip">40</span><span class="chip">60</span></div></div></div>
+              <div class="field"><label>Descriere</label><div class="ta">Vopsim și reparăm gardul împreună cu părinții. Materiale asigurate de Primărie. Vino în haine de lucru.</div></div>
+              <div class="foot"><span class="tbtn">Salvează ciornă</span><span class="tbtn pri">Publică</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W21 · Primărie · Acțiuni</b> — <code>/w/city/actions</code>. <code>POST/PUT /city/actions</code> (formularul din S11g, extins), „Înscriși” → W2 pentru acțiunea respectivă.</div>
+    </div>
+
+    <!-- W22 PRIMARIE CLASAMENT -->
+    <div class="frame-wrap" id="W22">
+      <div class="web" data-shot="W22-web-primarie-clasament">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span></nav><div class="right"><span class="av">P</span><span style="font-size:14px;font-weight:600">Primăria Arad</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">account_balance</span></span><div><b>Primăria Arad</b><small>Organizator și validator</small></div></div><div class="it"><span class="msym">dashboard</span>Panou</div><div class="it"><span class="msym">volunteer_activism</span>Acțiuni comunitare</div><div class="it"><span class="msym">qr_code_scanner</span>Validare participanți</div><div class="it on"><span class="msym">leaderboard</span>Clasament</div><div class="it"><span class="msym">event</span>Evenimente publice</div></div>
+          <div class="main">
+            <div style="display:flex;align-items:center;justify-content:space-between"><div><h2>Clasamentul voluntarilor</h2><p class="sub">Puncte câștigate la acțiunile comunitare (nu cele cheltuite). Public pentru toți utilizatorii.</p></div><span class="tbtn"><span class="msym" style="font-size:18px">download</span>Export CSV</span></div>
+            <div class="toolbar"><span class="chip on">Noiembrie</span><span class="chip">Anul 2026</span><div class="search" style="margin-left:auto;max-width:260px"><span class="msym">search</span>Caută voluntar</div></div>
+            <div class="two">
+              <div style="flex:1.5"><table><tr><th>#</th><th>Voluntar</th><th>Acțiuni</th><th>Puncte</th><th>Ultima participare</th></tr>
+                <tr><td>🥇</td><td><b>Mihai R.</b></td><td>9</td><td><b>980</b></td><td>Plantare · 7 nov.</td></tr>
+                <tr><td>🥈</td><td><b>Ioana S.</b></td><td>8</td><td><b>910</b></td><td>Curățenie · 25 oct.</td></tr>
+                <tr><td>🥉</td><td><b>Andrei P.</b></td><td>8</td><td><b>860</b></td><td>Donare · 20 oct.</td></tr>
+                <tr><td>4</td><td>Elena V.</td><td>7</td><td>790</td><td>Plantare · 7 nov.</td></tr>
+                <tr><td>5</td><td>Kovács E.</td><td>6</td><td>740</td><td>Curățenie · 25 oct.</td></tr>
+                <tr><td>6</td><td>Radu T.</td><td>6</td><td>690</td><td>Plantare · 7 nov.</td></tr>
+                <tr><td>7</td><td>Diana M.</td><td>5</td><td>610</td><td>Donare · 20 oct.</td></tr>
+                <tr><td>…</td><td></td><td></td><td></td><td></td></tr>
+                <tr style="background:var(--bg)"><td>16</td><td>Ana P.</td><td>3</td><td>270</td><td>Plantare · 7 nov.</td></tr>
+              </table></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:14px"><div class="panel"><h3>Premiile anului 2026</h3><div class="lead"><span class="r">1</span>Abonament anual la Teatrul Clasic</div><div class="lead"><span class="r">2</span>Abonament la Filarmonica Arad, stagiunea 2027</div><div class="lead" style="border:none"><span class="r">3</span>Cină pentru două persoane la un restaurant partener</div><p class="note" style="margin:10px 0 0">Primii 50 sunt invitați la Gala Voluntarilor, 19 decembrie.</p><span class="tbtn" style="margin-top:10px">Editează premiile</span></div><div class="panel"><h3>Statistici</h3><div class="kv"><div><span class="msym">group</span><div>412 voluntari activi în 2026</div></div><div><span class="msym">trending_up</span><div>+38% față de 2025</div></div><div><span class="msym">schedule</span><div>2.340 de ore de voluntariat</div></div></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W22 · Primărie · Clasament</b> — <code>/w/city/leaderboard</code>. <code>GET /community/leaderboard?period=month|year</code>; premiile se editează (text în config/DB), export CSV.</div>
+    </div>
+  </div>
+
+  <div class="sechdr">Admin (sidebar) — T14</div>
+  <div class="grid">
+
+    <!-- W23 ADMIN FIRME -->
+    <div class="frame-wrap" id="W23">
+      <div class="web" data-shot="W23-web-admin-firme">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span></nav><div class="right"><span class="av">A</span><span style="font-size:14px;font-weight:600">Admin</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">shield_person</span></span><div><b>Administrare</b><small>admin@demo.ro</small></div></div><div class="it"><span class="msym">dashboard</span>Dashboard</div><div class="it on"><span class="msym">storefront</span>Firme <span class="badge wait" style="margin-left:auto">3</span></div><div class="it"><span class="msym">event</span>Evenimente</div><div class="it"><span class="msym">sell</span>Oferte</div><div class="it"><span class="msym">volunteer_activism</span>Acțiuni</div><div class="it"><span class="msym">attractions</span>Obiective & ghiduri</div><div class="it"><span class="msym">group</span>Utilizatori</div></div>
+          <div class="main" style="display:flex;gap:20px">
+            <div style="flex:1;min-width:0">
+              <h2>Firme</h2><p class="sub">Conturile de firmă trebuie verificate înainte ca ofertele și evenimentele lor să devină publice.</p>
+              <div class="toolbar"><span class="chip on">De verificat (3)</span><span class="chip">Verificate (14)</span><span class="chip">Respinse (1)</span><div class="search" style="margin-left:auto;max-width:260px"><span class="msym">search</span>Caută firmă</div></div>
+              <table><tr><th>Firmă</th><th>Categorie</th><th>Cont</th><th>Înregistrată</th><th></th></tr>
+                <tr style="background:var(--bg)"><td><b>Brutăria Veche</b><br><small style="color:var(--muted)">Str. Mețianu 3</small></td><td>Producător</td><td>brutarie@exemplu.ro</td><td>azi, 09:12</td><td style="white-space:nowrap"><span class="tbtn">Respinge</span> <span class="tbtn ok"><span class="msym" style="font-size:16px">verified</span>Verifică</span></td></tr>
+                <tr><td><b>Crama Dealul Miniș</b><br><small style="color:var(--muted)">Miniș 45</small></td><td>Cramă</td><td>crama@exemplu.ro</td><td>ieri</td><td style="white-space:nowrap"><span class="tbtn">Respinge</span> <span class="tbtn ok"><span class="msym" style="font-size:16px">verified</span>Verifică</span></td></tr>
+                <tr><td><b>Grădina Bastion</b><br><small style="color:var(--muted)">Cetatea Aradului</small></td><td>Restaurant</td><td>bastion@exemplu.ro</td><td>ieri</td><td style="white-space:nowrap"><span class="tbtn">Respinge</span> <span class="tbtn ok"><span class="msym" style="font-size:16px">verified</span>Verifică</span></td></tr>
+              </table>
+            </div>
+            <div class="drawer"><h3>Brutăria Veche <span class="msym">close</span></h3>
+              <div class="kv" style="margin-bottom:14px"><div><span class="msym">category</span><div>Producător · brutărie artizanală</div></div><div><span class="msym">location_on</span><div>Str. Mețianu 3, Arad<br><small class="note">46.1712, 21.3140 · pe hartă</small></div></div><div><span class="msym">mail</span><div>brutarie@exemplu.ro · 0257 …</div></div><div><span class="msym">language</span><div>brutariaveche.ro</div></div><div><span class="msym">person</span><div>Cont: Ioan D. · înregistrat azi, 09:12</div></div></div>
+              <div class="panel" style="background:var(--bg);padding:12px"><b style="font-size:13px">Conținut în ciornă (se publică la verificare)</b><div class="lead" style="font-size:13px">Covrigi 2+1<b style="font-weight:500;font-size:12px">ofertă</b></div><div class="lead" style="font-size:13px;border:none">Atelier de pâine cu maia<b style="font-weight:500;font-size:12px">eveniment</b></div></div>
+              <div class="field" style="margin-top:14px"><label>Notă internă</label><div class="ta" style="min-height:50px">Verificat telefonic, firmă reală pe str. Mețianu.</div></div>
+              <div class="foot"><span class="tbtn">Respinge</span><span class="tbtn ok"><span class="msym" style="font-size:16px">verified</span>Verifică firma</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W23 · Admin · Firme</b> — <code>/w/admin/businesses</code>. <code>GET /admin/businesses?verified=false</code>, <code>POST /admin/businesses/{id}/verify</code>; drawer cu detaliile firmei și conținutul în ciornă.</div>
+    </div>
+
+    <!-- W24 ADMIN CONTINUT -->
+    <div class="frame-wrap" id="W24">
+      <div class="web" data-shot="W24-web-admin-continut">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span></nav><div class="right"><span class="av">A</span><span style="font-size:14px;font-weight:600">Admin</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">shield_person</span></span><div><b>Administrare</b><small>admin@demo.ro</small></div></div><div class="it"><span class="msym">dashboard</span>Dashboard</div><div class="it"><span class="msym">storefront</span>Firme</div><div class="it on"><span class="msym">event</span>Evenimente</div><div class="it"><span class="msym">sell</span>Oferte</div><div class="it"><span class="msym">volunteer_activism</span>Acțiuni</div><div class="it"><span class="msym">attractions</span>Obiective & ghiduri</div><div class="it"><span class="msym">group</span>Utilizatori</div></div>
+          <div class="main">
+            <div style="display:flex;align-items:center;justify-content:space-between"><div><h2>Evenimente</h2><p class="sub">Toate evenimentele din aplicație, indiferent de organizator. Admin poate publica, ascunde sau edita.</p></div><span class="tbtn pri"><span class="msym" style="font-size:18px">add</span>Eveniment nou</span></div>
+            <div class="toolbar"><span class="chip on">Toate (36)</span><span class="chip">Publicate</span><span class="chip">Ciorne (4)</span><span class="chip">Ascunse (2)</span><span class="chip"><span class="msym">filter_list</span>Organizator</span><span class="chip"><span class="msym">filter_list</span>Categorie</span><div class="search" style="margin-left:auto;max-width:260px"><span class="msym">search</span>Caută</div></div>
+            <table><tr><th>Eveniment</th><th>Organizator</th><th>Când</th><th>Bilete</th><th>Participă</th><th>Stare</th><th></th></tr>
+              <tr><td><b>Festivalul Vinului · Podgoria Miniș</b><br><small style="color:var(--muted)">Târguri</small></td><td>Crama Dealul Miniș</td><td>Sâm., 7 nov. · 17:00</td><td>de la 30 lei</td><td>120 🔥</td><td><span class="badge ok">Publicat</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn">Ascunde</span></td></tr>
+              <tr><td><b>Teatru de păpuși: Croitorașul cel viteaz</b><br><small style="color:var(--muted)">Familie și copii</small></td><td>Teatrul Clasic</td><td>Sâm., 7 nov. · 11:00</td><td>25–40 lei</td><td>86</td><td><span class="badge ok">Publicat</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn">Ascunde</span></td></tr>
+              <tr><td><b>Degustare de cafea de specialitate</b><br><small style="color:var(--muted)">Gastronomie</small></td><td>Cafeneaua din Pasaj</td><td>Sâm., 21 nov. · 11:00</td><td>25 lei</td><td>12</td><td><span class="badge draft">Ciornă</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn pri">Publică</span></td></tr>
+              <tr><td><b>Atelier de pâine cu maia</b><br><small style="color:var(--muted)">Familie și copii</small></td><td>Brutăria Veche <span class="badge wait">neverificată</span></td><td>Dum., 15 nov. · 10:00</td><td>60 lei</td><td>0</td><td><span class="badge draft">Ciornă</span></td><td style="white-space:nowrap"><span class="tbtn">Vezi</span></td></tr>
+              <tr><td><b>Petrecere privată</b><br><small style="color:var(--muted)">Concerte</small></td><td>Utilizator (raportat ×3)</td><td>Vin., 13 nov.</td><td>—</td><td>0</td><td><span class="badge wait">Ascuns</span></td><td style="white-space:nowrap"><span class="tbtn">Vezi</span> <span class="tbtn"><span class="msym" style="font-size:16px">delete</span></span></td></tr>
+              <tr><td><b>Repetiție deschisă: Filarmonica Arad</b><br><small style="color:var(--muted)">Concerte</small></td><td>Admin (import)</td><td>Mie., 11 nov. · 18:00</td><td>Gratuit</td><td>41</td><td><span class="badge ok">Publicat</span></td><td style="white-space:nowrap"><span class="tbtn">Editează</span> <span class="tbtn">Ascunde</span></td></tr>
+            </table>
+            <p class="note" style="margin-top:12px">Aceeași pagină, cu alte coloane, pentru <b>Oferte</b> (<code>/w/admin/offers</code>) și <b>Acțiuni</b> (<code>/w/admin/actions</code>): <code>PATCH /admin/{events|offers|actions}/{id}/status</code>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W24 · Admin · Evenimente / Oferte / Acțiuni</b> — <code>/w/admin/events</code> (+ offers, actions). Moderare: publică / ascunde / editează; admin creează și evenimente „oficiale” (<code>POST /events</code>).</div>
+    </div>
+
+    <!-- W25 ADMIN OBIECTIVE -->
+    <div class="frame-wrap" id="W25">
+      <div class="web" data-shot="W25-web-admin-obiective">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span></nav><div class="right"><span class="av">A</span><span style="font-size:14px;font-weight:600">Admin</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">shield_person</span></span><div><b>Administrare</b><small>admin@demo.ro</small></div></div><div class="it"><span class="msym">dashboard</span>Dashboard</div><div class="it"><span class="msym">storefront</span>Firme</div><div class="it"><span class="msym">event</span>Evenimente</div><div class="it"><span class="msym">sell</span>Oferte</div><div class="it"><span class="msym">volunteer_activism</span>Acțiuni</div><div class="it on"><span class="msym">attractions</span>Obiective & ghiduri</div><div class="it"><span class="msym">group</span>Utilizatori</div></div>
+          <div class="main" style="display:flex;gap:20px">
+            <div style="width:340px;flex:none">
+              <div style="display:flex;align-items:center;justify-content:space-between"><h2 style="font-size:22px">Obiective</h2><span class="tbtn pri" style="height:32px"><span class="msym" style="font-size:16px">add</span>Nou</span></div>
+              <div class="search" style="height:40px;margin:8px 0 10px"><span class="msym">search</span>Caută</div>
+              <div class="ev" style="background:var(--bg);margin:0 -8px;padding:10px 8px;border-radius:12px;border:none"><span class="thumb" style="width:48px;height:48px;background:linear-gradient(140deg,#6b5a46,#2b2622)"></span><div style="flex:1"><div class="ti" style="font-size:14px">Cetatea Aradului</div><div class="me">6 puncte de ghid · RO EN HU</div></div></div>
+              <div class="ev"><span class="thumb" style="width:48px;height:48px;background:linear-gradient(140deg,#9a8f7a,#5c5446)"></span><div style="flex:1"><div class="ti" style="font-size:14px">Palatul Cultural</div><div class="me">4 puncte · RO EN</div></div></div>
+              <div class="ev"><span class="thumb" style="width:48px;height:48px;background:linear-gradient(140deg,#7d7a74,#3a3835)"></span><div style="flex:1"><div class="ti" style="font-size:14px">Turnul de Apă</div><div class="me">3 puncte · RO</div></div></div>
+              <div class="ev"><span class="thumb" style="width:48px;height:48px;background:linear-gradient(140deg,#b06a3a,#5a3418)"></span><div style="flex:1"><div class="ti" style="font-size:14px">Teatrul Clasic „Ioan Slavici”</div><div class="me">3 puncte · RO</div></div></div>
+              <div class="ev"><span class="thumb" style="width:48px;height:48px;background:#DCDCD2"></span><div style="flex:1"><div class="ti" style="font-size:14px">Catedrala „Sfânta Treime”</div><div class="me"><span class="badge wait">fără ghid încă</span></div></div></div>
+            </div>
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;justify-content:space-between"><h2 style="font-size:22px">Cetatea Aradului</h2><div style="display:flex;gap:8px"><span class="tbtn"><span class="msym" style="font-size:18px">visibility</span>Vezi ca vizitator</span><span class="tbtn pri">Salvează</span></div></div>
+              <div class="frow"><div class="field"><label>Nume</label><div class="in filled">Cetatea Aradului</div></div><div class="field"><label>Tip</label><div class="in filled">Obiectiv istoric ▾</div></div><div class="field"><label>Vizită (min)</label><div class="in filled">90</div></div></div>
+              <div class="frow"><div class="field"><label>Coordonate</label><div class="in filled">46.1744, 21.3330 · <u>pe hartă</u></div></div><div class="field"><label>Program</label><div class="in filled">L–D 09:00–18:00</div></div><div class="field"><label>Parcare</label><div class="in filled">Parcarea Cetății, str. Cetății</div></div></div>
+              <div class="field"><label>Etichete</label><div class="in filled"><span class="tag">istorie</span><span class="tag">familie</span><span class="tag">în aer liber</span><span class="tag">foto</span></div></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px"><b>Puncte de ghid (6)</b><div style="display:flex;gap:8px"><span class="tbtn" style="height:32px"><span class="msym" style="font-size:16px">auto_awesome</span>Generează cu AI</span><span class="tbtn" style="height:32px"><span class="msym" style="font-size:16px">add</span>Punct nou</span></div></div>
+              <table><tr><th style="width:36px">#</th><th>Titlu</th><th>Text (RO)</th><th>Audio</th><th></th></tr>
+                <tr><td>1</td><td><b>Poarta principală</b></td><td><small>Intrarea de sud, cu blazonul imperial deasupra bolții. De aici pornea drumul spre oraș…</small></td><td><span class="badge ok">TTS</span></td><td style="white-space:nowrap"><span class="tbtn" style="height:30px">Editează</span> <span class="msym" style="color:var(--muted)">drag_indicator</span></td></tr>
+                <tr><td>2</td><td><b>Bastionul de nord</b></td><td><small>Unul dintre cele șase bastioane în stea…</small></td><td><span class="badge ok">TTS</span></td><td style="white-space:nowrap"><span class="tbtn" style="height:30px">Editează</span> <span class="msym" style="color:var(--muted)">drag_indicator</span></td></tr>
+                <tr><td>3</td><td><b>Cazărmile</b></td><td><small>Clădirile lungi din cărămidă din interior…</small></td><td><span class="badge wait">lipsă EN</span></td><td style="white-space:nowrap"><span class="tbtn" style="height:30px">Editează</span> <span class="msym" style="color:var(--muted)">drag_indicator</span></td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W25 · Admin · Obiective & ghiduri</b> — <code>/w/admin/places</code>. CRUD locuri + puncte de ghid (<code>/admin/places/{id}/guide-points</code>), reordonare, „Generează cu AI” (opțional) pentru texte.</div>
+    </div>
+
+    <!-- W26 ADMIN UTILIZATORI -->
+    <div class="frame-wrap" id="W26">
+      <div class="web" data-shot="W26-web-admin-utilizatori">
+        <div class="wtop"><div class="logo"><i></i>AradExperience</div><nav><span>Site public</span></nav><div class="right"><span class="av">A</span><span style="font-size:14px;font-weight:600">Admin</span></div></div>
+        <div class="wbody">
+          <div class="side"><div class="who"><span class="ic"><span class="msym">shield_person</span></span><div><b>Administrare</b><small>admin@demo.ro</small></div></div><div class="it"><span class="msym">dashboard</span>Dashboard</div><div class="it"><span class="msym">storefront</span>Firme</div><div class="it"><span class="msym">event</span>Evenimente</div><div class="it"><span class="msym">sell</span>Oferte</div><div class="it"><span class="msym">volunteer_activism</span>Acțiuni</div><div class="it"><span class="msym">attractions</span>Obiective & ghiduri</div><div class="it on"><span class="msym">group</span>Utilizatori</div></div>
+          <div class="main">
+            <h2>Utilizatori</h2><p class="sub">1.248 de conturi · 812 vizitatori · 391 localnici · 17 firme · 2 primărie · 1 admin</p>
+            <div class="toolbar"><span class="chip on">Toți</span><span class="chip">Vizitatori</span><span class="chip">Localnici</span><span class="chip">Firme</span><span class="chip">Primărie</span><div class="search" style="margin-left:auto;max-width:280px"><span class="msym">search</span>Caută după nume sau e-mail</div></div>
+            <table><tr><th>Utilizator</th><th>Rol</th><th>Puncte</th><th>Bilete</th><th>Înregistrat</th><th>Ultima activitate</th><th></th></tr>
+              <tr><td><div class="row" style="gap:8px"><span class="av">AP</span><div><b>Ana P.</b><br><small style="color:var(--muted)">ana.popescu@exemplu.ro</small></div></div></td><td><span class="tag">Localnic</span></td><td>270</td><td>2</td><td>12 sept. 2026</td><td>azi, 11:42</td><td><span class="tbtn">Detalii</span></td></tr>
+              <tr><td><div class="row" style="gap:8px"><span class="av">MR</span><div><b>Mihai R.</b><br><small style="color:var(--muted)">mihai.r@exemplu.ro</small></div></div></td><td><span class="tag">Localnic</span></td><td>980</td><td>5</td><td>3 mar. 2026</td><td>azi, 10:38</td><td><span class="tbtn">Detalii</span></td></tr>
+              <tr><td><div class="row" style="gap:8px"><span class="av">CP</span><div><b>Cafeneaua din Pasaj</b><br><small style="color:var(--muted)">firma@demo.ro</small></div></div></td><td><span class="tag">Firmă</span> <span class="badge ok">verificată</span></td><td>—</td><td>—</td><td>1 oct. 2026</td><td>azi, 11:42</td><td><span class="tbtn">Detalii</span></td></tr>
+              <tr><td><div class="row" style="gap:8px"><span class="av">PA</span><div><b>Primăria Arad</b><br><small style="color:var(--muted)">primaria@demo.ro</small></div></div></td><td><span class="tag">Primărie</span></td><td>—</td><td>—</td><td>1 oct. 2026</td><td>azi, 10:40</td><td><span class="tbtn">Detalii</span></td></tr>
+              <tr><td><div class="row" style="gap:8px"><span class="av">JS</span><div><b>John S.</b><br><small style="color:var(--muted)">john.s@example.com</small></div></div></td><td><span class="tag">Vizitator</span></td><td>—</td><td>1</td><td>azi, 09:05</td><td>azi, 09:30</td><td><span class="tbtn">Detalii</span></td></tr>
+              <tr><td><div class="row" style="gap:8px"><span class="av">KE</span><div><b>Kovács E.</b><br><small style="color:var(--muted)">kovacs.e@exemplu.ro</small></div></div></td><td><span class="tag">Localnic</span></td><td>740</td><td>0</td><td>18 apr. 2026</td><td>ieri</td><td><span class="tbtn">Detalii</span></td></tr>
+            </table>
+            <div class="pager"><span>‹</span><span class="on">1</span><span>2</span><span>3</span><span>…</span><span>63</span><span>›</span></div>
+            <p class="note" style="margin-top:12px">Detalii: schimbă rolul (ex. acordă CITY_HALL unui angajat al Primăriei), ajustează puncte (<code>ADJUST</code> cu notă), dezactivează contul. Fără date de card sau parole vizibile.</p>
+          </div>
+        </div>
+      </div>
+      <div class="cap"><b>W26 · Admin · Utilizatori</b> — <code>/w/admin/users</code>. <code>GET /admin/users?role&q</code> paginat; acțiuni: rol, ajustare puncte (prin <code>PointsService</code>), dezactivare.</div>
+    </div>
+  </div>
+</div>
+<script>
+  // Umple toate containerele .mapfill cu harta schematică din <template>.
+  const tpl = document.getElementById('mapTpl');
+  document.querySelectorAll('.mapfill').forEach(el => { el.appendChild(tpl.content.cloneNode(true)); });
+</script>
+</body>
+</html>
