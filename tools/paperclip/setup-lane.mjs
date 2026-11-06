@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Sets up one HACK4ARAD lane in your own local Paperclip: company, Claude agent, project, your tasks.
-// Usage: node tools/paperclip/setup-lane.mjs --lane P2   (P1, P2, P3 or P4)
+// Usage: node tools/paperclip/setup-lane.mjs --lane P2   (P1 Zoltan, P2 Lukas, P3 Octav, P4 Damian; --person <name> to override)
 // Safe to run again: it finds what already exists by name and only creates what is missing.
 import { readFileSync } from "node:fs";
 import path from "node:path";
@@ -13,10 +13,10 @@ const args = Object.fromEntries(process.argv.slice(2).reduce((acc, a, i, all) =>
 }, []));
 
 const LANES = {
-  P1: { person: "Persoana 1", name: "P1 · Platformă & Livrare", title: "Persoana 1 · Platformă, auth & livrare", icon: "shield", effort: "high", label: "P1 · Platformă", color: "#2563EB" },
-  P2: { person: "Persoana 2", name: "P2 · Experiența Vizitatorului", title: "Persoana 2 · Evenimente, locuri, bilete", icon: "globe", effort: "medium", label: "P2 · Vizitator", color: "#16A34A" },
-  P3: { person: "Persoana 3", name: "P3 · Hărți & AI", title: "Persoana 3 · Hartă, chat AI, itinerar", icon: "sparkles", effort: "high", label: "P3 · Hărți & AI", color: "#9333EA" },
-  P4: { person: "Persoana 4", name: "P4 · Firme & Comunitate", title: "Persoana 4 · Firme, oferte, puncte", icon: "target", effort: "high", label: "P4 · Firme & Comunitate", color: "#EA580C" },
+  P1: { person: "Zoltan", name: "P1 · Platformă & Livrare", title: "Persoana 1 · Platformă, auth & livrare", icon: "shield", effort: "high", label: "P1 · Platformă", color: "#2563EB" },
+  P2: { person: "Lukas", name: "P2 · Experiența Vizitatorului", title: "Persoana 2 · Evenimente, locuri, bilete", icon: "globe", effort: "medium", label: "P2 · Vizitator", color: "#16A34A" },
+  P3: { person: "Octav", name: "P3 · Hărți & AI", title: "Persoana 3 · Hartă, chat AI, itinerar", icon: "sparkles", effort: "high", label: "P3 · Hărți & AI", color: "#9333EA" },
+  P4: { person: "Damian", name: "P4 · Firme & Comunitate", title: "Persoana 4 · Firme, oferte, puncte", icon: "target", effort: "high", label: "P4 · Firme & Comunitate", color: "#EA580C" },
 };
 const laneKey = String(args.lane || "").toUpperCase();
 const lane = LANES[laneKey];
@@ -28,6 +28,8 @@ const API = String(args.api || "http://127.0.0.1:3100").replace(/\/$/, "") + "/a
 const REPO = path.resolve(String(args.repo || path.join(here, "..", "..")));
 const COMPANY = String(args.company || "HACK4ARAD");
 const MODEL = String(args.model || "claude-sonnet-5-5");
+if (args.person) lane.person = String(args.person);
+const REPO_SKILLS = ["task-workflow", "be-module", "fe-feature", "seed-data"];
 
 async function call(method, p, body) {
   const res = await fetch(API + p, { method, headers: { "Content-Type": "application/json" }, body: body === undefined ? undefined : JSON.stringify(body) });
@@ -53,7 +55,8 @@ const conns = await call("GET", `/companies/${C}/ai-connections`);
 const boardUser = conns.currentUserId || "local-board";
 if (!list(conns, "connections").some((c) => c.provider === "anthropic" && c.status === "connected") && !args["skip-connection-check"]) {
   console.log(`\nOne manual step first: connect your own Claude subscription to the ${COMPANY} company.\n` +
-    `  Open the Paperclip UI -> company ${COMPANY} -> Settings -> AI connections -> connect Claude (subscription), make it your default.\n` +
+    `  Open http://127.0.0.1:3100/${company.issuePrefix}/company/settings/connections (company ${COMPANY} -> Settings -> AI connections),\n` +
+    `  connect Claude with your own subscription and make it your default.\n` +
     `Then run this script again.`);
   process.exit(2);
 }
@@ -65,7 +68,7 @@ const instructions = role.trimEnd() + "\n" + common;
 let agent = list(await call("GET", `/companies/${C}/agents`)).find((a) => a.name === lane.name && a.status !== "terminated");
 if (!agent) {
   agent = await call("POST", `/companies/${C}/agents`, {
-    name: lane.name, title: lane.title, role: "engineer", icon: lane.icon,
+    name: lane.name, title: `${lane.person} · ${lane.title.split(" · ").slice(1).join(" · ")}`, role: "engineer", icon: lane.icon,
     adapterType: "claude_local",
     adapterConfig: { model: MODEL, effort: lane.effort, graceSec: 15, timeoutSec: 5400, maxTurnsPerRun: 400, dangerouslySkipPermissions: true },
     instructionsBundle: { entryFile: "AGENTS.md", files: { "AGENTS.md": instructions } },
@@ -83,6 +86,12 @@ if (!agent) {
     await call("PUT", `/agents/${agent.id}/instructions-bundle/file`, { path: "AGENTS.md", content: instructions, baseRevisionId: file.revision?.id ?? null });
     console.log(`Updated instructions of ${lane.name}`);
   }
+}
+
+agent = await call("GET", `/agents/${agent.id}`);
+if (agent.status === "paused" && agent.lifecycleState && agent.lifecycleState !== "ready" && !args["skip-connection-check"]) {
+  agent = await call("POST", `/agents/${agent.id}/lifecycle/retry`, {});
+  console.log(`Agent check restarted (${agent.lifecycleState}). It turns "idle" in the UI within a minute once your Claude connection works.`);
 }
 
 const labels = list(await call("GET", `/companies/${C}/labels`));
@@ -106,6 +115,16 @@ if (!project) {
   });
   console.log(`Created project AradExperience -> ${REPO}`);
 }
+
+const scan = await call("POST", `/companies/${C}/skills/scan-projects`, { projectIds: [project.id], mode: "import" });
+const companySkills = list(await call("GET", `/companies/${C}/skills`), "skills");
+const skillKeys = REPO_SKILLS.map((slug) => companySkills.find((k) => k.slug === slug)?.key).filter(Boolean);
+if (skillKeys.length !== REPO_SKILLS.length) {
+  console.error(`Expected the repo skills ${REPO_SKILLS.join(", ")} in .claude/skills, found ${skillKeys.length}. Is --repo the AradExperience folder?`);
+  process.exit(1);
+}
+const synced = await call("POST", `/agents/${agent.id}/skills/sync`, { mode: "add", desiredSkills: skillKeys });
+console.log(`Skills: ${scan.imported?.length ?? 0} imported, ${scan.updated?.length ?? 0} updated; agent has ${REPO_SKILLS.filter((x) => synced.desiredSkills.some((k) => k.endsWith("/" + x))).length}/4 repo skills`);
 
 const all = JSON.parse(readFileSync(path.join(here, "tasks.json"), "utf8"));
 const ownerOf = Object.fromEntries(all.map((t) => [t.key, t.lane]));

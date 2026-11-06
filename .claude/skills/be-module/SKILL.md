@@ -8,7 +8,7 @@ description: Cum se adaugă sau se extinde un modul în api/ (Spring Boot): migr
 Citește `api/CLAUDE.md`, secțiunea modulului din `docs/API.md` și tabelul din `docs/DATA-MODEL.md`. Pachet: `ro.aradexperience.api.<modul>`.
 
 ## Ordinea
-1. **Migrare** `src/main/resources/db/migration/V{n}__{modul}.sql` (numărul din `docs/STATUS.md`, rezervă-l). Doar DDL + indexuri. Seed separat în `V{n}_1__seed_{modul}.sql` (skill `seed-data`).
+1. **Migrare** `src/main/resources/db/migration/V{n}__{modul}.sql` (numărul rezervat pentru task-ul tău în `docs/STATUS.md`). Doar DDL + indexuri. Seed separat în `V{n}_1__seed_{modul}.sql` (skill `seed-data`).
 2. **Entitate** JPA (Lombok `@Getter @Setter @NoArgsConstructor`, `@Entity @Table(name="...")`, id `@GeneratedValue(IDENTITY)`, enum-uri `@Enumerated(STRING)`, timpi `OffsetDateTime`). Fără relații bidirecționale dacă nu sunt necesare; FK-urile simple pot fi `Long businessId` în loc de `@ManyToOne` când nu ai nevoie de obiect.
 3. **Repository** `extends JpaRepository<X, Long>` (+ `JpaSpecificationExecutor` pentru filtre). Query-uri cu `@Query` doar când derivatele nu ajung.
 4. **Service** `@Service @RequiredArgsConstructor @Transactional(readOnly = true)`; metodele care scriu au `@Transactional`. Aici stau regulile (capacitate, idempotență, proprietar). Aruncă `NotFoundException`, `ConflictException`, `ForbiddenException`.

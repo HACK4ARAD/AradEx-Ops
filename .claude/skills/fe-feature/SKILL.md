@@ -8,7 +8,7 @@ description: Cum se adaugă un ecran sau o funcționalitate în app/ (Vue 3): ti
 Citește `app/CLAUDE.md`, rutele din `docs/API.md` §Rute FE și captura ecranului din `design/screens/` (S = prototip original, E/W = extensii).
 
 ## Ordinea
-1. **Tipuri** în `src/shared/types/api.ts` — copiază DTO-urile din `docs/API.md` pentru endpoint-urile pe care le folosești (nu inventa câmpuri).
+1. **Tipuri** în `src/shared/types/<modul>.ts` (fișierul modulului tău; `api.ts` doar re-exportă, nu-l edita) — copiază DTO-urile din `docs/API.md` pentru endpoint-urile pe care le folosești (nu inventa câmpuri).
 2. **Client API** în `src/shared/api/<modul>.ts`: o funcție per endpoint, tipată, prin `client.get/post/...`:
    ```ts
    export const eventsApi = {
@@ -20,8 +20,8 @@ Citește `app/CLAUDE.md`, rutele din `docs/API.md` §Rute FE și captura ecranul
 3. **Stare**: date de ecran → composable local (`useEvents(filters)`) cu `data/loading/error/reload`; stare globală (user, toast, coș de bilete) → store Pinia în `shared/stores`.
 4. **View mobil** `src/mobile/views/<Nume>View.vue` (lățime 390, tab bar jos, top bar cu back unde e cazul). Compune din `shared/components`. Fără CSS custom dacă Tailwind + tokens ajung.
 5. **View web** `src/web/views/<Nume>View.vue` — același composable, altă așezare (sidebar + conținut, tabele pentru panouri, hartă + listă side-by-side). Dacă 80% din markup e identic, extrage o componentă în `shared/components` și folosește-o în ambele.
-6. **Rută** în `src/router/index.ts` cu `meta: { roles?: Role[], title }`; adaugă intrarea în navigație (tab bar mobil / sidebar web) dacă ecranul e de nivel 1.
-7. **i18n**: toate textele în `ro.json` (cheia `ecran.element`), `en.json` poate rămâne cu aceleași texte până la T15.
+6. **Rută**: toate rutele și navigația există deja (T02, P1) și arată spre `src/mobile/views/<Nume>View.vue` / `src/web/views/<Nume>View.vue`. Tu doar înlocuiești conținutul view-ului tău. Dacă îți trebuie o rută nouă, o ceri lui P1.
+7. **i18n**: toate textele în `src/shared/i18n/ro/<modul>.json` (cheia `<modul>.ecran.element`) și aceleași chei în `en/<modul>.json` (traducerea EN o faci tu pentru modulul tău).
 8. Rulează `npm run dev`, verifică în Chrome device toolbar 390×844 și la 1280px; `npm run build` și `npm run test`.
 
 ## Stări obligatorii pe orice listă/detaliu

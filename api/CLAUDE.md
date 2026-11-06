@@ -35,7 +35,7 @@ entități JPA, `dto/` cu `record`-uri. Mapare entitate↔DTO prin metode static
 - Timpi: `OffsetDateTime` în entități/DTO, DB `timestamptz`. Zona pentru logică de „azi/weekend”: `Europe/Bucharest`.
 - Paginare: `Pageable` → `PageResponse<T>` propriu (`content, page, size, totalElements`).
 - Config: `AppProps` (`@ConfigurationProperties("app")`) cu `jwt.secret`, `jwt.expirationHours`, `cors.origins`, `openai.apiKey/model`, `events.hotParticipants=50`, `events.hotSaves=20`.
-- Migrări: `src/main/resources/db/migration/V{n}__{modul}.sql` + `V{n}_1__seed_{modul}.sql`. Următorul număr liber e în `docs/STATUS.md`.
+- Migrări: `src/main/resources/db/migration/V{n}__{modul}.sql` + `V{n}_1__seed_{modul}.sql`. Numerele sunt rezervate pe task în `docs/STATUS.md` (nu le schimba; extra: rezerva culoarului tău).
 - Loguri: `@Slf4j`, nivel INFO pentru acțiuni de business (bilet emis, puncte acordate), fără date personale.
 
 ## Teste

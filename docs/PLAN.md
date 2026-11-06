@@ -29,7 +29,7 @@ T16 Deploy final, seed de producție, demo (toate)
 Paralelizare naturală după T03: **T05 + T06** (conținut), apoi **T07 / T08 / T09** în paralel, apoi **T10 + T11 + T12** în paralel, apoi **T13 + T14**.
 Linia de demo (obligatoriu să meargă duminică): T00–T13 + T16. T14 și T15 sunt „dacă mai e timp”, dar admin-ul e mic.
 
-Reguli de dimensiune: un task = max ~4–6 ore pentru un om cu Claude. Dacă depășește, se taie în `T05a/T05b` în STATUS.md, nu se lungește.
+Reguli de dimensiune: un task = max ~4–6 ore pentru un om cu Claude. Dacă depășește, se taie în `T05a/T05b` (Lead Tehnic o notează în STATUS.md), nu se lungește.
 
 ---
 
@@ -98,13 +98,22 @@ VITE_API_URL=http://localhost:8080/api/v1
 - PWA: `vite-plugin-pwa` cu manifest (nume, icon 512, `display: standalone`, culoare `#111111`), service worker implicit.
 - Pagini placeholder pentru toate rutele din `docs/API.md` §Rute FE, ca să existe navigația de la început.
 
-**Verificare:** `npm run dev` → `/` redirecționează corect pe telefon vs desktop; tab bar funcțional; `npm run build` fără erori; Lighthouse arată „installable”.
+- **Pregătire anti-conflict (obligatoriu, ca 4 oameni să lucreze în paralel fără să se calce):**
+  - câte un fișier view pentru **fiecare** rută (`mobile/views/SearchView.vue`, `EventDetailView.vue`, `OffersView.vue`, … și echivalentele `web/views/`), fiecare cu `PlaceholderScreen`; router-ul le importă pe toate → nimeni nu mai editează `router/index.ts` (lista de fișiere și proprietarii: `docs/TEAM.md`);
+  - navigația completă pe roluri (tab bar mobil, sidebar web) gata acum;
+  - i18n pe module: `i18n/ro/<modul>.json` + `i18n/en/<modul>.json` încărcate cu `import.meta.glob` (module: common, auth, places, events, tickets, map, chat, plan, business, offers, community, admin);
+  - tipuri pe module: `shared/types/<modul>.ts` (re-exportate din `types/api.ts`) și fișiere goale `shared/api/<modul>.ts` pentru toate modulele;
+  - componentele folosite de mai multe culoare: `AppSheet`, `QrCode` (generare), `useGeo` (poziție + fallback centrul Aradului);
+  - `mobile/views/HomeView.vue` (S1) ca „cochilie” cu 3 tab-uri care randează `HomeEventsTab.vue` (P2), `HomeOffersTab.vue` (P4), `HomeCommunityTab.vue` (P4) — create acum ca placeholdere.
+
+**Verificare:** `npm run dev` → `/` redirecționează corect pe telefon vs desktop; tab bar funcțional; `npm run build` fără erori; Lighthouse arată „installable”; fiecare rută deschide view-ul ei placeholder.
 
 ### T03 · Auth & roluri
 **Scop:** conturi, login, JWT, roluri și conturile demo.
 **Depinde de:** T01, T02
 
 - BE (`V2__users_businesses.sql`): tabelele `users`, `businesses` (vezi DATA-MODEL). `auth`: `POST /auth/register`, `POST /auth/login`, `GET /me`, `PATCH /me`. Roluri: `VISITOR, LOCAL, BUSINESS, CITY_HALL, ADMIN`. Înregistrarea permite doar `VISITOR | LOCAL | BUSINESS` (BUSINESS creează și un rând în `businesses` cu `verified=false`). `CITY_HALL` și `ADMIN` doar din seed.
+- Security: regulile pentru **toate** endpoint-urile din `docs/API.md` (coloana „Auth”) se scriu acum, ca celelalte culoare să nu mai atingă `SecurityConfig`. Selectorul de limbă RO/EN (Profil + `WebLayout`) tot aici.
 - Security: `JwtAuthFilter` (Bearer), `SecurityConfig` stateless, BCrypt, reguli: `/auth/**`, `/health`, `/swagger-ui/**`, `/v3/api-docs/**`, `GET /places/**`, `GET /events/**`, `GET /offers/**`, `GET /community/**`, `GET /businesses/**` publice; restul autentificat; `/business/**` → BUSINESS, `/city/**` → CITY_HALL|ADMIN, `/admin/**` → ADMIN. `@AuthenticationPrincipal` → `CurrentUser(id, role)`.
 - Seed `V2_1__seed_users.sql`: `visitor@demo.ro`, `local@demo.ro`, `firma@demo.ro` (+ business „Cafeneaua din Pasaj”, verified), `primaria@demo.ro`, `admin@demo.ro`, toate cu parola `demo1234` (hash BCrypt generat o dată și pus în SQL).
 - FE: `stores/auth.ts` (token în localStorage, `user`, `login/register/logout/fetchMe`), guard-uri pe rute (`meta.roles`), ecran login/înregistrare mobil (S12 adaptat: email + parolă + alegere rol Vizitator/Localnic/Firmă) și web (`/w/login`). Buton „Conturi demo” care completează rapid fiecare cont (doar în dev/demo).
@@ -141,7 +150,7 @@ VITE_API_URL=http://localhost:8080/api/v1
 **Depinde de:** T03, T05
 
 - BE (`V4__events.sql`): `events`, `saved_events`. `GET /events` cu filtre `from,to,category,near=lat,lng,radiusKm,organizerBusinessId,organizerType,hot,q,page,size`, sortare după `startAt`; `GET /events/{id}`; `POST/DELETE /events/{id}/save`; `GET /me/saved-events`. `isHot` = `participantsCount >= 50 || savesCount >= 20` (praguri în config). `distanceKm` calculat în DTO când vine `near`.
-- Creare evenimente: `POST /events` (CITY_HALL/ADMIN) și `POST /business/events` (T09). În T06 e suficient seed-ul.
+- Creare evenimente: `POST /events` (CITY_HALL/ADMIN) în T06, cu metode publice în `EventService` (`createForOrganizer`, `updateForOrganizer`, `deleteForOrganizer`) pe care T09 (P4) le apelează din `BusinessController` — P4 nu modifică pachetul `events`.
 - **Gata:** `V4__events.sql` + `V4_1__seed_events.sql` (21 evenimente reale din nov–dec 2026 — Filarmonica, Teatrul Clasic, Târgul de Crăciun, UTA — marcate `is_demo=false`, + 9 demo cu `is_demo=true`). Lista orientativă inițială era: 15–20 evenimente reale/plauzibile pe 7–30 nov 2026 (Filarmonica, Teatrul Clasic, expoziții la Palatul Cultural, tur ghidat la Cetate, târg de produse locale, meci UTA, Festivalul vinului Miniș etc.), categorii: `CONCERT, THEATRE, FAMILY, EXHIBITION, SPORT, OUTDOOR, FAIR, FOOD`.
 - FE mobil: S1 Acasă (header „Ce faci în Arad?”, căutare, cele 3 carduri Evenimente/Oferte/Comunitate, chips Azi/Weekend/7 zile, lista), S2 Căutare + filtre (sheet), S3 Detaliu (hero, bilete, dată, loc + „Indicații”, preț, descriere, „🔥 Popular · N participă”), Salvate. Web: `/w/events` grid + filtre, `/w/events/:id`.
 - `EventCard` în `shared/components` folosit de ambele UI.
@@ -248,7 +257,7 @@ VITE_API_URL=http://localhost:8080/api/v1
 ### T15 · i18n RO/EN, PWA, Android (opțional)
 **Depinde de:** ecranele existente
 
-- Toate textele din UI în `i18n/ro.json` + `en.json` (HU doar dacă rămâne timp — juriul e român). Selector de limbă în Profil.
+- Fiecare culoar își traduce singur modulul (`i18n/en/<modul>.json`); T15 face doar (selectorul de limbă e în T03, la P1): EN pentru `common`, `places`, `events`, `tickets`, și o listă cu cheile EN lipsă din celelalte module (o trimite culoarelor, nu le editează el). HU doar dacă rămâne timp.
 - PWA: icon, splash, `theme-color`, verificare „Add to Home Screen” pe Android și iOS.
 - Capacitor (opțional, ~1 h): `npx cap add android`, `cap sync`, APK de debug pentru demo; cameră nativă pentru scanner QR dacă `html5-qrcode` e lent.
 
@@ -269,7 +278,7 @@ VITE_API_URL=http://localhost:8080/api/v1
 ## Ce e „done” pentru orice task
 1. Codul e pe `main` printr-un PR (branch `feat/T05-places`), build + teste verzi.
 2. Criteriile din „Verificare” bifate manual, pe mobil **și** web unde există ambele.
-3. `docs/API.md` actualizat dacă s-a schimbat ceva față de contract; `docs/STATUS.md` are task-ul mutat la „Done” + deciziile luate + ce a rămas.
+3. `docs/API.md` actualizat dacă s-a schimbat ceva față de contract; `docs/status/Px.md` are task-ul mutat la „Done” + deciziile luate + ce a rămas.
 4. Fluxul de demo (`docs/DEMO.md`) încă merge cap-coadă.
 
 ---
@@ -306,7 +315,7 @@ Max 8 slide-uri după `docs/DEMO.md` §Pitch; video de rezervă al demo-ului în
 **Verificare:** slide-urile și video-ul sunt pe laptopul de prezentare și într-un link de rezervă.
 
 ### T18 · (stretch) Rol Voluntar + mesaje (P4) — din `design/ia/` (prototip + admin)
-Rol `VOLUNTEER` creat doar de Primărie (fără SMS real), alocat pe acțiuni; în aplicație doar 3 tab-uri: Acțiuni, Scanează, Mesaje; scanarea se deschide cu 30 min înainte de start; Primăria vede cine a scanat pe cine și răspunde la mesaje. Migrarea V10. **Doar după ce bucla T11 e verde.**
+Rol `VOLUNTEER` creat doar de Primărie (fără SMS real), alocat pe acțiuni; în aplicație doar 3 tab-uri: Acțiuni, Scanează, Mesaje; scanarea se deschide cu 30 min înainte de start; Primăria vede cine a scanat pe cine și răspunde la mesaje. Migrarea V10. **Doar după ce bucla T11 e verde.** Rolul nou `VOLUNTEER` cere o schimbare în `Role`/`SecurityConfig` (ale lui P1): o ceri lui P1.
 
 ### T19 · (stretch) Transport public — tramvai (P3) — din `design/ia/AradExperience-prototype`
 Căutare destinație, linii de tramvai CTP Arad din OSM (ODbL), stații apropiate, orare de exemplu marcate „(exemplu)”, „Arată-mi pe hartă” în `MapView`. Fără date inventate prezentate ca reale. **Doar după ce T13 e verde.**

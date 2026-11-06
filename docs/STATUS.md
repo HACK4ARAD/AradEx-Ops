@@ -1,38 +1,40 @@
-# STATUS — memoria echipei (se actualizează la finalul fiecărui task)
+# STATUS — rezumatul echipei
+
+**Acest fișier îl actualizează doar Lead Tehnic / Persoana 1 (Zoltan).** Fiecare culoar își scrie starea, deciziile și problemele în `docs/status/P1.md` … `P4.md`, în propriile PR-uri, ca să nu se calce pe același fișier.
 
 Ultima actualizare: 2026-11-06 (kit inițial, înainte de cod)
 
 ## Task-uri
 | Task | Stare | Cine | Branch / PR | Note |
 |---|---|---|---|---|
-| T00 Repo & tooling | IN PROGRESS | P1 (kit) | — | docker-compose, .env.example, .gitignore, CLAUDE.md, skills, docs — de făcut: `git init`, remote, CI opțional |
-| T01 API skeleton | IN PROGRESS | P1 (kit) | — | schelet scris în avans (api/README.md): pom, config, security JWT, erori, health, V1, teste — **de compilat** (`mvn test`) și de rulat o dată |
-| T02 APP skeleton | IN PROGRESS | P1 (kit) | — | schelet construit și verificat (`npm run build/test` verzi): layout-uri, router cu toate rutele, client API, auth store, componente de bază, i18n, PWA. Lipsesc: MapView, QrCode/QrScanner, AppSheet (vin în task-urile lor) |
-| T03 Auth & roluri | TODO | P1 | | migrarea V2 + seed-ul V2_1 (conturi demo) există |
-| T04 Deploy v0 | TODO | P1 | | |
-| T05 Locuri & ghid | TODO | P2 | | migrarea V3 + seed-ul V3_1 (12 locuri reale, 33 puncte de ghid) există; de adăugat pozele |
-| T06 Evenimente | TODO | P2 | | migrarea V4 + seed-ul V4_1 (21 evenimente reale + 9 demo) există |
-| T07 Bilete | TODO | P2 | | |
-| T08 Hartă | TODO | P3 | | |
-| T09 Firme & panou | TODO | P4 | | |
-| T10 Oferte & coduri | TODO | P4 | | |
-| T11 Comunitate & puncte | TODO | P4 | | |
-| T12 Chat AI | TODO | P3 | | |
-| T13 Planificator itinerar | TODO | P3 | | |
-| T14 Admin | TODO | P1 | | |
-| T15 i18n / PWA / Android | TODO | P2 | | |
-| T16a Deploy final & seed prod | TODO | P1 | | |
-| T16b Pitch, slide-uri, video de rezervă | TODO | P3 | | |
-| T17 Google rating (opțional) | TODO | P3 | | stretch |
-| T18 Rol Voluntar + mesaje (opțional, din prototipul IA) | TODO | P4 | | stretch |
-| T19 Transport public / tramvai (opțional, din prototipul IA) | TODO | P3 | | stretch |
+| T00 Repo & tooling | IN PROGRESS | P1 Zoltan (kit) | — | docker-compose, .env.example, .gitignore, CLAUDE.md, skills, docs — de făcut: `git init`, remote, CI opțional |
+| T01 API skeleton | IN PROGRESS | P1 Zoltan (kit) | — | schelet scris în avans (api/README.md): pom, config, security JWT, erori, health, V1, teste — **de compilat** (`mvn test`) și de rulat o dată |
+| T02 APP skeleton | IN PROGRESS | P1 Zoltan (kit) | — | schelet construit și verificat (`npm run build/test` verzi): layout-uri, router cu toate rutele, client API, auth store, componente de bază, i18n, PWA. Lipsesc: MapView, QrCode/QrScanner, AppSheet (vin în task-urile lor) |
+| T03 Auth & roluri | TODO | P1 Zoltan | | migrarea V2 + seed-ul V2_1 (conturi demo) există |
+| T04 Deploy v0 | TODO | P1 Zoltan | | |
+| T05 Locuri & ghid | TODO | P2 Lukas | | migrarea V3 + seed-ul V3_1 (12 locuri reale, 33 puncte de ghid) există; de adăugat pozele |
+| T06 Evenimente | TODO | P2 Lukas | | migrarea V4 + seed-ul V4_1 (21 evenimente reale + 9 demo) există |
+| T07 Bilete | TODO | P2 Lukas | | |
+| T08 Hartă | TODO | P3 Octav | | |
+| T09 Firme & panou | TODO | P4 Damian | | |
+| T10 Oferte & coduri | TODO | P4 Damian | | |
+| T11 Comunitate & puncte | TODO | P4 Damian | | |
+| T12 Chat AI | TODO | P3 Octav | | |
+| T13 Planificator itinerar | TODO | P3 Octav | | |
+| T14 Admin | TODO | P1 Zoltan | | |
+| T15 i18n / PWA / Android | TODO | P2 Lukas | | |
+| T16a Deploy final & seed prod | TODO | P1 Zoltan | | |
+| T16b Pitch, slide-uri, video de rezervă | TODO | P3 Octav | | |
+| T17 Google rating (opțional) | TODO | P3 Octav | | stretch |
+| T18 Rol Voluntar + mesaje (opțional, din prototipul IA) | TODO | P4 Damian | | stretch |
+| T19 Transport public / tramvai (opțional, din prototipul IA) | TODO | P3 Octav | | stretch |
 
 Stări: TODO · IN PROGRESS · REVIEW · DONE · BLOCKED (cu motiv).
 
-Culoare și oameni: vezi `docs/TEAM.md`.
+Culoare și oameni: vezi `docs/TEAM.md` (P1 Zoltan · P2 Lukas · P3 Octav · P4 Damian).
 
 ## Următorul număr de migrare Flyway liber
-`V5` (V1 baseline, V2 users/businesses, V3 places, V4 events — toate scrise și verificate pe Postgres 16 la 6 nov). Cine ia un număr îl scrie aici imediat, ca să nu se ciocnească două PR-uri. V5 = tickets + reviews (T07), V6 = announcements + google_place_id (T09), V7 offers, V8 community/points, V9 itineraries, V10 volunteers + messages (T18, stretch), V11 transport (T19, doar dacă e nevoie de tabele).
+`V5` (V1 baseline, V2 users/businesses, V3 places, V4 events — toate scrise și verificate pe Postgres 16 la 6 nov). Numerele sunt **rezervate dinainte pe task** (mai jos); nu e nevoie să editezi aici. Dacă îți trebuie încă o migrare, folosește următorul număr din rezerva culoarului tău: P1 → V20–V29, P2 → V30–V39, P3 → V40–V49, P4 → V50–V59. V5 = tickets + reviews (T07), V6 = announcements + google_place_id (T09), V7 offers, V8 community/points, V9 itineraries, V10 volunteers + messages (T18, stretch), V11 transport (T19, doar dacă e nevoie de tabele).
 
 ## Decizii luate
 - 2026-11-06 · Email + parolă în loc de cod pe e-mail (prototip) — fără server de mail de configurat.

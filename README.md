@@ -15,10 +15,10 @@ Conturi demo: `visitor@demo.ro`, `local@demo.ro`, `firma@demo.ro`, `primaria@dem
 ## Unde e ce
 - `docs/PLAN.md` — task-urile T00–T16, ordonate pe dependențe, cu descriere și checklist de verificare
 - `docs/API.md` — contractul de API (endpoint-uri + DTO-uri) · `docs/DATA-MODEL.md` — tabele și enum-uri
-- `docs/STATUS.md` — starea curentă, decizii, probleme (se actualizează la fiecare task) · `docs/DEMO.md` — fluxul de demo și pitch-ul · `docs/DEPLOY.md`
+- `docs/TEAM.md` — cine ce face (Zoltan, Lukas, Octav, Damian) · `docs/STATUS.md` — rezumat (Lead) + `docs/status/Px.md` — starea fiecărui culoar · `docs/DEMO.md` — fluxul de demo și pitch-ul · `docs/DEPLOY.md`
 - `CLAUDE.md`, `api/CLAUDE.md`, `app/CLAUDE.md` — reguli pentru Claude Code · `.claude/skills/` — `task-workflow`, `be-module`, `fe-feature`, `seed-data`
 - `design/` — prototipul original (`AradExperience.html`), ecranele noi (`AradExperience-extensii.html`), capturi în `design/screens/`, poze în `design/assets/`
 
 ## Cum lucrăm
-Un task din PLAN = un branch = un PR. Începe cu `/task-workflow` în Claude Code („ia task-ul T05”), termină cu checklist-ul de verificare și STATUS.md.
+Un task din PLAN = un branch = un PR. Începe cu `/task-workflow` în Claude Code („ia task-ul T05”), termină cu checklist-ul de verificare și `docs/status/Px.md`. Agenții Paperclip: `tools/paperclip/README.md`.
 `main` rulează mereu. Fluxul din `docs/DEMO.md` nu se strică.

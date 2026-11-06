@@ -6,17 +6,18 @@ description: Cum se începe, se implementează, se verifică și se închide un 
 # Task workflow (AradExperience)
 
 ## 1. Start
-1. Citește task-ul din `docs/PLAN.md`, secțiunile aferente din `docs/API.md` și `docs/DATA-MODEL.md`, și `docs/STATUS.md` (dependențele trebuie să fie DONE sau măcar mergeabile).
-2. `git checkout main && git pull && git checkout -b feat/Txx-nume-scurt`.
-3. Scrie în 5–10 rânduri planul concret: fișiere pe care le creezi/modifici, migrarea (numărul din STATUS.md — rezervă-l acolo acum), endpoint-urile, ecranele. Arată-l omului **înainte** de a scrie cod dacă task-ul atinge și BE și FE; altfel mergi direct.
-4. Marchează task-ul `IN PROGRESS` în STATUS.md cu numele tău și branch-ul.
+1. Citește task-ul din `docs/PLAN.md`, secțiunile aferente din `docs/API.md` și `docs/DATA-MODEL.md`, `docs/TEAM.md` §„Cine ce atinge” și `docs/STATUS.md` (dependențele trebuie să fie deja în `origin/main`).
+2. `git fetch origin && git worktree add ../_wt/Txx -b feat/Txx-nume-scurt origin/main` și lucrezi în `../_wt/Txx` (fără worktree: `git switch -c feat/Txx-nume-scurt origin/main`).
+3. Scrie în 5–10 rânduri planul concret: fișiere pe care le creezi/modifici, migrarea (numărul rezervat pentru task în STATUS.md), endpoint-urile, ecranele. Arată-l omului **înainte** de a scrie cod dacă task-ul atinge și BE și FE; altfel mergi direct.
+4. Marchează task-ul `IN PROGRESS` în `docs/status/Px.md` (culoarul tău) cu branch-ul.
 
 ## 2. Implementare
 - BE: urmează skill-ul `be-module` (migrare → entitate → repo → service → DTO → controller → teste). FE: `fe-feature` (tipuri → api → store/composable → view mobil → view web → rută → nav).
 - Ordinea recomandată într-un task mixt: migrare + entități → service + teste → controller → tipuri FE → api FE → ecran mobil → ecran web → seed. Rulează aplicația după fiecare pas mare, nu la final.
 - Seed-ul (`seed-data`) se scrie înainte de ecrane, ca să ai date reale când le construiești.
-- Dacă dai de ceva neclar sau API.md trebuie schimbat: alege varianta simplă, notează în STATUS.md „Decizii”, continuă. Nu bloca pe întrebări mici.
-- Nu ieși din scopul task-ului. Ce observi în plus → listă „De făcut mai târziu” în STATUS.md.
+- Dacă dai de ceva neclar sau API.md trebuie schimbat: alege varianta simplă, notează în `docs/status/Px.md` „Decizii”, continuă. Nu bloca pe întrebări mici.
+- Nu ieși din scopul task-ului. Ce observi în plus → listă „De făcut mai târziu” în `docs/status/Px.md`.
+- Nu edita fișierele altui culoar (vezi `docs/TEAM.md`). Dacă îți trebuie ceva de acolo, cere-l în task-ul lui.
 
 ## 3. Verificare (înainte de PR) — checklist
 Rulează efectiv, nu presupune:
@@ -31,10 +32,10 @@ Rulează efectiv, nu presupune:
 Scrie rezultatul verificării în PR (ce ai testat, ce nu, ce ai observat).
 
 ## 4. Review (de preferat de altcineva + Claude)
-Cere review cu: „Fă review la PR-ul pentru Txx: caută bug-uri care strică demo-ul, încălcări ale CLAUDE.md, diferențe față de API.md.” Reviewer-ul rulează aplicația, nu doar citește diff-ul. Se repară doar ce e major/critic; restul → STATUS.md „Probleme cunoscute”.
+Cere review cu: „Fă review la PR-ul pentru Txx: caută bug-uri care strică demo-ul, încălcări ale CLAUDE.md, diferențe față de API.md.” Reviewer-ul rulează aplicația, nu doar citește diff-ul. Se repară doar ce e major/critic; restul → `docs/status/Px.md` „Probleme cunoscute”. Review-ul îl face QA & Demo pe GitHub (`gh pr review`).
 
 ## 5. Închidere
-1. Merge în `main` (squash), șterge branch-ul.
-2. STATUS.md: task → `DONE`, decizii, probleme cunoscute, numărul de migrare următor, „De făcut mai târziu”.
+1. `git push -u origin feat/Txx-...` și `gh pr create` (titlu `Txx: ...`, în descriere ce ai testat). Merge-ul (squash) îl face QA & Demo după review, nu tu.
+2. `docs/status/Px.md` (în același PR): task → `REVIEW`/`DONE`, decizii, probleme cunoscute, „De făcut mai târziu”.
 3. `docs/API.md` actualizat dacă s-a schimbat ceva. Dacă ai adăugat un ecran care nu era în design, pune o captură în `design/screens/`.
 4. Spune în chat, în 3 rânduri: ce merge, ce nu, ce urmează.
