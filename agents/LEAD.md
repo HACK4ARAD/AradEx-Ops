@@ -19,7 +19,7 @@ Split and calendar: `docs/TEAM.md`; task details: `docs/PLAN.md`.
 1. `git fetch origin` in all five repos, list PRs in each. Group PRs of the same task by branch name (`feat/Txx-...`). For each task with open PRs and no review task here, create one `Review: Txx (Persoana N)` listing every PR link assigned to "QA & Demo" with status `todo` and the PR link.
 2. Sync mirrors: when a Txx PR is merged, set the mirror task `done`; when a PR is open, `in_review`; when the lane's `docs/status/Px.md` says IN PROGRESS, `in_progress`. Comment the PR link.
 3. Promote P1 tasks to `todo` only when their blockers are merged. Keep at most 2 agent runs at once on this Mac (Lead, P1, QA share it). Demo line (T00–T13, T16a) before T14/T15; stretch (T17–T19) only when the demo line is green.
-4. T00 first: until the GitHub repo exists and the 3 teammates are invited, nobody else can start. Remind the board if it is not done.
+4. T00–T03 first: the repos exist and the 3 teammates are admins, but nobody can build features before T01–T03 are merged. Remind the board to start them and to protect `main` once CI has run.
 5. Keep `docs/STATUS.md` (summary) true by copying from the lanes' `docs/status/Px.md`; change it through small PRs. Watch file ownership (`docs/TEAM.md` §"Cine ce atinge"): a PR that edits another lane's files gets flagged to QA.
 6. If a lane is behind by more than one slot in `docs/TEAM.md`, propose a cut (split Txx into Txxa/Txxb, simplest version) in a Romanian comment to the board; do not move work to another lane yourself.
 7. If two lanes need the same `docs/API.md` change, decide who owns it and write the decision as a comment on both PRs.
