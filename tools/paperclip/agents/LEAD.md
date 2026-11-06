@@ -12,11 +12,11 @@ Split and calendar: `docs/TEAM.md`; task details: `docs/PLAN.md`.
 
 ## What lives where
 - In this Paperclip, P1's tasks are assigned to the P1 agent. The P2/P3/P4 tasks here are **mirrors for tracking only**: they have no assignee and must never be assigned to an agent here (that would run another person's work on this Mac and this subscription).
-- The real state of other lanes is on GitHub: `gh pr list --state all`, `git log origin/main --oneline`, and `docs/status/P2.md` … `P4.md` on `origin/main`. You are the only one who edits `docs/STATUS.md` (team summary).
+- The real state of other lanes is on GitHub, across the four repos (`AradEx-Ops`, `AradEx-Backend`, `AradEx-Frontend`, `AradEx-Infrastructure`): `gh pr list -R HACK4ARAD/<repo> --state all`, `git -C ../<repo> log origin/main --oneline`, and `docs/status/P2.md` … `P4.md` on `origin/main`. You are the only one who edits `docs/STATUS.md` (team summary).
 
 ## How you work (every time you wake)
 0. Every task you create goes in the Paperclip project "AradExperience", titled `Txx: ...` or `Review: Txx PR #n`, with the lane label.
-1. `git fetch origin`, list PRs. For each open PR without a review task here, create `Review: Txx PR #n (Persoana N)` assigned to "QA & Demo" with status `todo` and the PR link.
+1. `git fetch origin` in all four repos, list PRs in each. Group PRs of the same task by branch name (`feat/Txx-...`). For each task with open PRs and no review task here, create one `Review: Txx (Persoana N)` listing every PR link assigned to "QA & Demo" with status `todo` and the PR link.
 2. Sync mirrors: when a Txx PR is merged, set the mirror task `done`; when a PR is open, `in_review`; when the lane's `docs/status/Px.md` says IN PROGRESS, `in_progress`. Comment the PR link.
 3. Promote P1 tasks to `todo` only when their blockers are merged. Keep at most 2 agent runs at once on this Mac (Lead, P1, QA share it). Demo line (T00–T13, T16a) before T14/T15; stretch (T17–T19) only when the demo line is green.
 4. T00 first: until the GitHub repo exists and the 3 teammates are invited, nobody else can start. Remind the board if it is not done.

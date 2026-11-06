@@ -1,11 +1,11 @@
 ---
 name: be-module
-description: Cum se adaugă sau se extinde un modul în api/ (Spring Boot): migrare Flyway, entitate, repository, service, DTO-uri, controller, teste — în ordinea și cu șabloanele proiectului. Folosește-l pentru orice endpoint sau tabel nou.
+description: Cum se adaugă sau se extinde un modul în AradEx-Backend/ (Spring Boot): migrare Flyway, entitate, repository, service, DTO-uri, controller, teste — în ordinea și cu șabloanele proiectului. Folosește-l pentru orice endpoint sau tabel nou.
 ---
 
-# Modul nou / extindere în `api/`
+# Modul nou / extindere în `AradEx-Backend/`
 
-Citește `api/CLAUDE.md`, secțiunea modulului din `docs/API.md` și tabelul din `docs/DATA-MODEL.md`. Pachet: `ro.aradexperience.api.<modul>`.
+Citește `AradEx-Backend/CLAUDE.md`, secțiunea modulului din `docs/API.md` și tabelul din `docs/DATA-MODEL.md`. Pachet: `ro.aradexperience.api.<modul>`.
 
 ## Ordinea
 1. **Migrare** `src/main/resources/db/migration/V{n}__{modul}.sql` (numărul rezervat pentru task-ul tău în `docs/STATUS.md`). Doar DDL + indexuri. Seed separat în `V{n}_1__seed_{modul}.sql` (skill `seed-data`).

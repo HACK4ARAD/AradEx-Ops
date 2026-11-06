@@ -2,7 +2,7 @@
 // Sets up one HACK4ARAD lane in your own local Paperclip: company, Claude agent, project, your tasks.
 // Usage: node tools/paperclip/setup-lane.mjs --lane P2   (P1 Zoltan, P2 Lukas, P3 Octav, P4 Damian; --person <name> to override)
 // Safe to run again: it finds what already exists by name and only creates what is missing.
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -62,7 +62,14 @@ if (!list(conns, "connections").some((c) => c.provider === "anthropic" && c.stat
   process.exit(2);
 }
 
-try { execFileSync("git", ["-C", REPO, "config", "core.hooksPath", ".githooks"]); console.log("Git hook enabled: no Co-Authored-By lines in commits"); } catch { console.warn("Could not enable .githooks (run: git config core.hooksPath .githooks)"); }
+const SIBLINGS = ["AradEx-Backend", "AradEx-Frontend", "AradEx-Infrastructure"].map((n) => path.join(REPO, "..", n));
+const missing = SIBLINGS.filter((d) => !existsSync(path.join(d, ".git")));
+if (missing.length) console.warn(`Missing sibling repos next to AradEx-Ops: ${missing.map((d) => path.basename(d)).join(", ")} (they should all be in the same folder).`);
+for (const dir of [REPO, ...SIBLINGS.filter((d) => existsSync(path.join(d, ".git")))]) {
+  try { execFileSync("git", ["-C", dir, "config", "core.hooksPath", ".githooks"]); }
+  catch { console.warn(`Could not enable .githooks in ${dir} (run: git -C ${dir} config core.hooksPath .githooks)`); }
+}
+console.log("Git hook enabled in all repos: no Co-Authored-By lines in commits");
 
 const common = readFileSync(path.join(here, "agents", "common.md"), "utf8");
 const role = readFileSync(path.join(here, "agents", `${laneKey}.md`), "utf8");
@@ -113,7 +120,7 @@ let project = list(await call("GET", `/companies/${C}/projects`)).find((p) => p.
 if (!project) {
   project = await call("POST", `/companies/${C}/projects`, {
     name: "AradExperience", status: "planned", visibility: "open", leadAgentId: agent.id, goalIds: [goal.id], targetDate: "2026-11-08", icon: "rocket",
-    description: `Clona mea a repo-ului echipei. Culoarul meu: ${lane.name}. Citește CLAUDE.md, docs/TEAM.md și tools/paperclip/agents/common.md. Un task = un branch feat/Txx = un PR pe GitHub.`,
+    description: `Workspace: AradEx-Ops; repo-urile surori ../AradEx-Backend, ../AradEx-Frontend, ../AradEx-Infrastructure (GitHub HACK4ARAD). Culoarul meu: ${lane.name}. Citește CLAUDE.md, docs/TEAM.md și tools/paperclip/agents/common.md. Un task = branch feat/Txx (același nume în fiecare repo atins) = câte un PR.`,
     workspace: { name: "AradExperience", sourceType: "local_path", cwd: REPO, isPrimary: true },
   });
   console.log(`Created project AradExperience -> ${REPO}`);
@@ -123,7 +130,7 @@ const scan = await call("POST", `/companies/${C}/skills/scan-projects`, { projec
 const companySkills = list(await call("GET", `/companies/${C}/skills`), "skills");
 const skillKeys = REPO_SKILLS.map((slug) => companySkills.find((k) => k.slug === slug)?.key).filter(Boolean);
 if (skillKeys.length !== REPO_SKILLS.length) {
-  console.error(`Expected the repo skills ${REPO_SKILLS.join(", ")} in .claude/skills, found ${skillKeys.length}. Is --repo the AradExperience folder?`);
+  console.error(`Expected the repo skills ${REPO_SKILLS.join(", ")} in .claude/skills, found ${skillKeys.length}. Is --repo the AradEx-Ops folder?`);
   process.exit(1);
 }
 const synced = await call("POST", `/agents/${agent.id}/skills/sync`, { mode: "add", desiredSkills: skillKeys });
@@ -140,7 +147,7 @@ const setupTitle = `SETUP: Laptopul meu pentru ${lane.name}`;
 if (!existing.some((i) => i.title === setupTitle)) {
   await call("POST", `/companies/${C}/issues`, {
     title: setupTitle, status: "todo", priority: "critical", assigneeUserId: boardUser, projectId: project.id, goalId: goal.id, labelIds: [L.setup], allowDuplicate: true,
-    description: "De făcut de tine (omul), nu de agent:\n- [ ] Claude Code instalat și logat (`claude`), Node 20+, `gh auth login`\n- [ ] Java 21 + Maven, Postgres 16 (`docker compose up -d` din repo sau instalare locală)\n- [ ] Repo-ul echipei clonat (invitația de pe GitHub de la Persoana 1), `.env` din `.env.example` (cheile le primești de la Persoana 1, nu le pune în chat-uri publice)\n- [ ] `cd app && npm ci && npm run build` și `cd api && mvn -q test` merg\n\nCând e gata, marchează `done` și mută primul tău task în `todo` doar după ce dependențele lui sunt pe `main`.",
+    description: "De făcut de tine (omul), nu de agent:\n- [ ] Claude Code instalat și logat (`claude`), Node 20+, `gh auth login`\n- [ ] Java 21 + Maven, Postgres 16 (`(cd ../AradEx-Infrastructure && docker compose up -d)` din repo sau instalare locală)\n- [ ] Repo-ul echipei clonat (invitația de pe GitHub de la Persoana 1), `.env` din `.env.example` (cheile le primești de la Persoana 1, nu le pune în chat-uri publice)\n- [ ] `cd ../AradEx-Frontend && npm ci && npm run build` și `cd ../AradEx-Backend && mvn -q test` merg\n\nCând e gata, marchează `done` și mută primul tău task în `todo` doar după ce dependențele lui sunt pe `main`.",
   });
 }
 

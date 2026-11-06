@@ -7,7 +7,7 @@ description: Cum se începe, se implementează, se verifică și se închide un 
 
 ## 1. Start
 1. Citește task-ul din `docs/PLAN.md`, secțiunile aferente din `docs/API.md` și `docs/DATA-MODEL.md`, `docs/TEAM.md` §„Cine ce atinge” și `docs/STATUS.md` (dependențele trebuie să fie deja în `origin/main`).
-2. `git fetch origin && git worktree add ../_wt/Txx -b feat/Txx-nume-scurt origin/main` și lucrezi în `../_wt/Txx` (fără worktree: `git switch -c feat/Txx-nume-scurt origin/main`).
+2. În fiecare repo pe care îl atinge task-ul (`AradEx-Backend`, `AradEx-Frontend`, `AradEx-Ops` pentru docs): `git fetch origin && git worktree add ../_wt/<Repo>-Txx -b feat/Txx-nume-scurt origin/main` — **același nume de branch** în toate (fără worktree: `git switch -c feat/Txx-nume-scurt origin/main`).
 3. Scrie în 5–10 rânduri planul concret: fișiere pe care le creezi/modifici, migrarea (numărul rezervat pentru task în STATUS.md), endpoint-urile, ecranele. Arată-l omului **înainte** de a scrie cod dacă task-ul atinge și BE și FE; altfel mergi direct.
 4. Marchează task-ul `IN PROGRESS` în `docs/status/Px.md` (culoarul tău) cu branch-ul.
 
@@ -21,7 +21,7 @@ description: Cum se începe, se implementează, se verifică și se închide un 
 
 ## 3. Verificare (înainte de PR) — checklist
 Rulează efectiv, nu presupune:
-- [ ] `cd api && ./mvnw test` verde; `cd app && npm run build && npm run test` verde; fără erori în consola browserului.
+- [ ] `cd ../AradEx-Backend && ./mvnw test` verde; `cd ../AradEx-Frontend && npm run build && npm run test` verde; fără erori în consola browserului.
 - [ ] Fiecare punct din secțiunea „Verificare” a task-ului, executat manual: pe **mobil** (Chrome device toolbar 390×844 + telefon real dacă există) și pe **web** (≥1280px) unde task-ul are ambele.
 - [ ] Endpoint-urile noi apar în Swagger și răspund conform `docs/API.md` (status-uri 400/401/403/404/409 incluse — încearcă-le).
 - [ ] Rolurile: un cont cu rol greșit primește 403, nu 500. Guest-ul vede doar ce e public.
@@ -35,7 +35,7 @@ Scrie rezultatul verificării în PR (ce ai testat, ce nu, ce ai observat).
 Cere review cu: „Fă review la PR-ul pentru Txx: caută bug-uri care strică demo-ul, încălcări ale CLAUDE.md, diferențe față de API.md.” Reviewer-ul rulează aplicația, nu doar citește diff-ul. Se repară doar ce e major/critic; restul → `docs/status/Px.md` „Probleme cunoscute”. Review-ul îl face QA & Demo pe GitHub (`gh pr review`).
 
 ## 5. Închidere
-1. `git push -u origin feat/Txx-...` și `gh pr create` (titlu `Txx: ...`, în descriere ce ai testat). Fără `Co-Authored-By:` în commit-uri și fără „Generated with Claude Code” în PR. Merge-ul (squash) îl face QA & Demo după review, nu tu.
-2. `docs/status/Px.md` (în același PR): task → `REVIEW`/`DONE`, decizii, probleme cunoscute, „De făcut mai târziu”.
+1. În fiecare repo atins: `git push -u origin feat/Txx-...` și `gh pr create` (titlu `Txx: ...`, în descriere ce ai testat + link-urile PR-urilor pereche din celelalte repo-uri). Fără `Co-Authored-By:` în commit-uri și fără „Generated with Claude Code” în PR. Merge-ul (squash) îl face QA & Demo după review, nu tu.
+2. `docs/status/Px.md` (în PR-ul din `AradEx-Ops`, același branch): task → `REVIEW`/`DONE`, decizii, probleme cunoscute, „De făcut mai târziu”.
 3. `docs/API.md` actualizat dacă s-a schimbat ceva. Dacă ai adăugat un ecran care nu era în design, pune o captură în `design/screens/`.
 4. Spune în chat, în 3 rânduri: ce merge, ce nu, ce urmează.

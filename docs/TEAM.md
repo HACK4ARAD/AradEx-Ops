@@ -8,7 +8,8 @@
 | **P4** | **Damian** | Firme & comunitate: firme, oferte, puncte (bucla de demo) |
 
 Fiecare om are **un agent Paperclip** pereche, care rulează **pe laptopul lui, cu abonamentul lui Claude** (configurare: `tools/paperclip/README.md`). Paperclip-urile nu comunică între ele: **GitHub (PR-uri) și `docs/status/Px.md` sunt sursa comună de adevăr.** Pe laptopul lui Zoltan mai rulează **Lead Tehnic** (urmărește PR-urile tuturor, ține `docs/STATUS.md`) și **QA & Demo** (review + merge la fiecare PR, rulează fluxul din `DEMO.md`).
-**T00 (repo-ul https://github.com/HACK4ARAD/AradExperience în organizația HACK4ARAD + invitații) e primul: până atunci ceilalți nu pot începe.**
+**Repo-uri** (organizația [HACK4ARAD](https://github.com/HACK4ARAD), surori în același folder): `AradEx-Ops` (plan, docs, design, agenți), `AradEx-Backend`, `AradEx-Frontend`, `AradEx-Infrastructure` (doar P1). Un task care atinge mai multe = același nume de branch și câte un PR în fiecare.
+**T00 (drept de scriere pentru toți pe cele 4 repo-uri) e primul: până atunci ceilalți nu pot face PR-uri.**
 
 ## Task-uri și ore
 
@@ -27,15 +28,16 @@ Regula: **editezi doar fișierele culoarului tău.** Dacă îți trebuie o schim
 
 | | P1 · Zoltan | P2 · Lukas | P3 · Octav | P4 · Damian |
 |---|---|---|---|---|
-| **BE** (`api/.../aradexperience/api/`) | `common/**` (inclusiv `SecurityConfig`, `Role`), `auth`, `users`, `admin`, `health`, `application.yml`, `pom.xml` | `places`, `events`, `tickets` | `ai`, `itineraries` | `business`, `offers`, `community`, `points` |
-| **Views mobil** (`app/src/mobile/views/`) | `LoginView`, `ProfileView`, `HomeView` (doar cochilia cu tab-uri), `PlaceholderView` | `HomeEventsTab`, `SearchView`, `EventDetailView`, `EventTicketsView`, `CheckoutView`, `ConfirmView`, `TicketsView`, `TicketView`, `SavedView`, `PlaceView` | `MapPageView`, `ChatView`, `PlanView`, `ItineraryView`, `ItineraryMapView` | `HomeOffersTab`, `HomeCommunityTab`, `OffersView`, `OfferDetailView`, `CommunityView`, `ActionDetailView`, `LeaderboardView`, `BusinessView`, `PanelView` |
-| **Views web** (`app/src/web/views/`) | `LoginView`, `AdminView`, `PlaceholderView` | `LandingView`, `EventsView`, `EventDetailView`, `PlacesView`, `PlaceView`, `AccountView` | `MapPageView`, `PlanView`, `ChatView` | `OffersView`, `CommunityView`, `BusinessPublicView`, `BusinessPanelView`, `CityPanelView` |
-| **Componente comune** (`app/src/shared/components/`) | `App*`, `EmptyState`, `Skeleton`, `PlaceholderScreen`, `ApiStatus`, `QrCode` | `EventCard`, `PlaceCard`, `AudioGuideBar` | `MapView` | `OfferCard`, `ActionCard`, `QrScanner` |
+| **BE** (`AradEx-Backend/.../aradexperience/api/`) | `common/**` (inclusiv `SecurityConfig`, `Role`), `auth`, `users`, `admin`, `health`, `application.yml`, `pom.xml` | `places`, `events`, `tickets` | `ai`, `itineraries` | `business`, `offers`, `community`, `points` |
+| **Views mobil** (`AradEx-Frontend/src/mobile/views/`) | `LoginView`, `ProfileView`, `HomeView` (doar cochilia cu tab-uri), `PlaceholderView` | `HomeEventsTab`, `SearchView`, `EventDetailView`, `EventTicketsView`, `CheckoutView`, `ConfirmView`, `TicketsView`, `TicketView`, `SavedView`, `PlaceView` | `MapPageView`, `ChatView`, `PlanView`, `ItineraryView`, `ItineraryMapView` | `HomeOffersTab`, `HomeCommunityTab`, `OffersView`, `OfferDetailView`, `CommunityView`, `ActionDetailView`, `LeaderboardView`, `BusinessView`, `PanelView` |
+| **Views web** (`AradEx-Frontend/src/web/views/`) | `LoginView`, `AdminView`, `PlaceholderView` | `LandingView`, `EventsView`, `EventDetailView`, `PlacesView`, `PlaceView`, `AccountView` | `MapPageView`, `PlanView`, `ChatView` | `OffersView`, `CommunityView`, `BusinessPublicView`, `BusinessPanelView`, `CityPanelView` |
+| **Componente comune** (`AradEx-Frontend/src/shared/components/`) | `App*`, `EmptyState`, `Skeleton`, `PlaceholderScreen`, `ApiStatus`, `QrCode` | `EventCard`, `PlaceCard`, `AudioGuideBar` | `MapView` | `OfferCard`, `ActionCard`, `QrScanner` |
 | **Composables / stores** | `useFormat`, `useGeo`, `stores/auth`, `stores/ui` | `useTts` | `useRoute` | — |
 | **API + tipuri FE** (`shared/api/`, `shared/types/`) | `client`, `auth`, `admin`, `health` | `places`, `events`, `tickets` | `ai`, `itineraries` | `business`, `offers`, `community` |
 | **i18n** (`shared/i18n/ro/` și `en/`) | `common`, `auth`, `admin` | `places`, `events`, `tickets` | `map`, `chat`, `plan` | `business`, `offers`, `community` |
 | **Fișiere comune** | `router/index.ts`, layout-uri, navigație, `types/api.ts` (doar re-export), `docs/STATUS.md` (Lead) | — | — | — |
-| **Docs** | `docs/status/P1.md`, `DEPLOY.md` | `docs/status/P2.md` | `docs/status/P3.md`, slide-uri | `docs/status/P4.md` |
+| **Repo `AradEx-Infrastructure`** | tot | — | — | — |
+| **Docs** (`AradEx-Ops`) | `docs/status/P1.md`, `DEPLOY.md` | `docs/status/P2.md` | `docs/status/P3.md`, slide-uri | `docs/status/P4.md` |
 
 `docs/API.md`: fiecare modifică doar secțiunea modulului lui.
 
@@ -54,7 +56,7 @@ Regula: **editezi doar fișierele culoarului tău.** Dacă îți trebuie o schim
 ## Calendar
 | Când | P1 · Zoltan | P2 · Lukas | P3 · Octav | P4 · Damian |
 |---|---|---|---|---|
-| **Vineri 6 nov, seara** | T00 (repo GitHub, invită echipa), T01, T02 (structura anti-conflict) → T03 | T05 (poze + ecrane), pregătește T06 | T12 BE (`OpenAiClient`, `fallback.json`) + `MapView` pentru T08 | seed-uri V6/V7/V8 (firme, oferte, acțiuni) + schelet T09 |
+| **Vineri 6 nov, seara** | T00 (drepturi pe repo-uri, CI), T01, T02 (structura anti-conflict) → T03 | T05 (poze + ecrane), pregătește T06 | T12 BE (`OpenAiClient`, `fallback.json`) + `MapView` pentru T08 | seed-uri V6/V7/V8 (firme, oferte, acțiuni) + schelet T09 |
 | **Sâmbătă 7 nov, dimineața** | T04 deploy v0 | T06 final | T08 | T09 |
 | **Sâmbătă, după-amiaza** | T14 BE + FE | T07 | T12 final | T10 |
 | **Sâmbătă, seara/noaptea** | integrare, `main` verde, fluxul de demo | T15 (limbă, PWA) | T13 | T11 (bucla de puncte) |

@@ -1,7 +1,7 @@
 [
  {
   "key": "T00",
-  "title": "T00: Repo & tooling",
+  "title": "T00: Repo-uri & tooling (4 repo-uri în HACK4ARAD)",
   "lane": "P1",
   "hours": 1,
   "slot": "Vineri 6 nov, seara",
@@ -10,7 +10,7 @@
   "labels": [
    "linia de demo"
   ],
-  "body": "**Scop:** oricine rulează proiectul în 5 minute. Kit-ul e deja în repo (git local, 2 commit-uri pe `main`, fără remote).\n\n- [ ] Zoltan (om): creează repo-ul **https://github.com/HACK4ARAD/AradExperience** în organizația HACK4ARAD, **gol** (fără README/licență, ca istoricul să rămână același cu zip-urile)\n- [ ] Zoltan: `git remote add origin https://github.com/HACK4ARAD/AradExperience.git && git push -u origin main` din `~/Desktop/HACK4ARAD/AradExperience`\n- [ ] Zoltan: adaugă Lukas, Octav, Damian în organizație cu drept de scriere pe repo — **ceilalți nu pot începe până nu e gata** (agentul se oprește și cere asta board-ului)\n- [ ] Recomandat: protecție pe `main` (merge doar prin PR), ca nimeni să nu împingă direct\n- [ ] `.github/workflows/ci.yml` (opțional, 15 min): `mvn -q test` în `api/`, `npm ci && npm run build && npm run test` în `app/`\n- [ ] README cu cele 3 comenzi (db, api, app) verificat\n\n**Verificare:** `git status` nu arată `.env`; README corect; ceilalți 3 văd repo-ul și fac `git fetch` din clona lor din zip.\nDetalii: `docs/PLAN.md` §T00."
+  "body": "**Scop:** oricine rulează proiectul în 5 minute. Cele 4 repo-uri există deja în organizația HACK4ARAD, private, cu istoricul din zip-uri: `AradEx-Ops` (plan, docs, design, agenți), `AradEx-Backend`, `AradEx-Frontend`, `AradEx-Infrastructure`.\n\n- [x] Repo-urile create și urcate (6 nov)\n- [ ] Zoltan (om): Lukas, Octav, Damian cu drept de **scriere** pe cele 4 repo-uri (implicit în organizație au doar citire) — **ceilalți nu pot face PR-uri până nu e gata** (agentul se oprește și cere asta board-ului)\n- [ ] Recomandat: protecție pe `main` în fiecare repo (merge doar prin PR)\n- [ ] CI (opțional, 15 min): `AradEx-Backend/.github/workflows/ci.yml` cu `mvn -q test`; `AradEx-Frontend/.github/workflows/ci.yml` cu `npm ci && npm run build && npm run test`\n- [ ] README-urile celor 4 repo-uri verificate (comenzile db, api, app)\n\n**Verificare:** `git status` nu arată `.env` în niciun repo; ceilalți 3 fac `git fetch` în toate cele 4 clone din zip și pot împinge un branch de test.\nDetalii: `docs/PLAN.md` §T00, `docs/TEAM.md`."
  },
  {
   "key": "T01",
@@ -26,7 +26,7 @@
   "labels": [
    "linia de demo"
   ],
-  "body": "**Scop:** scheletul din `api/` (scris în avans, necompilat) pornește pe Postgres, cu Flyway V1–V4, erori ProblemDetail, Swagger, health.\n\n- [ ] `mvn test` verde (repară ce nu compilează, nu dezactiva teste)\n- [ ] `mvn spring-boot:run` pe baza ta `aradexperience_t01` → Flyway aplică V1–V4 + seed-urile\n- [ ] `/api/v1/health` ok, `/swagger-ui.html` se deschide\n\nDetalii: `docs/PLAN.md` §T01, `api/README.md`, `api/CLAUDE.md`."
+  "body": "**Scop:** scheletul din `AradEx-Backend/` (scris în avans, necompilat) pornește pe Postgres, cu Flyway V1–V4, erori ProblemDetail, Swagger, health.\n\n- [ ] `mvn test` verde (repară ce nu compilează, nu dezactiva teste)\n- [ ] `mvn spring-boot:run` pe baza ta `aradexperience_t01` → Flyway aplică V1–V4 + seed-urile\n- [ ] `/api/v1/health` ok, `/swagger-ui.html` se deschide\n\nDetalii: `docs/PLAN.md` §T01, `AradEx-Backend/README.md`, `AradEx-Backend/CLAUDE.md`."
  },
  {
   "key": "T02",
@@ -41,7 +41,7 @@
   "labels": [
    "linia de demo"
   ],
-  "body": "**Scop:** scheletul din `app/` rulează pe mașina echipei și e pregătit ca 4 oameni să lucreze în paralel fără conflicte (lista exactă de fișiere și proprietari: `docs/TEAM.md` §„Cine ce atinge”).\n\n- [ ] `npm ci && npm run build && npm run test` verde\n- [ ] `/` redirecționează pe `/m` (390 px) și `/w` (desktop); `?ui=m|w` merge\n- [ ] Lighthouse: installable\n- [ ] Câte un fișier view pentru **fiecare** rută (mobil + web, numele din `docs/TEAM.md`), cu `PlaceholderScreen`; router-ul le importă → nimeni altcineva nu mai editează `router/index.ts`\n- [ ] Navigația completă pe roluri (tab bar mobil, sidebar web)\n- [ ] i18n pe module: `i18n/ro/<modul>.json` + `i18n/en/<modul>.json` cu `import.meta.glob`\n- [ ] Tipuri pe module `shared/types/<modul>.ts` (re-export din `types/api.ts`) + fișiere `shared/api/<modul>.ts` goale pentru toate modulele\n- [ ] `AppSheet`, `QrCode`, `useGeo` (folosite de mai multe culoare)\n- [ ] `HomeView` (S1) = cochilie cu 3 tab-uri → `HomeEventsTab` (P2), `HomeOffersTab`, `HomeCommunityTab` (P4) ca placeholdere\n\n**Merge cât mai repede**: ceilalți încep doar pe structura asta.\n\nDetalii: `docs/PLAN.md` §T02, `app/README.md`."
+  "body": "**Scop:** scheletul din `AradEx-Frontend/` rulează pe mașina echipei și e pregătit ca 4 oameni să lucreze în paralel fără conflicte (lista exactă de fișiere și proprietari: `docs/TEAM.md` §„Cine ce atinge”).\n\n- [ ] `npm ci && npm run build && npm run test` verde\n- [ ] `/` redirecționează pe `/m` (390 px) și `/w` (desktop); `?ui=m|w` merge\n- [ ] Lighthouse: installable\n- [ ] Câte un fișier view pentru **fiecare** rută (mobil + web, numele din `docs/TEAM.md`), cu `PlaceholderScreen`; router-ul le importă → nimeni altcineva nu mai editează `router/index.ts`\n- [ ] Navigația completă pe roluri (tab bar mobil, sidebar web)\n- [ ] i18n pe module: `i18n/ro/<modul>.json` + `i18n/en/<modul>.json` cu `import.meta.glob`\n- [ ] Tipuri pe module `shared/types/<modul>.ts` (re-export din `types/api.ts`) + fișiere `shared/api/<modul>.ts` goale pentru toate modulele\n- [ ] `AppSheet`, `QrCode`, `useGeo` (folosite de mai multe culoare)\n- [ ] `HomeView` (S1) = cochilie cu 3 tab-uri → `HomeEventsTab` (P2), `HomeOffersTab`, `HomeCommunityTab` (P4) ca placeholdere\n\n**Merge cât mai repede**: ceilalți încep doar pe structura asta.\n\nDetalii: `docs/PLAN.md` §T02, `AradEx-Frontend/README.md`."
  },
  {
   "key": "T03",
@@ -73,7 +73,7 @@
   "labels": [
    "linia de demo"
   ],
-  "body": "**Scop:** URL public pentru API (Render) și APP (Netlify) de sâmbătă, ca deploy-ul final să fie doar un push.\n\n- Agentul pregătește: `api/Dockerfile`, lista de env, `app/public/_redirects`, `docs/DEPLOY.md`\n- Persoana 1 (om): conturile Neon/Render/Netlify și setarea secretelor (agentul se oprește și cere)\n\n**Verificare:** `https://<api>/api/v1/health` ok; APP publicată afișează „API online”.\nDetalii: `docs/PLAN.md` §T04, `docs/DEPLOY.md`."
+  "body": "**Scop:** URL public pentru API (Render) și APP (Netlify) de sâmbătă, ca deploy-ul final să fie doar un push.\n\n- Agentul pregătește: config de deploy în `AradEx-Infrastructure` (Render, Netlify, lista de env fără valori), `AradEx-Backend/Dockerfile`, `AradEx-Frontend/public/_redirects`, `docs/DEPLOY.md` (în `AradEx-Ops`)\n- Persoana 1 (om): conturile Neon/Render/Netlify și setarea secretelor (agentul se oprește și cere)\n\n**Verificare:** `https://<api>/api/v1/health` ok; APP publicată afișează „API online”.\nDetalii: `docs/PLAN.md` §T04, `docs/DEPLOY.md`."
  },
  {
   "key": "T05",
@@ -167,7 +167,7 @@
   "labels": [
    "linia de demo"
   ],
-  "body": "**Scop:** tab Oferte, revendicare cu cod/QR, validare la firmă. Migrarea **V7** + seed V7_1 (5–8 oferte, poze în `app/public/img`).\n\n- [ ] BE: `GET /offers`, `GET /offers/{id}`, `POST /offers/{id}/redeem` (o revendicare activă → 409), `GET /me/redemptions`, CRUD `/business/offers`, `POST /business/redemptions/use`\n- [ ] FE: `HomeOffersTab` pe S1, detaliu, „Revendică” → QR + cod; panou firmă: oferte, „Validează cod” (input + `QrScanner` cu html5-qrcode)\n\n**Verificare:** revendic → firma validează → `codesUsed` crește; a doua validare 409; `OfferRedemptionServiceTest`.\nDetalii: `docs/PLAN.md` §T10."
+  "body": "**Scop:** tab Oferte, revendicare cu cod/QR, validare la firmă. Migrarea **V7** + seed V7_1 (5–8 oferte, poze în `AradEx-Frontend/public/img`).\n\n- [ ] BE: `GET /offers`, `GET /offers/{id}`, `POST /offers/{id}/redeem` (o revendicare activă → 409), `GET /me/redemptions`, CRUD `/business/offers`, `POST /business/redemptions/use`\n- [ ] FE: `HomeOffersTab` pe S1, detaliu, „Revendică” → QR + cod; panou firmă: oferte, „Validează cod” (input + `QrScanner` cu html5-qrcode)\n\n**Verificare:** revendic → firma validează → `codesUsed` crește; a doua validare 409; `OfferRedemptionServiceTest`.\nDetalii: `docs/PLAN.md` §T10."
  },
  {
   "key": "T11",

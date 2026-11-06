@@ -1,11 +1,11 @@
 ---
 name: fe-feature
-description: Cum se adaugă un ecran sau o funcționalitate în app/ (Vue 3): tipuri din API.md, client API, store/composable, view mobil, view web, rută, navigație, stări de încărcare/gol/eroare, stil Clean Ink. Folosește-l pentru orice ecran nou (Sx, Ex, Wx) sau feature de UI.
+description: Cum se adaugă un ecran sau o funcționalitate în AradEx-Frontend/ (Vue 3): tipuri din API.md, client API, store/composable, view mobil, view web, rută, navigație, stări de încărcare/gol/eroare, stil Clean Ink. Folosește-l pentru orice ecran nou (Sx, Ex, Wx) sau feature de UI.
 ---
 
-# Feature nou în `app/`
+# Feature nou în `AradEx-Frontend/`
 
-Citește `app/CLAUDE.md`, rutele din `docs/API.md` §Rute FE și captura ecranului din `design/screens/` (S = prototip original, E/W = extensii).
+Citește `AradEx-Frontend/CLAUDE.md`, rutele din `docs/API.md` §Rute FE și captura ecranului din `design/screens/` (S = prototip original, E/W = extensii).
 
 ## Ordinea
 1. **Tipuri** în `src/shared/types/<modul>.ts` (fișierul modulului tău; `api.ts` doar re-exportă, nu-l edita) — copiază DTO-urile din `docs/API.md` pentru endpoint-urile pe care le folosești (nu inventa câmpuri).

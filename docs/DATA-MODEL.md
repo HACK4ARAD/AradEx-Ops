@@ -32,7 +32,7 @@ Migrarea `V2__users_businesses.sql` + seed-ul `V2_1__seed_users.sql` (5 conturi 
 
 ### places (T05, V3)
 `id, name, slug UNIQUE, type, description TEXT, address, lat, lng, image_url, image_credit NULL, opening_hours TEXT NULL, visit_minutes INT, tags VARCHAR (csv: "istorie,familie"), rating NUMERIC(2,1) NULL, parking_hint TEXT NULL, exterior_only BOOL DEFAULT false (Cetatea, Turnul de Apă), google_place_id VARCHAR NULL (T17), created_at`
-Migrarea `V3__places.sql` + seed-ul `V3_1__seed_places.sql` (12 locuri reale, 33 puncte de ghid) **există deja** în `api/` și trec pe Postgres 16.
+Migrarea `V3__places.sql` + seed-ul `V3_1__seed_places.sql` (12 locuri reale, 33 puncte de ghid) **există deja** în `AradEx-Backend/` și trec pe Postgres 16.
 
 ### guide_points (T05, V3)
 `id, place_id FK places ON DELETE CASCADE, position INT, title, text TEXT, image_url NULL, audio_url NULL, lat NULL, lng NULL, duration_sec INT NULL`
@@ -92,4 +92,4 @@ users 1─n points_transactions ; users 1─n itineraries
 ## Seed (date demo) — ce trebuie să existe
 - 5 conturi demo (T03), 1 firmă verificată „Cafeneaua din Pasaj” + 2–3 firme extra (Brutăria Veche, Crama Dealul Miniș, Producători din județul Arad).
 - 10–12 locuri reale cu ghid (T05), 15–20 evenimente (T06) pe 7–30 nov 2026, 5–8 oferte (T10), 3 acțiuni comunitare + înscriși + puncte (T11).
-- Imaginile: `app/public/img/...` (copiate din `design/assets/`), stocate în DB ca path relativ `/img/offers/cafea.jpg`.
+- Imaginile: `AradEx-Frontend/public/img/...` (copiate din `design/assets/`), stocate în DB ca path relativ `/img/offers/cafea.jpg`.

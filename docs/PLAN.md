@@ -36,14 +36,14 @@ Reguli de dimensiune: un task = max ~4–6 ore pentru un om cu Claude. Dacă dep
 ## Faza 0 — Fundație
 
 ### T00 · Repo & tooling
-**Scop:** monorepo cu tot ce trebuie ca oricine să poată rula proiectul în 5 minute.
+**Scop:** repo-urile cu tot ce trebuie ca oricine să poată rula proiectul în 5 minute (acum 4 repo-uri în organizația HACK4ARAD, vezi „Adăugiri” la final).
 **Depinde de:** —
 
-- Structură: `api/` (Spring Boot), `app/` (Vue), `docs/`, `design/`, `.claude/skills/`, `CLAUDE.md`, `README.md`.
+- Structură: `AradEx-Backend/` (Spring Boot), `AradEx-Frontend/` (Vue), `docs/`, `design/`, `.claude/skills/`, `CLAUDE.md`, `README.md`.
 - `docker-compose.yml` cu `postgres:16` (db `aradexperience`, user/parolă `arad`/`arad`, port 5432, volum). Nu băgăm încă API/APP în compose — doar DB.
 - `.env.example` la rădăcină (vezi mai jos) + `.gitignore` (`.env`, `node_modules`, `target`, `dist`, `.idea`, `.vscode`, `*.log`).
 - Copiezi `docs/`, `.claude/`, `CLAUDE.md` din kit. `docs/STATUS.md` e „memoria” echipei — se actualizează la fiecare task.
-- Opțional (15 min): GitHub Actions `ci.yml` care rulează `mvn -q test` în `api/` și `npm ci && npm run build && npm run test` în `app/` pe PR.
+- Opțional (15 min): GitHub Actions `ci.yml` care rulează `mvn -q test` în `AradEx-Backend/` și `npm ci && npm run build && npm run test` în `AradEx-Frontend/` pe PR.
 
 `.env.example`:
 ```
@@ -58,14 +58,14 @@ CORS_ORIGINS=http://localhost:5173
 VITE_API_URL=http://localhost:8080/api/v1
 ```
 
-**Verificare:** `docker compose up -d` pornește DB; `git status` nu arată `.env`; README explică cele 3 comenzi (db, api, app).
+**Verificare:** `(cd ../AradEx-Infrastructure && docker compose up -d)` pornește DB; `git status` nu arată `.env`; README explică cele 3 comenzi (db, api, app).
 
 ### T01 · API skeleton (Spring Boot)
 **Scop:** aplicație Spring care pornește pe Postgres, cu migrări, erori standard, OpenAPI, test de fum.
 **Depinde de:** T00
-**Stare:** schelet scris în `api/` (vezi `api/README.md`) — rămâne de compilat, rulat și corectat ce nu trece. Migrările **V1–V4 + seed-urile V2_1, V3_1, V4_1 sunt scrise și verificate pe Postgres 16** (T03, T05, T06 pornesc cu schema și datele gata).
+**Stare:** schelet scris în `AradEx-Backend/` (vezi `AradEx-Backend/README.md`) — rămâne de compilat, rulat și corectat ce nu trece. Migrările **V1–V4 + seed-urile V2_1, V3_1, V4_1 sunt scrise și verificate pe Postgres 16** (T03, T05, T06 pornesc cu schema și datele gata).
 
-- Java 21, Spring Boot 3.3+, Maven. Dependențe: web, data-jpa, validation, security, flyway, postgresql, springdoc-openapi-starter-webmvc-ui, jjwt (api/impl/jackson), lombok, actuator; test: spring-boot-starter-test, testcontainers (postgresql, junit-jupiter).
+- Java 21, Spring Boot 3.3+, Maven. Dependențe: web, data-jpa, validation, security, flyway, postgresql, springdoc-openapi-starter-webmvc-ui, jjwt (AradEx-Backend/impl/jackson), lombok, actuator; test: spring-boot-starter-test, testcontainers (postgresql, junit-jupiter).
 - Pachet de bază `ro.aradexperience.api`. Module = pachete pe funcționalitate (`auth`, `users`, `places`, `events`, `tickets`, `business`, `offers`, `community`, `points`, `ai`, `itineraries`, `admin`) + `common` (`config`, `security`, `error`, `util`).
 - `application.yml` citește din env (`POSTGRES_URL` etc., cu valori implicite pentru local). Profiluri: `default` (local), `prod`.
 - Flyway activ, `src/main/resources/db/migration/V1__baseline.sql` gol sau cu extensia `pgcrypto`. Convenție: `V{n}__{modul}.sql` pentru schemă, `V{n}_1__seed_{modul}.sql` pentru date de seed (fiecare task își adaugă migrarea proprie, nu modifică migrările vechi).
@@ -79,13 +79,13 @@ VITE_API_URL=http://localhost:8080/api/v1
 ### T02 · APP skeleton (Vue 3)
 **Scop:** proiectul Vue cu cele două „aplicații” (mobil + web), design tokens Clean Ink, client API, PWA.
 **Depinde de:** T00
-**Stare:** schelet construit și verificat în `app/` (vezi `app/README.md`); rămân componentele MapView / QrCode / QrScanner / AppSheet, care vin în task-urile lor.
+**Stare:** schelet construit și verificat în `AradEx-Frontend/` (vezi `AradEx-Frontend/README.md`); rămân componentele MapView / QrCode / QrScanner / AppSheet, care vin în task-urile lor.
 
 - `npm create vite@latest app -- --template vue-ts`; adaugi: vue-router, pinia, tailwindcss, vue-i18n, @vueuse/core, leaflet + @types/leaflet, qrcode, html5-qrcode, vite-plugin-pwa; dev: vitest, @vue/test-utils, eslint + prettier.
 - Structură:
   ```
-  app/src/
-    shared/      api/ (client.ts, auth.ts, events.ts …)  types/api.ts (oglinda docs/API.md)
+  AradEx-Frontend/src/
+    shared/      AradEx-Backend/ (client.ts, auth.ts, events.ts …)  types/api.ts (oglinda docs/API.md)
                  stores/ (auth, ui)  components/ (Button, Card, Chip, Input, Sheet, Toast, EventCard, OfferCard, MapView, QrCode, QrScanner)
                  composables/ (useGeo, useTts, useFormat)  i18n/ (ro.json, en.json)  styles/tokens.css
     mobile/      layouts/MobileLayout.vue (top bar + bottom tabs)  views/…
@@ -125,7 +125,7 @@ VITE_API_URL=http://localhost:8080/api/v1
 **Scop:** să existe de sâmbătă un URL public pentru API și APP, ca deploy-ul final să fie doar un push.
 **Depinde de:** T01, T02 (paralel cu T03)
 
-- DB: Neon sau Render Postgres (free). API: Render Web Service din `api/Dockerfile`, env din `.env.example` (fără valori locale), `CORS_ORIGINS` = URL Netlify. APP: Netlify, build `npm run build`, publish `app/dist`, `app/public/_redirects` cu `/* /index.html 200`, `VITE_API_URL` = URL Render.
+- DB: Neon sau Render Postgres (free). API: Render Web Service din `AradEx-Backend/Dockerfile`, env din `.env.example` (fără valori locale), `CORS_ORIGINS` = URL Netlify. APP: Netlify, build `npm run build`, publish `AradEx-Frontend/dist`, `AradEx-Frontend/public/_redirects` cu `/* /index.html 200`, `VITE_API_URL` = URL Render.
 - Documentezi în `docs/DEPLOY.md`: unde e fiecare, cine are acces, cum se face redeploy.
 
 **Verificare:** `https://<api>/api/v1/health` ok; APP publicată apelează `/health` și afișează „API online” pe un ecran de debug/profil.
@@ -304,6 +304,8 @@ Regula de aur pentru noapte: la 02:00 opriți feature-urile noi și faceți doar
 ---
 
 ## Adăugiri pentru echipa de 4 (Paperclip, 6 nov)
+**Repo-uri separate:** monorepo-ul descris la T00 a fost împărțit în 4 repo-uri în organizația GitHub HACK4ARAD: `AradEx-Ops` (`docs/`, `design/`, `.claude/`, `tools/paperclip/`), `AradEx-Backend` (fostul `api/`), `AradEx-Frontend` (fostul `app/`), `AradEx-Infrastructure` (`docker-compose.yml`, deploy). Căile `AradEx-Backend/...` din plan sunt relative la folderul comun.
+
 Împărțirea pe oameni e în `docs/TEAM.md`. Task-uri noi față de lista de mai sus:
 
 ### T16a · Deploy final & seed de producție (P1)
