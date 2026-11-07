@@ -32,7 +32,8 @@ async function readToken() {
 }
 
 export async function sendSms(phone, body) {
-  if (!/^\+\d{8,15}$/.test(phone)) throw new Error('bad phone')
+  // doar mobile românești (07xx), ca în API: un SMS spre alt fel de număr nu pleacă nici dacă ar ajunge în coadă
+  if (!/^\+407\d{8}$/.test(phone)) throw new Error('bad phone')
   if (DRY_RUN) return
   await run('osascript', [SCRIPT, phone, body], { timeout: 30000 })
 }
