@@ -198,7 +198,7 @@
   "labels": [
    "linia de demo"
   ],
-  "body": "**Scop:** S8: „ce fac în weekend cu copiii?” → întrebare de clarificare → evenimente reale din DB. (`OpenAiClient` + `fallback.json` se pot începe vineri seara.)\n\n- [ ] BE `ai`: `OpenAiClient` (RestClient, timeout 20 s, retry 1), `POST /ai/chat` → `{reply, suggestedEventIds, quickReplies}` cu json_schema, catalog 14 zile, filtrare id-uri\n- [ ] Fallback pentru 3 întrebări tipice + „răspuns offline”\n- [ ] FE: S8 mobil cu chips și `EventCard` cu prop `compact` (componenta e a lui P2); pe web doar pagina `/w/chat` (`ChatView`), fără panou în layout\n\n**Verificare:** fluxul din DEMO.md pasul 2; cu cheie greșită aplicația nu se blochează; `ChatServiceTest` cu client mock.\nDetalii: `docs/PLAN.md` §T12."
+  "body": "**Scop:** S8: „ce fac în weekend cu copiii?” → întrebare de clarificare → evenimente reale din DB. (`ClaudeClient` + `fallback.json` se pot începe vineri seara.)\n\n- [ ] BE `ai`: `ClaudeClient` (SDK-ul oficial `com.anthropic:anthropic-java:3.2.0`, `app.anthropic.*`, model `claude-haiku-5-5`, timeout 20 s, retry 1), `POST /ai/chat` → `{reply, suggestedEventIds, quickReplies}` cu structured outputs, catalog 14 zile, filtrare id-uri\n- [ ] Fallback pentru 3 întrebări tipice + „răspuns offline”\n- [ ] FE: S8 mobil cu chips și `EventCard` cu prop `compact` (componenta e a lui P2); pe web doar pagina `/w/chat` (`ChatView`), fără panou în layout\n\n**Verificare:** fluxul din DEMO.md pasul 2; cu cheie greșită aplicația nu se blochează; `ChatServiceTest` cu client mock.\nDetalii: `docs/PLAN.md` §T12."
  },
  {
   "key": "T13",
