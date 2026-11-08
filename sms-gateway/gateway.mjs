@@ -7,7 +7,7 @@
 //
 // Tokenul stă în Keychain (serviciul `aradex-sms-gateway`), pus de setup.sh; nu se afișează și nu se scrie în fișiere.
 // În log apar doar ultimele 3 cifre ale numărului, niciodată textul (are codul).
-import { execFile } from 'node:child_process'
+import { execFile, spawn } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import { promisify } from 'node:util'
@@ -45,9 +45,24 @@ async function api(token, path) {
   return res.status === 204 ? null : res.json()
 }
 
+/**
+ * Ține Mac-ul treaz cât rulează gateway-ul: un SMS cerut cât Mac-ul doarme stă în coadă și expiră după 4 minute (s-a
+ * întâmplat o dată, noaptea). `caffeinate -i -s` oprește sleep-ul din inactivitate (-s doar pe încărcător); ecranul se poate
+ * stinge. Cu `-w` se oprește singur odată cu gateway-ul. Procesul pornit de launchd rămâne node, deci permisiunea de a controla
+ * Mesaje (dată lui node) nu se schimbă. Capacul închis adoarme totuși un MacBook fără monitor extern.
+ */
+export function keepAwake(pid = process.pid) {
+  if (process.platform !== 'darwin') return null
+  const c = spawn('/usr/bin/caffeinate', ['-i', '-s', '-w', String(pid)], { stdio: 'ignore' })
+  c.on('error', (e) => log('caffeinate unavailable:', e.message))
+  c.unref()
+  return c
+}
+
 async function loop() {
   const token = await readToken()
-  log(`gateway started · ${API}${DRY_RUN ? ' · DRY RUN (no SMS)' : ''}`)
+  const awake = keepAwake()
+  log(`gateway started · ${API}${DRY_RUN ? ' · DRY RUN (no SMS)' : ''}${awake ? ' · keeping the Mac awake' : ''}`)
   let backoff = POLL_MS
   for (;;) {
     try {

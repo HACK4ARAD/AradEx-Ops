@@ -11,6 +11,7 @@ API-ul pune SMS-ul într-o coadă (`sms_outbox`), `gateway.mjs` de pe Mac îl ia
 3. `./setup.sh` — generează tokenul (Keychain + AWS `aradex/sms-gateway`), repornește API-ul, pornește gateway-ul cu launchd
    (repornește singur, și după restart). Prima dată macOS întreabă dacă **node** poate controla Mesaje → **Permite**.
 4. Jurnal: `tail -f ~/Library/Logs/aradex-sms-gateway.log` (numerele apar doar cu ultimele 3 cifre, textul niciodată).
+5. Cât rulează, gateway-ul ține Mac-ul treaz (`caffeinate -i -s`, pe încărcător); ecranul se poate stinge. **Nu închide capacul**: un MacBook închis adoarme oricum (fără monitor extern), iar SMS-urile cerute între timp expiră după 4 minute.
 
 `./setup.sh --restart` după o actualizare · `./setup.sh --stop` oprește gateway-ul și golește tokenul (codurile reale trec pe Twilio / 503).
 Test local, fără SMS: `AX_API=http://localhost:8092/api/v1 AX_DRY_RUN=1 node gateway.mjs`.
