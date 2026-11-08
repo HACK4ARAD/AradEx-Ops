@@ -13,7 +13,11 @@ PLIST="$HOME/Library/LaunchAgents/$LABEL.plist"
 LOG="$HOME/Library/Logs/aradex-sms-gateway.log"
 NODE="$(command -v node)"
 
-stop_agent() { launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null || true; }
+stop_agent() {
+  launchctl bootout "gui/$(id -u)/$LABEL" 2>/dev/null || true
+  # bootout se termină în fundal: un bootstrap pornit prea repede dă „Bootstrap failed: 5” și gateway-ul rămâne oprit
+  for _ in $(seq 1 20); do launchctl print "gui/$(id -u)/$LABEL" >/dev/null 2>&1 || return 0; sleep 0.5; done
+}
 start_agent() {
   mkdir -p "$(dirname "$PLIST")" "$(dirname "$LOG")"
   cat >"$PLIST" <<PLIST
@@ -30,7 +34,7 @@ start_agent() {
 </dict></plist>
 PLIST
   stop_agent
-  launchctl bootstrap "gui/$(id -u)" "$PLIST"
+  launchctl bootstrap "gui/$(id -u)" "$PLIST" || { sleep 2; launchctl bootstrap "gui/$(id -u)" "$PLIST"; }
   echo "Gateway-ul rulează. Jurnal: tail -f $LOG"
 }
 restart_api() {
