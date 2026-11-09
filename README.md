@@ -18,3 +18,9 @@ Ce e aici:
 - `tasks.json`: task-urile din `../AradEx-Plan/docs/PLAN.md`, împărțite pe culoare, cu ore, prioritate și dependențe.
 
 Doar Zoltan (P1) modifică acest repo, prin PR. Commit-urile sunt fără `Co-Authored-By:`. După ce o schimbare intră în `main`, fiecare face `./setup.sh` din `AradEx-Plan` (sau `git pull`) și rulează din nou scriptul.
+
+## Drepturi de autor
+
+© 2026 Echipa AradExperience (Hack4Arad 2026): ZOCZELI, LukasL2004, vaidaoctav, DamAndrei04. **Toate drepturile rezervate.** Codul e public doar ca să poată fi văzut; copierea, modificarea sau folosirea lui în alt proiect cer acordul nostru scris. Detalii în [LICENSE](LICENSE). Pozele (Wikimedia Commons), datele de transport (CTP Arad) și bibliotecile open source rămân sub licențele lor.
+
+*Copyright © 2026 the AradExperience team. All rights reserved — see [LICENSE](LICENSE).*
